@@ -1,0 +1,193 @@
+
+body, h1, h2, ul, li, p {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    height: 100vh;
+    width: 100%;
+    border: none;
+}
+
+header {
+    background-color: #222;
+    color: white;
+    padding: 10px 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav{
+    width: 20%;
+    display: flex;
+    justify-content: space-between;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+#logo{
+    width: 15%;
+    padding-left: 5%;
+}
+
+nav li {
+    padding-right: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.search-bar {
+    text-align: center;
+}
+
+.search-bar input[type="text"] {
+    padding: 10px;
+    border: none;
+}
+
+.search-bar button {
+    padding: 10px 20px;
+    background-color: #f5c518;
+    border: none;
+    color: #222;
+    cursor: pointer;
+}
+
+main {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    background-color: black;
+    text-align: left;
+    color: aliceblue;
+}
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #222;
+    color: white;
+}
+
+#top10 {
+    font-size: 4rem;
+}
+
+#top10 ,#top15accion {
+    margin-bottom: 0;
+    padding-top: 2%;
+    padding-left: 2%;
+}
+
+/*  CARUSEL */
+.carousel-container {
+    padding-top: 20px;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    margin: 0 auto;
+    height: 500px;
+    width: 96vw; /* Set the width to 100vw */
+    overflow: hidden;
+}
+
+.carousel-slide {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+    align-items: center;
+    
+}
+
+.carousel-slide .cont {
+    max-width: 50%;
+    height: 500px;
+    margin: 0 10px;
+    vertical-align: middle;
+}
+
+.carousel-slide .cont img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+/*  CARUSEL MAS CHICO   */
+/* Style the small carousel container */
+.small-carousel-container {
+    width: 100%;
+    height: 300px; /* Set the desired height */
+    margin-top: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Style the small carousel slide */
+.small-carousel-slide {
+    width: calc(100% - 40px); /* Adjust the width as needed */
+    height: 100%;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.small-carousel-item {
+    flex: 0 0 auto;
+    padding: 0;
+    position: relative;
+}
+
+.small-carousel-item img {
+    height: 300px;
+    width: auto;
+    display: block;
+    max-width: 100%;
+}
+
+/* Style the arrow controls for the small carousel */
+.small-carousel-prev,
+.small-carousel-next,
+.carousel-prev,
+.carousel-next {
+    background-color: #f5c518;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.carousel-prev,
+.carousel-next{
+    top: 62%;
+}
+
+
+.small-carousel-prev, .carousel-prev {
+    left: 0;
+}
+
+.small-carousel-next, .carousel-next {
+    right: 0;
+}
+
+.small-carousel-prev:hover,
+.small-carousel-next:hover,
+.carousel-prev:hover,
+.carousel-next:hover {
+    background-color: #e0b214;
+}
