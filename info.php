@@ -49,53 +49,9 @@
         </header>
         <main>';
 
+        $id = $_GET['id_peli'];
+        echo '<h1>'.$id.'</h1>';
 
-        echo '
-        <h1 id="top10">TOP 10</h1>
-        <div class="carousel-container">
-        <button class="carousel-prev">&#60</button>
-        <div class="carousel-slide">';
-    
-            // Assuming you have a database connection established earlier
-            $sql = "SELECT path_poster as poster, id_peli as id FROM peli ORDER BY calificacion DESC LIMIT 10";
-            $result = mysqli_query($conexion,$sql);
-
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $imagePath = $row["poster"];
-                    echo '<div class="cont"><a href="info.php?id_peli=' . $row["id"] . '" ><img src="' . $imagePath . '" alt="Movie Posters"></a></div>';
-                }
-            } else {
-                echo '<p>No movies found.</p>';
-            }
-            
-        echo '</div>
-        <button class="carousel-next">&#62</button>
-        </div>';
-        
-        echo '
-        <h2 id="top15accion">TOP 15 en genero ACCIÓN</h2>
-        <div class="small-carousel-container">
-            <button class="small-carousel-prev">&#60</button>
-            <div class="small-carousel-slide">';
-
-            $sql = "SELECT path_poster FROM peli ORDER BY id_peli DESC LIMIT 15";
-            $result = mysqli_query($conexion,$sql);
-
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $imagePath = $row["path_poster"];
-                    echo '<div class="small-carousel-item"><a href="" ><img src="' . $imagePath . '" alt="Movie Posters"></a></div>';
-                }
-            } else {
-                echo '<p>No movies found.</p>';
-            }
-            
-        echo '    </div>
-            <button class="small-carousel-next">&#62</button>
-        </div>';
-        
-     
         echo '
         </main>
         <footer>

@@ -24,7 +24,6 @@ $(document).ready(function(){
         pauseOnHover: false,
         pauseOnFocus: false,
         pauseOnDotsHover: false,
-
     });
 
     // Add click event listeners for arrow controls

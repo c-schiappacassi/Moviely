@@ -71,6 +71,7 @@ main {
     background-color: black;
     text-align: left;
     color: aliceblue;
+    z-index: 1;
 }
 
 footer {
@@ -92,6 +93,7 @@ footer {
 
 /*  CARUSEL */
 .carousel-container {
+    z-index: 3;
     padding-top: 20px;
     justify-content: center;
     align-content: center;

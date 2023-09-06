@@ -23,5 +23,15 @@
             </ul>
         </nav>
     ';
+    $opciones_sin_sesion='
+        <img id="logo" src="moviely logo.png" alt="">
+        <nav>
+            <ul>
+                <li><a href="#">ABM contenido</a></li>
+                <li><a href="#"ABM moderador</a></li>
+                <li><a href="#">Mi Perfil</a></li>
+            </ul>
+        </nav>
+    ';
 ?>
 
