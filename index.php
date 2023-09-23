@@ -15,38 +15,26 @@
         include("conexion.php");
         include("opciones.php");
 
-/*
-    if(isset($_SESSION['id_usuario']))
-    {
-        $id_usuario = $_SESSION['id_usuario'];
-        
-        $q = "SELECT * from usuario where id_usuario = '$id_usuario' and administrador =1";
-        $resultado=mysqli_num_rows(mysqli_query($conexion,$q));
-        if($resultado!=0) echo $opciones_admin;
-        else echo $opciones;
+        echo '<header>';
 
-        if(isset($_POST['limpiar'])) //Limpiar filtro
+        if(isset($_SESSION['id_usuario']))
         {
-            $_POST['usuario'] = '';
-            $_POST['tipo'] = '';
-        }  */  
-
-        echo '
-        <header>
-            <img id="logo" src="moviely logo.png" alt="">
-            <div class="search-bar">
-                <input type="text" placeholder="Search for movies...">
-                <button>Search</button>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#">Top Charts</a></li>
-                    <li><a href="#">Mi Lista</a></li>
-                    <li><a href="#">Mi Perfil</a></li>
-                </ul>
-            </nav>
+            $id_usuario = $_SESSION['id_usuario'];
             
-        </header>
+            $q = "SELECT * from usuario where id_usuario = '$id_usuario' and administrador =1";
+            $resultado=mysqli_num_rows(mysqli_query($conexion,$q));
+            if($resultado!=0) echo $opciones_admin;
+            else echo $opciones;
+
+            if(isset($_POST['limpiar'])) //Limpiar filtro
+            {
+                $_POST['usuario'] = '';
+                $_POST['tipo'] = '';
+            }  
+        }
+        else echo $opciones_sin_sesion;  
+
+        echo '</header>
         <main>';
 
 
@@ -79,13 +67,13 @@
             <button class="small-carousel-prev">&#60</button>
             <div class="small-carousel-slide">';
 
-            $sql = "SELECT path_poster FROM peli ORDER BY id_peli DESC LIMIT 15";
+            $sql = "SELECT path_poster as poster, id_peli as id FROM peli ORDER BY id_peli DESC LIMIT 15";
             $result = mysqli_query($conexion,$sql);
 
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                    $imagePath = $row["path_poster"];
-                    echo '<div class="small-carousel-item"><a href="" ><img src="' . $imagePath . '" alt="Movie Posters"></a></div>';
+                    $imagePath = $row["poster"];
+                    echo '<div class="small-carousel-item"><a href="info.php?id_peli=' . $row["id"] . '" ><img src="'.$imagePath.'." alt="Movie Posters"></a></a></div>';
                 }
             } else {
                 echo '<p>No movies found.</p>';
@@ -101,10 +89,8 @@
         <footer>
             <p>&copy; 2023 Your Movie Reviews</p>
         </footer>
-        '; 
-/*    
-     }
-    else header("Location:login.php");   */
+        ';   
+    
 
     ?>
         <script src="script/lightbox-plus-jquery.js"></script>

@@ -43,3 +43,4 @@ $(document).ready(function(){
         $('.small-carousel-slide').slick('slickNext');
     });
 });
+

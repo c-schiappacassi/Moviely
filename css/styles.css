@@ -1,3 +1,13 @@
+:root{
+    --blanco: aliceblue;
+    --rojo: #FA3902;
+    --amarillo: #FEB403;
+    --azul: #0080ff;
+    --azul-oscuro: #0071e2;
+    --negro: black;
+    --header:#222;
+}
+
 
 body, h1, h2, ul, li, p {
     margin: 0;
@@ -12,8 +22,8 @@ body {
 }
 
 header {
-    background-color: #222;
-    color: white;
+    background-color: var(--header);
+    color: var(--blanco);
     padding: 10px 0;
     width: 100%;
     display: flex;
@@ -43,7 +53,7 @@ nav li {
 
 nav a {
     text-decoration: none;
-    color: white;
+    color: var(--blanco);
     font-weight: bold;
 }
 
@@ -58,27 +68,29 @@ nav a {
 
 .search-bar button {
     padding: 10px 20px;
-    background-color: #f5c518;
+    background-color: var(--amarillo);
     border: none;
-    color: #222;
+    color: var(--header);
     cursor: pointer;
 }
 
 main {
     width: 100%;
+    min-height: 100%;
+    box-sizing: border-box; 
     text-align: center;
     justify-content: center;
-    background-color: black;
+    background-color: var(--negro);
     text-align: left;
-    color: aliceblue;
+    color: var(--blanco);
     z-index: 1;
 }
 
 footer {
     text-align: center;
     padding: 10px 0;
-    background-color: #222;
-    color: white;
+    background-color: var(--header);
+    color: var(--blanco);
 }
 
 #top10 {
@@ -162,9 +174,9 @@ footer {
 .small-carousel-next,
 .carousel-prev,
 .carousel-next {
-    background-color: #f5c518;
+    background-color: var(--amarillo);
     border: none;
-    color: white;
+    color: var(--blanco);
     padding: 10px 20px;
     cursor: pointer;
     position: absolute;
@@ -191,5 +203,196 @@ footer {
 .small-carousel-next:hover,
 .carousel-prev:hover,
 .carousel-next:hover {
-    background-color: #e0b214;
+    background-color: var(--amarillo);
+}
+
+
+
+/* Formularios ABM */
+.form_alta_peli, #form-modi-elec{
+    width: 85%;
+    height: fit-content;
+    margin:auto;
+    padding: 20px 60px;
+}
+
+.op, .opBusca{
+    display: none;
+}
+
+.cont-viejo{
+    background-color: var(--rojo);
+    color: var(--negro);
+    position: absolute;
+    height: fit-content;
+    width: fit-content;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+#viejo-texto{
+    right:5%;
+    top: 69.8%;
+    padding: 0.5em;
+}
+
+#viejo-imagen{
+    right:10.5%;
+    top: 40%;
+    padding: 0.5em;
+}
+
+.divisor{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 2% 0;
+}
+
+.cont-dinamicas{
+    display: flex;
+    flex-direction: row;
+    width: 46.5%;
+    justify-content: space-between;
+}
+
+.cont-genero{
+    width: 27%;
+}
+
+.div-repetidor >  div{
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    position: static;
+    max-width: 240px;
+}
+
+.div-repetidor > div > div span{
+    font-size: 0.75rem;
+    color: var(--texto);
+    font-weight: 700;
+    position: relative;
+    top: 0.5rem;
+    margin: 0 0 0 7px;
+    padding: 0 3px;
+    width: fit-content;
+    background-color: var(--negro);
+}
+  
+input[type=text], textarea, select , input[type=number], input[type=file]{
+    padding: 11px 10px;
+    margin-right: 10px;
+    margin-top: 1%;
+    font-size: 1rem;
+    border: 2px var(--blanco) solid;
+    border-radius: 5px;
+    background: transparent;
+    color: var(--blanco);
+}
+
+option{
+    background-color: var(--negro);
+    font-size: 1rem;
+}
+
+
+#tituloMod, #tituloRead , input[type=file]{
+    width: 100%;
+}
+
+#descripcionRead, #descripcionMod  {
+    width: 100%;
+    resize: none;
+}
+
+select, input[type=file]{
+    width: 80%;
+}
+
+.op > input[type=number]{
+    width: 20%;
+}
+
+.cont-espaciado{
+    margin-top: 4%;
+}
+
+.mas{
+    margin-top: 10%;
+}
+
+.importante{
+    font-size: 2rem;
+    color: var();
+}
+
+
+.div-repetidor a{
+    margin-top: 35px;
+    padding-left: 15px;
+    color: var(--blanco);
+    text-decoration: none;
+}
+
+.div-repetidor a:hover{
+    color: var(--rojo);
+}
+
+.boton_agregar {
+    border: 2px solid var(--azul);
+    background-color: var(--azul);
+    border-radius: 0.9em;
+    padding: 0.5em;
+    transition: all ease-in-out 0.2s;
+    height: fit-content;
+    width: fit-content;
+    font-size: 0.8em;
+    color: var(--blanco);
+    font-weight: 600;
+    margin-top: 64px;
+}
+
+.boton_agregar:hover{
+    background-color: var(--azul-oscuro);
+}
+
+.cont-info{
+    width: 46.5%;
+}
+
+input[type="date"]{
+    background-color: var(--azul);
+    margin-top: 1%;
+    padding: 10px;
+    position: relative;
+    font-family: "Roboto Mono",monospace;
+    color: var(--blanco);
+    font-size: 16px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+
+input[type="submit"]{
+    background-color: var(--rojo);
+    margin: 5% auto;
+    padding: 15px;
+    font-family: "Roboto Mono",monospace;
+    color: var(--blanco);
+    font-size: 1.5rem;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+
+.label-cargado{
+    margin-left: 5%;
+}
+
+.cont-cargados{
+    margin-bottom: 3%;
+}
+
+.completador{
 }

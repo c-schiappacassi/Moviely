@@ -1,0 +1,53 @@
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Admin</title>
+</head>
+
+<body>
+</header>
+            <main>
+                <form class="form_alta_peli" method="post" action="AltaPeli.php" enctype="multipart/form-data"> 
+                    <form class="form_alta_peli" method="POST" action="mofiBase.php" enctype="multipart/form-data"> 
+                        <div class="divisor">
+                            <div class="cont-info">
+                                <div class="cont-espaciado">
+                                    <label class="importante">Título<br>
+                                        <input id="titulo" type="text"  name="titulo" value="'. $row_encontrado['titulo'].'" required>
+                                    </label>
+                                </div>
+                                <input name="id_peli" type="hidden" value="'.$row_encontrado['id_peli'].'">
+                                <div class="cont-espaciado">
+                                    <label class="importante">Descripción
+                                        <label style="font-size: 1rem; margin-left:50%;"> Modificar: <input type="checkbox" id="modiDes" name="modiDes"/></label>
+                                        <br>
+                                        <textarea readonly name="descripRead" id="descripcionRead" cols="30" rows="10" required>'. $row_encontrado['descripcion'].'</textarea>
+                                        <textarea name="descripMod" id="descripcionMod" cols="30" rows="10" required>'. $row_encontrado['descripcion'].'</textarea>
+                                    </label>
+                                </div>
+                            </div>
+                </form>
+
+
+        </main>
+        <footer>
+            <p>&copy; 2023 Your Movie Reviews</p>
+        </footer>'; 
+
+        <script src="script/lightbox-plus-jquery.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('select.busca').on('change', function(){
+                    var demovalue = $(this).val(); 
+                    $("label.opBusca").hide();
+                    $("#elijo-por-"+demovalue).show();
+                });
+            });
+        </script>
+        <script src="script/etiquetas-dinamicas.js"></script>        
+</body>
+</html>
