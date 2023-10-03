@@ -47,7 +47,7 @@ btn_agregarD.addEventListener("click", function( ){
            const input_apellido = D1.create('input', { type: 'text', name: 'apellidos[]', autocomplete: 'off' });
        
            //crear un botoncito de eliminar este div 
-           const borrar = D1.create('a', { href: 'javascript:void(0)', innerHTML: 'x', onclick: function( ){ D1.remove(div_principal); } } );
+           const borrar = D1.create('a', { href: 'javascript:void(0)', innerHTML: '&times;', onclick: function( ){ D1.remove(div_principal); } } );
        
            //agregar cada etiqueta a su nodo padre
            D1.append(span_nombre, div_nombre);
@@ -101,7 +101,7 @@ btn_agregarA.addEventListener("click", function( ){
            const input_apellido = D2.create('input', { type: 'text', name: 'apellidosA[]', autocomplete: 'off' });
        
            //crear un botoncito de eliminar este div 
-           const borrar = D2.create('a', { href: 'javascript:void(0)', innerHTML: 'x', onclick: function( ){ D2.remove(div_principal); } } );
+           const borrar = D2.create('a', { href: 'javascript:void(0)', innerHTML: '&times;', onclick: function( ){ D2.remove(div_principal); } } );
        
            //agregar cada etiqueta a su nodo padre
            D2.append(span_nombre, div_nombre);
@@ -150,7 +150,7 @@ btn_agregarG.addEventListener("click", function( ){
            const input_nombre = D3.create('input', { type: 'text', name: 'nombresG[]', autocomplete: 'off' } );
       
            //crear un botoncito de eliminar este div 
-           const borrar = D3.create('a', { href: 'javascript:void(0)', innerHTML: 'x', onclick: function( ){ D3.remove(div_principal); } } );
+           const borrar = D3.create('a', { href: 'javascript:void(0)', id: 'a_genero' , innerHTML: '&times;', onclick: function( ){ D3.remove(div_principal); } } );
        
            //agregar cada etiqueta a su nodo padre
            D3.append(span_nombre, div_nombre);

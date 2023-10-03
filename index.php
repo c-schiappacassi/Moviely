@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/estilos.css">
     <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
     <title>Admin</title>
@@ -14,8 +14,6 @@
     <?php
         include("conexion.php");
         include("opciones.php");
-
-        echo '<header>';
 
         if(isset($_SESSION['id_usuario']))
         {
@@ -34,11 +32,9 @@
         }
         else echo $opciones_sin_sesion;  
 
-        echo '</header>
-        <main>';
-
-
         echo '
+        <main>
+
         <h1 id="top10">TOP 10</h1>
         <div class="carousel-container">
         <button class="carousel-prev">&#60</button>
@@ -93,7 +89,7 @@
     
 
     ?>
-        <script src="script/lightbox-plus-jquery.js"></script>
+        <script src="script/jquery.js"></script>
         <script src="slick/slick.min.js"></script>
         <script src="script/script.js"></script>
 </body>

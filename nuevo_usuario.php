@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>Registro</title>
     <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/estilos.css">
 </head>
 
 <body>

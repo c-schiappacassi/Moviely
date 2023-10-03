@@ -1,0 +1,795 @@
+:root{
+    --blanco: aliceblue;
+    --rojo: #FA3902;
+    --amarillo: #FEB403;
+    --azul: #0080ff;
+    --azul-oscuro: #0071e2;
+    --negro: black;
+    --header:#222;
+}
+
+
+body, h1, h2, ul, li, p {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    height: 100vh;
+    width: 100%;
+    border: none;
+    overflow-x: hidden;
+}
+
+header {
+    background-color: var(--header);
+    color: var(--blanco);
+    padding: 10px 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 20vh;
+}
+
+nav{
+    width: 20%;
+    display: flex;
+    justify-content: space-between;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+#link-logo{
+    padding: 0%;
+    width: 15%;
+    margin: 0%;
+    padding-left: 5%;
+}
+
+#logo{
+    width: 100%;
+}
+
+nav li {
+    padding-right: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--blanco);
+    font-weight: bold;
+}
+
+.search-bar {
+    text-align: center;
+}
+
+.search-bar input[type="text"] {
+    padding: 10px;
+    border: none;
+}
+
+.search-bar button {
+    padding: 10px 20px;
+    background-color: var(--amarillo);
+    border: none;
+    color: var(--header);
+    cursor: pointer;
+}
+
+main {
+    width: 100%;
+    min-height: 75vh;
+    box-sizing: border-box; 
+    text-align: center;
+    justify-content: center;
+    background-color: var(--negro);
+    text-align: left;
+    color: var(--blanco);
+    z-index: 1;
+}
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: var(--header);
+    color: var(--blanco);
+    height: 5vh;
+}
+
+#top10 {
+    font-size: 4rem;
+}
+
+#top10 ,#top15accion {
+    margin-bottom: 0;
+    padding-top: 2%;
+    padding-left: 2%;
+}
+
+/*  CARUSEL */
+.carousel-container {
+    z-index: 3;
+    padding-top: 20px;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    margin: 0 auto;
+    height: 500px;
+    width: 96vw; /* Set the width to 100vw */
+    overflow: hidden;
+}
+
+.carousel-slide {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+    align-items: center;
+    
+}
+
+.carousel-slide .cont {
+    max-width: 50%;
+    height: 500px;
+    margin: 0 10px;
+    vertical-align: middle;
+}
+
+.carousel-slide .cont img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+/*  CARUSEL MAS CHICO   */
+/* Style the small carousel container */
+.small-carousel-container {
+    width: 100%;
+    height: 300px; /* Set the desired height */
+    margin-top: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Style the small carousel slide */
+.small-carousel-slide {
+    width: calc(100% - 40px); /* Adjust the width as needed */
+    height: 100%;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.small-carousel-item {
+    flex: 0 0 auto;
+    padding: 0;
+    position: relative;
+}
+
+.small-carousel-item img {
+    height: 300px;
+    width: auto;
+    display: block;
+    max-width: 100%;
+}
+
+/* Style the arrow controls for the small carousel */
+.small-carousel-prev,
+.small-carousel-next,
+.carousel-prev,
+.carousel-next {
+    background-color: var(--amarillo);
+    border: none;
+    color: var(--blanco);
+    padding: 10px 20px;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.carousel-prev,
+.carousel-next{
+    top: 62%;
+}
+
+
+.small-carousel-prev, .carousel-prev {
+    left: 0;
+}
+
+.small-carousel-next, .carousel-next {
+    right: 0;
+}
+
+.small-carousel-prev:hover,
+.small-carousel-next:hover,
+.carousel-prev:hover,
+.carousel-next:hover {
+    background-color: var(--amarillo);
+}
+
+
+
+/* Formularios ABM */
+.form_alta_peli, #form-modi-elec, .form_cancelar{
+    width: 90%;
+    height: fit-content;
+    margin:auto;
+    padding: 20px 60px;
+
+}
+#form-modi-elec{
+    margin-left: 30%;
+    padding-top: 5%;   
+    padding-bottom: 0%;
+    margin-bottom: 0%;
+}
+
+.div_form{
+    top:10%;
+    width: 60%;
+    margin: auto;
+    padding: 3% 0%;
+    text-align: center;
+    font-size: 1.2rem;
+    border: 2px var(--blanco) solid;
+    border-radius: 5px;
+    background: transparent;
+    color: var(--blanco);
+}
+
+.form_usuario{
+    width: 60%;
+    height: fit-content;
+    margin:auto;
+    padding: 20px 60px;
+    font-size: 1.2rem;
+}
+
+.form_usuario div{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3%;
+}
+
+.form_usuario div input{
+    width: 60%;
+}
+
+.op, .opBusca{
+    display: none;
+}
+
+.opBusca{
+    position: absolute;
+}
+
+.cont-viejo{
+    background-color: var(--rojo);
+    color: var(--negro);
+    position: absolute;
+    height: fit-content;
+    width: fit-content;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+#viejo-texto{
+    right:5%;
+    top: 69.8%;
+    padding: 0.5em;
+}
+
+#viejo-imagen{
+    right:10.5%;
+    top: 40%;
+    padding: 0.5em;
+}
+
+.divisor{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 2% 0;
+}
+
+.cont-dinamicas{
+    display: flex;
+    flex-direction: row;
+    width: 46.5%;
+    justify-content: space-between;
+    padding: 11px 10px;
+    border: 2px var(--blanco) solid;
+    border-radius: 5px;
+    background: transparent;
+    color: var(--blanco);
+}
+
+.div-repetidor{
+    margin-top: 2%;
+    width: 100%;
+}
+
+
+.div-repetidor >  div{
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    position: static;
+    max-width: 350px;
+}
+
+.div-repetidor > div > div span{
+    font-size: 0.75rem;
+    color: var(--texto);
+    font-weight: 700;
+    position: relative;
+    top: 0.5rem;
+    margin: 0 0 0 7px;
+    padding: 0 3px;
+    width: fit-content;
+    background-color: var(--negro);
+}
+  
+input[type=text], textarea, select , input[type=number], input[type=file], input[type=email], input[type=password]{
+    padding: 11px 10px;
+    margin-right: 10px;
+    margin-top: 1%;
+    font-size: 1rem;
+    border: 2px var(--blanco) solid;
+    border-radius: 5px;
+    background: transparent;
+    color: var(--blanco);
+}
+input[type=email], input[type=password]{
+    margin-top: 0%;
+}
+
+option{
+    background-color: var(--negro);
+    font-size: 1rem;
+}
+
+#descripcionRead, #descripcionMod, #descripcion, #titulo ,#tituloMod, #tituloRead , input[type=file]{
+    width: 100%;
+}
+
+textarea {
+    resize: none;
+}
+
+select, input[type=file]{
+    width: 80%;
+}
+
+.op > input[type=number]{
+    width: 20%;
+}
+
+.cont-espaciado{
+    padding-top: 2.5%;
+}
+
+.mas{
+    margin-top: 10%;
+}
+
+.importante{
+    font-size: 2rem;
+    color: var();
+}
+
+
+.div-repetidor a{
+    margin-top: 26px;
+    padding-left: 15px;
+    color: var(--blanco);
+    text-decoration: none;
+    font-size: 2rem;
+}
+
+#a_genero{
+    padding-right: 28%;
+}
+
+.div-repetidor a:hover{
+    color: var(--rojo);
+}
+
+.boton_agregar {
+    border: 2px solid var(--azul);
+    background-color: var(--azul);
+    border-radius: 0.9em;
+    padding: 0.5em;
+    transition: all ease-in-out 0.2s;
+    height: fit-content;
+    width: fit-content;
+    font-size: 0.8em;
+    color: var(--blanco);
+    font-weight: 600;
+    margin-top: 350px;
+    margin-right: 20px;
+}
+
+.boton_agregar:hover{
+    background-color: var(--azul-oscuro);
+}
+
+#agregarG{
+    position: absolute;
+    margin-top: 360px;
+    margin-left: 235px;
+}
+
+.cont-info{
+    width: 46.5%;
+}
+
+input[type="date"]{
+    background-color: var(--azul);
+    margin-top: 1%;
+    padding: 10px;
+    position: relative;
+    font-family: "Roboto Mono",monospace;
+    color: var(--blanco);
+    font-size: 16px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+
+input[type="submit"]{
+    background-color: var(--amarillo);
+    margin: 5% auto;
+    margin-bottom: 0%;
+    padding: 15px;
+    font-family: "Roboto Mono",monospace;
+    color: var(--blanco);
+    font-size: 1.5rem;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+
+
+
+input[name=submit-busca]{
+    margin-top: 8%;
+}
+
+.label-cargado{
+    margin-left: 5%;
+}
+
+.cont-cargados{
+    margin-bottom: 3%;
+}
+
+.completador{
+    width: 100%;
+    padding: 10%;
+    text-align: center;
+}
+
+/* pagina de INFO */
+/*estrellas*/
+.rating-registrado {
+display: inline-block;
+}
+
+.rating-registrado input {
+display: none;
+}
+
+.rating-registrado label {
+float: right;
+cursor: pointer;
+color: var(--header);
+transition: color 0.3s;
+}
+
+.rating-registrado label:before {
+content: '\2605';
+font-size: 60px;
+}
+
+.rating-registrado input:checked ~ label {
+color: var(--amarillo);
+transition: color 0.3s;
+}
+
+/* de la nueva review */
+.rating {
+    display: inline-block;
+    }
+    
+    .rating input {
+    display: none;
+    }
+    
+    .rating label {
+    float: right;
+    cursor: pointer;
+    color: #ccc;
+    transition: color 0.3s;
+    }
+    
+    .rating label:before {
+    content: '\2605';
+    font-size: 30px;
+    }
+    
+    .rating input:checked ~ label,
+    .rating label:hover,
+    .rating label:hover ~ label {
+    color: #6f00ff;
+    transition: color 0.3s;
+    }
+/* fin de las estrellas */
+
+#informacion{
+    width: 100%;
+    margin: auto;
+    background-color: transparent;
+    display: flex;
+    text-align: start;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    padding: 3% 5%;
+    padding-bottom: 1%;
+    color: var(--blanco);
+}
+
+#contDatos{
+    width: 75%;
+    padding-left: 5%;
+}
+
+#contPoster{
+    width: 25%;
+}
+
+#contDatosTags{
+    width: 100%;
+    padding-top: 4rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+#contPoster img {
+    width: 100%;
+    height: fit-content;
+}
+
+#tituloInfo{
+    font-size: 4rem;
+}
+
+#descripcionInfo{
+    font-size: 1.5rem;
+    font-weight: lighter;
+    padding-top: 5%;
+}
+
+#dateInfo{
+    background-color: transparent;
+    color: var(--blanco);
+    padding: 0%;
+
+    font-size: 1.2rem;
+ 
+    font-family: 'Montserrat', sans-serif;
+}
+
+#contEstreFecha{
+    width: 90%;
+    height: fit-content;
+    align-items: center;
+    display: flex;
+    padding: 0%;
+    justify-content: space-between;
+}
+
+#contFechaDur{
+    width: 60%;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.tags{
+    font-size: 1.3rem;
+    padding-right: 5%;
+}
+
+#contDesTags{
+    display: flex;
+    min-height:45vh;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.form_cancelar{
+    margin-top: 0%;
+    padding-top: 0%;
+}
+
+.form_cancelar input[type="submit"], button, .Btn {
+    background-color: var(--rojo);
+    padding: 15px;
+    margin: 0%;
+    font-family: "Roboto Mono",monospace;
+    color: var(--blanco);
+    font-size: 1.2rem;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+
+#botones-admin{
+    margin-left: 5%;
+    display: flex;
+    justify-content: space-between;
+    width: 22.5%;
+}
+
+.Btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 160px;
+    background-color: var(--azul-oscuro);
+    border: none;
+    cursor: pointer;
+    transition-duration: .3s;
+}
+
+.rojo-elim{
+    background-color: var(--rojo);
+}
+  
+.svg {
+    width: 13px;
+    position: absolute;
+    right: 0;
+    margin-right: 20px;
+    fill: white;
+    transition-duration: .3s;
+}
+
+.Btn:hover {
+    color: transparent;
+}
+
+.Btn:hover svg {
+    right: 43%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    transition-duration: .3s;
+}
+
+button:active,  input[type="submit"]:active {
+    transform: translate(3px , 3px);
+    transition-duration: .3s;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black overlay */
+    z-index: 1000;
+}
+
+.show{
+    display: block;
+}
+
+.popup {
+    position: fixed;
+    background-color: var(--blanco);
+    border: 1px solid var(--negro);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    width: 50%;
+    height: fit-content;
+    padding: 20px;
+    padding-bottom: 4%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1001;
+    color: var(--negro);
+    border-radius: 10px;
+}
+
+/* Styles for the close button */
+.popup-close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 2rem;
+}
+
+/* Add styles for the content and buttons inside the pop-up as needed */
+.popup-content {
+    text-align: center;
+    align-items: center;
+    padding: 5%;
+    font-weight: bold;
+    font-size: 4rem;
+}
+
+.descripcion_accion{
+    text-align: start;
+    margin-top: 3%;
+    font-size: 1.2rem;
+}
+
+.popup-buttons {
+    display: flex;
+    width: 80%;
+    margin: auto;
+    justify-content: space-between;
+}
+
+.popup-buttons form , .popup-buttons button{
+    width: 40%;
+}
+
+.popup-buttons button{
+    background-color: var(--azul-oscuro);
+}
+
+.popup-buttons button:hover{
+    transform: scale(1.1);
+}
+
+.popup-buttons form button{
+    width: 100%;
+    height: 100%;
+}
+
+#boton-eliminar svg{
+    width: 20px;
+}
+
+#boton-eliminar{
+    background-color: var(--rojo);
+}
+
+#checkboxContainerDire, #checkboxContainerActor, #checkboxContainerGenero{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 150px;
+    margin-top: 2%;
+    overflow-y: scroll;
+    padding: 11px 10px;
+    font-size: 1.1rem;
+    border: 2px var(--blanco) solid;
+    border-radius: 5px;
+    background: transparent;
+    color: var(--blanco);
+    margin-bottom: 5%;
+}
+
+#checkboxSearchDire, #checkboxSearchActor, #checkboxSearchGenero{
+    width: 80%;
+}

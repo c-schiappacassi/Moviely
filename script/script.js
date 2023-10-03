@@ -17,8 +17,8 @@ $(document).ready(function(){
     // Small carousel with manual navigation using arrow controls
     $('.small-carousel-slide').slick({
         infinite: true,
-        slidesToShow: 5, // Set to 6 to scroll 6 images at a time
-        slidesToScroll: 5, // Set to 6 to scroll 6 images at a time
+        slidesToShow: 3, // Set to 6 to scroll 6 images at a time
+        slidesToScroll: 1, // Set to 6 to scroll 6 images at a time
         arrows: false,
         variableWidth: true,
         pauseOnHover: false,

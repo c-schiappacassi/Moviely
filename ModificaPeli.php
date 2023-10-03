@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/estilos.css">
     <title>Admin</title>
 </head>
 
@@ -12,8 +12,6 @@
     <?php
         include("conexion.php");
         include("opciones.php");
-
-        echo '<header>';
 
         if(isset($_SESSION['id_usuario']))
         {
@@ -32,24 +30,16 @@
         }
         else echo $opciones_sin_sesion;
 
-        echo '</header>
+        echo '
             <main>';// EMPIEZA EL MAIN
 
       
-        if (isset($_GET['submit-busca'])) {
+        if (isset($_GET['submit-modif'])) {
 
             $id_busca= $_GET['busca_id'];
-            $titulo_busca= $_GET['busca_titulo'] ;
 
-            if ($titulo_busca != ""){
-                $encontrado = mysqli_query($conexion,"SELECT id_peli FROM moviely.peli WHERE titulo = ('$titulo_busca')" );
-                if ($encontrado->num_rows > 0){
-                    $id_busca =  mysqli_fetch_assoc($encontrado);
-                    $id_busca = $id_busca['id_peli'];
-                } 
-            }
             $encontrado = mysqli_query($conexion,"SELECT * FROM moviely.peli WHERE id_peli = ('$id_busca')" );
-
+            
             if ($encontrado->num_rows > 0){
                 $row_encontrado = mysqli_fetch_assoc($encontrado); 
                 
@@ -211,6 +201,22 @@
                             <div class="cont-dinamicas">
                                 <div id="div-director" class="div-repetidor">
                                     <p class="importante">Agregar directores</p>
+                                    <input type="text" id="checkboxSearchDire" placeholder="Buscar en el Sistema">
+                                    <div id="checkboxContainerDire">
+                                        ';
+                                        $todos_direc = mysqli_query($conexion,"SELECT * FROM moviely.director");
+                                        while ($row_direc = $todos_direc->fetch_assoc()) {
+                                            echo'
+                                            <div class="checkbox-container-Dire">
+                                                <label>'.$row_direc['nombre'].' '.$row_direc['apellido'].'</label>
+                                                <input type="checkbox" name="checkboxDire[]" id="'.$row_direc['id_director'].'" value="'.$row_direc['id_director'].'" class="checkboxDire" data-name="'.$row_direc['nombre'].' '.$row_direc['apellido'].'">
+                                            </div>
+                                            ';
+                                        }
+                                        echo '
+                                    </div>
+                                    <p style="font-size:1.5rem;">Si no existe en el Sistema, <span style="font-weight:bold; ">Creelo</span>:</p>
+                                    <p>(Preste atención a la ortografía, Comience con Mayúscula)</p>
                                     <div>
                                         <div>
                                             <span>Nombre</span><input type="text" name="nombres[]" autocomplete="off" />
@@ -226,6 +232,22 @@
                             <div class="cont-dinamicas">
                                 <div id="div-actor" class="div-repetidor">
                                     <p class="importante">Agregar actores</p>
+                                    <input type="text" id="checkboxSearchActor" placeholder="Buscar en el Sistema">
+                                    <div id="checkboxContainerActor">
+                                        ';
+                                        $todos_Actorc = mysqli_query($conexion,"SELECT * FROM moviely.actor");
+                                        while ($row_Actor = $todos_Actorc->fetch_assoc()) {
+                                            echo'
+                                            <div class="checkbox-container-Actor">
+                                                <label>'.$row_Actor['nombre'].' '.$row_Actor['apellido'].'</label>
+                                                <input type="checkbox" name="checkboxActor[]" id="'.$row_Actor['id_actor'].'" value="'.$row_Actor['id_actor'].'" class="checkboxActor" data-name="'.$row_Actor['nombre'].' '.$row_Actor['apellido'].'">
+                                            </div>
+                                            ';
+                                        }
+                                        echo '
+                                    </div>
+                                    <p style="font-size:1.5rem;">Si no existe en el Sistema, <span style="font-weight:bold; ">Creelo</span>:</p>
+                                    <p>(Preste atención a la ortografía, Comience con Mayúscula)</p>
                                     <div>
                                         <div>
                                             <span>Nombre</span><input type="text" name="nombresA[]" autocomplete="off" />
@@ -242,6 +264,22 @@
                         <div class="cont-dinamicas cont-genero">
                             <div id="div-genero" class="div-repetidor">
                                 <p class="importante">Agregar generos</p>
+                                <input type="text" id="checkboxSearchGenero" placeholder="Buscar en el Sistema">
+                                <div id="checkboxContainerGenero">
+                                    ';
+                                    $todos_Genero = mysqli_query($conexion,"SELECT * FROM moviely.genero");
+                                    while ($row_Genero = $todos_Genero->fetch_assoc()) {
+                                        echo'
+                                        <div class="checkbox-container-Genero">
+                                            <label>'.$row_Genero['nombre_genero'].'</label>
+                                            <input type="checkbox" name="checkboxGenero[]" id="'.$row_Genero['id_genero'].'" value="'.$row_Genero['id_genero'].'" class="checkboxGenero" data-name="'.$row_Genero['nombre_genero'].'">
+                                        </div>
+                                        ';
+                                    }
+                                    echo '
+                                </div>
+                                <p style="font-size:1.5rem;">Si no existe en el Sistema, <span style="font-weight:bold; ">Creelo</span>:</p>
+                                <p>(Preste atención a la ortografía, Comience con Mayúscula)</p>
                                 <div>
                                     <div>
                                         <span>Nombre del Genero</span><input type="text" name="nombresG[]" autocomplete="off" />
@@ -250,11 +288,15 @@
                             </div>
                             <input class="boton_agregar" type="button" value="+ Agregar" id="agregarG" />
                         </div>
-                        <input type="submit" name="submit" value="Registrar Modificación"> 
+                        <input type="submit" name="submit" value="Registrar Modificación">
                     </form>
+                    <form class="form_cancelar" method="GET" action="info.php">
+                            <input type="hidden" name="id_peli" value="'.$row_encontrado['id_peli'].'">
+                            <input type="submit" name="cancel" value="Cancelar Modificación"> 
+                    </form>   
                 ';
-                } 
-            }else {echo '<p class="importante">No hay contenido bajo ese registro</p>';}
+                } else {echo '<div class="completador"><h1 class="importante">No hay contenido bajo ese registro</h1><div>';}
+            }
         
 
 
@@ -266,7 +308,6 @@
 	?>  
         <script src="script/jquery.js"></script>   
         <script>
-            
             const checkboxT = document.getElementById("modiTit");
             const checkboxD = document.getElementById("modiDes");
             $("#descripcionRead").show();
@@ -293,8 +334,9 @@
                     $("#tituloMod").hide();
                 }
             });
-        </script>   
-        <script src="script/check.js"></script> 
+        </script>
+        <script src="script/unchecked.js"></script>
+        <script src="script/checked.js"></script>
         <script src="script/etiquetas-dinamicas.js"></script>    
 </body>
 </html>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/estilos.css">
     <title>Admin</title>
 </head>
 
@@ -12,8 +12,6 @@
     <?php
         include("conexion.php");
         include("opciones.php");
-
-        echo '<header>';
 
         if(isset($_SESSION['id_usuario']))
         {
@@ -32,7 +30,7 @@
         }
         else echo $opciones_sin_sesion;
 
-        echo '</header>
+        echo '
             <main> 
             
             <div class="completador">
@@ -42,6 +40,10 @@
                 if(isset($_POST['submit'])){
                     $id_peli = $_POST['id_peli'];
                     $flag_update = 0;
+
+                    $destruc_peli = "DELETE FROM moviely.peli WHERE id_peli = ($id_peli);";
+                    $destruc_peli_direc = "DELETE FROM moviely.peli_director WHERE id_peli = ($id_peli);";
+                    $destruc_peli_actor = "DELETE FROM moviely.peli_actor WHERE id_peli = ($id_peli);";
 
                     //variables con modificaciones a cargar
                     $titulo = ($_POST['tituloMod'] == "") ? $_POST['tituloRead'] : $_POST['tituloMod']; //verifica modificacion titulo
@@ -94,6 +96,40 @@
                     }
 
                     //verifico de no quedarme sin director, actor o genero
+                    $flagD = 0;$flagA = 0;$flagG = 0;
+                    if (isset($_POST['checkboxDire'])) {
+                        $checkedCheckboxValues = $_POST['checkboxDire'];
+
+                        foreach ($checkedCheckboxValues as $checkedCheckboxValue) { 
+                            $existe_relacion= mysqli_query($conexion, "SELECT * FROM moviely.peli_director WHERE id_peli=($id_peli) AND id_director=($checkedCheckboxValue)");
+                            if ($existe_relacion->num_rows==0){
+                                $relacion = mysqli_query($conexion,"INSERT INTO peli_director ( id_peli, id_director) values ( '$id_peli' , '$checkedCheckboxValue' );");
+                            }
+                        }
+                    } else {$flagD = 1;}
+
+                    if (isset($_POST['checkboxActor'])) {
+                        $checkedCheckboxValues = $_POST['checkboxActor'];
+                
+                        foreach ($checkedCheckboxValues as $checkedCheckboxValue) {
+                            $existe_relacion= mysqli_query($conexion, "SELECT * FROM moviely.peli_actor WHERE id_peli=($id_peli) AND id_actor=($checkedCheckboxValue)");
+                            if ($existe_relacion->num_rows==0){
+                                $relacion = mysqli_query($conexion,"INSERT INTO peli_actor ( id_peli, id_actor) values ( $id_peli , $checkedCheckboxValue);");
+                            }
+                        }
+                    } else { $flagA = 1;  }
+
+                    if (isset($_POST['checkboxGenero'])) {
+                        $checkedCheckboxValues = $_POST['checkboxGenero'];
+        
+                        foreach ($checkedCheckboxValues as $checkedCheckboxValue) {
+                            $existe_relacion= mysqli_query($conexion, "SELECT * FROM moviely.peli_genero WHERE id_peli=($id_peli) AND id_genero=($checkedCheckboxValue)");
+                            if ($existe_relacion->num_rows==0){
+                                $relacion = mysqli_query($conexion,"INSERT INTO moviely.peli_genero ( id_peli, id_genero) values ( $id_peli, $checkedCheckboxValue);");
+                            }
+                        }
+                    } else {  $flagG = 1; }
+
                     if( isset( $_POST['nombres'] ) ){
                         foreach( $_POST['nombres'] as $indice => $nombre ){        
                             if($nombre != ""){
@@ -101,7 +137,7 @@
                             }                       
                         }
                     }
-                    if (count($uncheckedDirectors) == $direcCont && $NuevoDireCont == 0) { $flag_update=1; }
+                    if (count($uncheckedDirectors) == $direcCont && $NuevoDireCont == 0 && $flagD == 1 ) { $flag_update=1; }
                 
                     
                     if( isset( $_POST['nombresA'] ) ){
@@ -111,8 +147,7 @@
                             }   
                         }
                     }
-
-                    if (count($uncheckedActors) == $actCont && $NuevoActCont == 0 ) {$flag_update=1;}
+                    if (count($uncheckedActors) == $actCont && $NuevoActCont == 0 && $flagA == 1 ) {$flag_update=1;}
                     
                     
                     if( isset( $_POST['nombresG'] ) ){
@@ -122,16 +157,17 @@
                             }   
                         }
                     }
-                    if (count($uncheckedGenres) == $genCont && $NuevoGenCont == 0 ) {$flag_update=1;}
+                    if (count($uncheckedGenres) == $genCont && $NuevoGenCont == 0 && $flagG == 1) {$flag_update=1;}
 
-                
+                    
+
                     if($flag_update != 1){
                         //nuevos directores
                         if( isset( $_POST['nombres'] ) ){
                             foreach( $_POST['nombres'] as $indice => $nombre ){
                                 $apellido = $_POST['apellidos'][$indice];
-                                
-                                if($nombre != ""){
+
+                                if ($nombre != "" && $apellido != ""){
                                     $buscadire = "SELECT id_director FROM moviely.director WHERE nombre=('$nombre') AND apellido=('$apellido')";
                                     
                                     $existedire = mysqli_query($conexion,$buscadire);
@@ -147,7 +183,6 @@
                                     if ($existe_relacion->num_rows==0){
                                         $relacion = mysqli_query($conexion,"INSERT INTO peli_director ( id_peli, id_director) values ( $id_peli , $iddire);");
                                     }
-                                    $NuevoDireCont++;  
                                 }                       
                             }
                         }
@@ -163,7 +198,7 @@
                             foreach( $_POST['nombresA'] as $indice => $nombre ){
                                 $apellido = $_POST['apellidosA'][$indice];
                                 
-                                if($nombre != ""){
+                                if ($nombre != "" && $apellido != ""){
                                     $buscaactor = "SELECT id_actor FROM moviely.actor WHERE nombre=('$nombre') AND apellido=('$apellido')";
                                     
                                     $existeactor = mysqli_query($conexion,$buscaactor);
@@ -179,8 +214,6 @@
                                     if ($existe_relacion->num_rows==0){
                                         $relacion = mysqli_query($conexion,"INSERT INTO peli_actor ( id_peli, id_actor) values ( $id_peli , $idactor);");
                                     }
-        
-                                    $NuevoActCont++;  
                                 }   
                             }
                         }
@@ -210,7 +243,6 @@
                                     if ($existe_relacion->num_rows==0){
                                         $relacion = mysqli_query($conexion,"INSERT INTO moviely.peli_genero ( id_peli, id_genero) values ( $id_peli , $idgenero);");
                                     }
-                                    $NuevoGenCont++;
                                 }   
                             }
                         }
@@ -227,17 +259,16 @@
                         echo 'No se a modificado el contenido por error de carga, Asegurese de que deje registrado al menos un director, un actor y un genero para el Contenido ';
                     }
                 }
-
+                
         echo '  </h1>
+                <a href="info.php?id_peli='.$id_peli.'">Volver a la visualizacion del contenido</a><br>
+                <a href="index.php">Volver a la home</a>
             </div>
         </main>
         <footer>
             <p>&copy; 2023 Your Movie Reviews</p>
         </footer>'; 
-
 	?>  
-       <script src="script/jquery.js"></script>      
-        <script src="script/etiquetas-dinamicas.js"></script>    
 </body>
 </html>
 
