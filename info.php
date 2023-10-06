@@ -45,10 +45,7 @@
             $q_actorPeli= mysqli_query($conexion, "SELECT id_actor FROM moviely.peli_actor WHERE id_peli = ('$id_peli')");
             $q_generoPeli= mysqli_query($conexion, "SELECT id_genero FROM moviely.peli_genero WHERE id_peli = ('$id_peli')");
 
-            
-
             //$calificacion = $row_datos['calificacion'];
-            
             
             echo '
             <div id="informacion">
@@ -217,6 +214,6 @@
 
     ?>
         <script src="script/jquery.js"></script>
-        <script src="script/pop-ups.js"></script>
+        <script src="script/pop-ups-admin.js"></script>
 </body>
 </html>

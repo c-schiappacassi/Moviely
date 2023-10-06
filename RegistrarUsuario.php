@@ -41,7 +41,7 @@
                         <form class="form_usuario" method="post" action="RegistrarUsuario.php">
                             <div>
                                 <label for="nombre_usuario">Usuario:</label>
-                                <input type="text" name="nombre_usuario" required>
+                                <input type="text" name="nombre_usuario" maxlength="15" required>
                             </div>
                             <div>
                                 <label for="mail_usuario">Email:</label>
@@ -80,7 +80,7 @@
                     ';
                     
                 }
-                else{
+                else if ($mail == $row['mail']){
                     echo'
                     <div class="overlay show" id="overlay-mail-repe">
                         <div class="popup">

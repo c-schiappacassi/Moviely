@@ -17,18 +17,7 @@
 
         if(isset($_SESSION['id_usuario']))
         {
-            $id_usuario = $_SESSION['id_usuario'];
-            
-            $q = "SELECT * from usuario where id_usuario = '$id_usuario' and administrador =1";
-            $resultado=mysqli_num_rows(mysqli_query($conexion,$q));
-            if($resultado!=0) echo $opciones_admin;
-            else echo $opciones;
-
-            if(isset($_POST['limpiar'])) //Limpiar filtro
-            {
-                $_POST['usuario'] = '';
-                $_POST['tipo'] = '';
-            }  
+            header('Location: Index.php');
         }
         else echo $opciones_sin_sesion;
 
@@ -57,7 +46,7 @@
             $mail = $_POST['mail_usuario'];
             $contra= md5($_POST['contra_usuario']);
             $mail_regis = mysqli_query($conexion,"SELECT id_usuario from usuario where mail = '$mail'");
-            $pregunta = mysqli_query($conexion,"SELECT id_usuario from usuario where mail = '$mail' and contraseña = '$contra'");
+            $pregunta = mysqli_query($conexion,"SELECT id_usuario , nombre_usuario , mail from usuario where mail = '$mail' and contraseña = '$contra'");
 
             if($mail_regis->num_rows == 0 ){
                 echo'                                                                   
@@ -96,6 +85,8 @@
             else if ( $pregunta->num_rows == 1){
                 $row = $pregunta->fetch_assoc();
                 $_SESSION['id_usuario'] = $row['id_usuario'];
+                $_SESSION['nombre_usuario'] = $row['nombre_usuario'];
+                $_SESSION['mail_usuario'] = $row['mail'];
                 header('Location: Index.php');
             }
         }

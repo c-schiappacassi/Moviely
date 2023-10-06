@@ -81,3 +81,28 @@ $(document).ready(function(){
     });
 
 });
+
+$(document).ready(function(){
+    //edit de perfil
+    const quiero_edit = document.getElementById('click-edit');
+    const repe_repe = document.getElementById('boton-mail-repe');
+    const pop_edit = document.getElementById('overlay-edit-perfil');
+    const cancelX_edit = document.getElementById('pop-edit-perfil');
+    const cancelBoton_edit = document.getElementById('boton-cancelo-edit-perfil');
+
+    quiero_edit.addEventListener("click", function( ){
+        pop_edit.classList.add('show');
+    });
+
+    repe_repe.addEventListener("click", function( ){
+        pop_edit.classList.add('show');
+    });
+
+    cancelX_edit.addEventListener("click", function( ){
+        pop_edit.classList.remove('show');
+    });
+
+    cancelBoton_edit.addEventListener("click", function( ){
+        pop_edit.classList.remove('show');
+    });   
+});

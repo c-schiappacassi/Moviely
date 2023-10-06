@@ -1,5 +1,6 @@
 :root{
     --blanco: aliceblue;
+    --blanco-gris: rgb(190, 190, 190);
     --rojo: #FA3902;
     --amarillo: #FEB403;
     --azul: #0080ff;
@@ -34,14 +35,19 @@ header {
 }
 
 nav{
-    width: 20%;
+    width: fit-content;
     display: flex;
     justify-content: space-between;
+    margin-right: 3%;
+    height: 100%;
 }
 
 nav ul {
     list-style: none;
     display: flex;
+    height: 100%;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 #link-logo{
@@ -56,7 +62,11 @@ nav ul {
 }
 
 nav li {
-    padding-right: 20px;
+    width: 20%;
+    height: 100%;
+    display: flex;
+    text-align: center;
+    align-items: center;
 }
 
 nav a {
@@ -65,7 +75,7 @@ nav a {
     font-weight: bold;
 }
 
-.search-bar {
+#search-bar {
     text-align: center;
 }
 
@@ -74,7 +84,23 @@ nav a {
     border: none;
 }
 
-.search-bar button {
+#search-bar input[type="submit"]{
+    padding: 10px 20px;
+    background-color: var(--amarillo);
+    border: none;
+    color: var(--header);
+    cursor: pointer;
+    font-size: 1.2rem;
+    height: fit-content;
+    width: fit-content;
+}
+
+#search-bar input[type="search"] {
+    padding: 10px;
+    border: none;
+}
+
+.search-bar button{
     padding: 10px 20px;
     background-color: var(--amarillo);
     border: none;
@@ -86,7 +112,6 @@ main {
     width: 100%;
     min-height: 75vh;
     box-sizing: border-box; 
-    text-align: center;
     justify-content: center;
     background-color: var(--negro);
     text-align: left;
@@ -112,6 +137,22 @@ footer {
     padding-left: 2%;
 }
 
+#cont-busca{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 95%;
+    align-items: center;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+#cont-busca div{
+    max-width: 50%;
+    height: 500px;
+    margin: 10px;
+}
+
 /*  CARUSEL */
 .carousel-container {
     z-index: 3;
@@ -124,6 +165,7 @@ footer {
     width: 96vw; /* Set the width to 100vw */
     overflow: hidden;
 }
+
 
 .carousel-slide {
     display: flex;
@@ -139,7 +181,7 @@ footer {
     vertical-align: middle;
 }
 
-.carousel-slide .cont img {
+.carousel-slide .cont img ,#cont-busca div  a img {
     object-fit: cover;
     width: 100%;
     height: 100%;
@@ -350,6 +392,21 @@ input[type=text], textarea, select , input[type=number], input[type=file], input
     background: transparent;
     color: var(--blanco);
 }
+
+#search-bar input[type="search"]{
+    padding: 11px 10px;
+    margin-right: 10px;
+    margin-top: 1%;
+    font-size: 1rem;
+    border-radius: 5px;
+    background: transparent;
+    color: var(--blanco);
+}
+
+#search-bar input[type='search']:active{
+    border: 2px var(--blanco) solid;
+}
+
 input[type=email], input[type=password]{
     margin-top: 0%;
 }
@@ -385,7 +442,7 @@ select, input[type=file]{
 
 .importante{
     font-size: 2rem;
-    color: var();
+    color: var(--blanco);
 }
 
 
@@ -625,7 +682,7 @@ transition: color 0.3s;
     padding-top: 0%;
 }
 
-.form_cancelar input[type="submit"], button, .Btn {
+.form_cancelar input[type="submit"], .search-bar input[type="submit"], button, .Btn , #div_logout {
     background-color: var(--rojo);
     padding: 15px;
     margin: 0%;
@@ -792,4 +849,115 @@ button:active,  input[type="submit"]:active {
 
 #checkboxSearchDire, #checkboxSearchActor, #checkboxSearchGenero{
     width: 80%;
+}
+
+
+#perfil{
+    width: 100%;
+    margin: auto;
+    padding-top: 3%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding-bottom: 3%;
+}
+
+#perfil .popup{
+    background-color: var(--blanco-gris);
+}
+
+#info-usuario{
+    width: 30%;
+    height: fit-content;
+    padding: 1% 1.5% ;
+    border: 2px var(--blanco) solid;
+    border-radius: 5px;
+    background: transparent;
+    color: var(--blanco);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#info-usuario h1{
+    font-size: 3rem;
+}
+
+#usuario-reviews{
+    width: 60%;
+    min-height: 60vh;
+    padding-left: 4.3%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    border-left: 2px var(--blanco) solid;
+}
+
+#text-perfil{
+    width: 100%;
+}
+
+#text-perfil a{
+    width: 1.5rem;
+}
+
+#click-edit{
+    position: absolute;
+    height: 1%;
+    width:3.5%;
+    margin-top: 1%;
+    align-self: flex-end;
+}
+
+#div_logout{
+    width: 200px;
+    margin-top: 5%;
+    text-align: center;
+}
+
+#div_logout a{
+    text-decoration: none;
+    color: var(--blanco);
+    font-weight: bold;
+}
+
+
+#edit-perfil{
+    padding: 11px 10px;
+    margin-right: 10px;
+    margin-top: 1%;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.5rem;
+    border: 2px var(--negro) solid;
+    border-radius: 5px;
+    color: var(--negro);
+    align-items: center;
+}
+
+#edit-perfil div{
+    margin-bottom: 2%;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+#edit-perfil input[type='text'] , #edit-perfil input[type='email']{
+    border: 2px var(--negro) solid;
+    color: var(--negro);
+    width: 60%;
+}
+
+#botones-edit {
+    width: 90%;
+    margin-bottom: 0%;
+    margin-top: 2%;
+}
+
+#botones-edit button{
+    width: fit-content;
+    min-width: 40%;
 }
