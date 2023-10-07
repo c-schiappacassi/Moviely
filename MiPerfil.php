@@ -12,6 +12,7 @@
 
 <body>
     <?php
+        ob_start();
         include("conexion.php");
         include("opciones.php");
 
@@ -45,7 +46,7 @@
 
                         <div class="overlay" id="overlay-edit-perfil">
                             <div class="popup">
-                                <span class="popup-close" id="pop-edit-perfil">&times;</span>
+                                <span class="popup-close" id="pop-cerrar-edit">&times;</span>
                                 <div class="popup-content">
                                     <p>Edición de perfil</p>
                                 </div>
@@ -118,9 +119,9 @@
                 else{
                     $id_usuario = $_SESSION['id_usuario'];
                     if($nom_nuevo > "" && $mail_nuevo > ""){
-                       $update = mysqli_query($conexion,"UPDATE usuario SET nombre_usuario = '$nom_nuevo', mail = '$mail_nuevo' WHERE id_usuario = '$id_usuario'");
-                       session_destroy();
-                       header("Location:LogInUsuario.php");
+                        $update = mysqli_query($conexion,"UPDATE usuario SET nombre_usuario = '$nom_nuevo', mail = '$mail_nuevo' WHERE id_usuario = '$id_usuario'");
+                        session_destroy();
+                        header('Location: mail_registrado.php?id_usuario='.$id_usuario.'');
                     }
                     else if($mail_nuevo == "" && $nom_nuevo > ""){
                         $update = mysqli_query($conexion,"UPDATE usuario SET nombre_usuario = '$nom_nuevo' WHERE id_usuario = '$id_usuario'");
@@ -129,8 +130,7 @@
                     }
                     else if($mail_nuevo > "" && $nom_nuevo == ""){ 
                         $update = mysqli_query($conexion,"UPDATE usuario SET mail = '$mail_nuevo' WHERE id_usuario = '$id_usuario'");
-                        session_destroy();
-                        header("Location:LogInUsuario.php");
+                        header('Location: mail_registrado.php?id_usuario='.$id_usuario.'');
                     }
                 } 
             }                
@@ -151,5 +151,6 @@
     ?>
     <script src="script/jquery.js"></script>
     <script src="script/pop-ups.js"></script>
+    
 </body>
 </html>

@@ -214,6 +214,6 @@
 
     ?>
         <script src="script/jquery.js"></script>
-        <script src="script/pop-ups-admin.js"></script>
+        <script src="script/pop-ups.js"></script>
 </body>
 </html>

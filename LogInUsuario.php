@@ -38,6 +38,7 @@
                             </div>
                             <input type="submit" name="logueame" value="Iniciar Sesion">
                         </form>
+                        <p style="font-size:1rem;">No tienes cuenta? <a href="RegistrarUsuario.php">Regístrate</a></p>
                         <p style="font-size:1rem;">Tambien puedes <a href="LogInMail.php">iniciar sesion por Mail registrado</a></p>
                     </div>
                     ';
@@ -47,7 +48,6 @@
 
             $usuario_regis = mysqli_query($conexion,"SELECT id_usuario from usuario where nombre_usuario = '$usuario'");
             $pregunta = mysqli_query($conexion,"SELECT id_usuario , nombre_usuario, mail from usuario where nombre_usuario = '$usuario' and contraseña = '$contra'");
-//aca nos quedamos, seguir modificando parael usuario en lugar del mail
             if($usuario_regis->num_rows == 0 ){
                 echo'                                                                   
                 <div class="overlay show" id="overlay-mail-nuevo">

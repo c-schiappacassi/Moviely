@@ -39,6 +39,7 @@
                             </div>
                             <input type="submit" name="logueame" value="Iniciar Sesion">
                         </form>
+                        <p style="font-size:1rem;">No tienes cuenta? <a href="RegistrarUsuario.php">Regístrate</a></p>
                         <p style="font-size:1rem;">Tambien puedes <a href="LogInUsuario.php">iniciar sesion por nombre de usuario</a></p>
                     </div>
                     ';

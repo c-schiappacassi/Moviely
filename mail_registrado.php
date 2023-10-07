@@ -1,39 +1,58 @@
 <?php session_start();?>
 <?php
 include("conexion.php");
+include("vendor\config.php");
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'vendor/autoload.php'; // Include PHPMailer autoload file
 
-$mail = new PHPMailer(true);
+if (isset($_GET['id_usuario']) || isset($_SESSION['id_usuario'])){
 
-try {
-    // Common SMTP settings
-    $mail->isSMTP();
-    $mail->SMTPSecure = 'tls';
-    $mail->Port = 465;
-
-    // Gmail settings
-    $gmailEnabled = true; // Set to true if using Gmail
-
-    if ($gmailEnabled) {
-        $mail->Host = 'smtp.gmail.com'; // Gmail SMTP server
-        $mail->SMTPAuth = true;
-        $mail->Username = 'movielyreviews@gmail.com'; // Your Gmail address
-        $mail->Password = 'MOVIELY_moviely'; // Your Gmail password or App Password
+    if(isset($_SESSION['id_usuario'])){
+        $id = $_SESSION['id_usuario'];
     }
+    else{$id = $_GET['id_usuario'];} 
 
-    // Common email settings
-    $mail->setFrom('movielyreviews@gmail.com', 'Moviely-Reviews');
-    $mail->addAddress('tripa.xjp@gmail.com', 'Kensho');
-    $mail->isHTML(true);
-    $mail->Subject = 'Test Email';
-    $mail->Body = 'This is a test email sent from a webpage using PHPMailer.';
+    $registrado = mysqli_query($conexion,"SELECT nombre_usuario, mail FROM moviely.usuario WHERE id_usuario = '$id';"); 
+    $row_registrado = $registrado->fetch_assoc();
+    
+    
+    require_once 'vendor/autoload.php'; 
+    $mail = new PHPMailer(true);
 
-    $mail->send();
-    echo 'Email sent successfully!';
-} catch (Exception $e) {
-    echo "Email could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    try {
+        $mail->isSMTP();
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 25;
+
+        $mail->Host = 'smtp.office365.com'; 
+        $mail->SMTPAuth = true;
+        $mail->Username = 'MovielyReviews@hotmail.com'; 
+        $mail->Password = 'MOVIELY_moviely';
+
+        $mail->setFrom('MovielyReviews@hotmail.com', 'Moviely-Reviews');
+        $mail->addAddress(''.$row_registrado['mail'].'', ''.$row_registrado['nombre_usuario'].'');
+        $mail->isHTML(true);
+        $mail->Subject = 'Bienvenido a Moviely!';
+        $mail->Body = '¡Bienvenido a Moviely '.$row_registrado['nombre_usuario'].'!,
+        <br><br>Estamos muy contentos de que te hayas registrado en nuestra comunidad de amantes del cine.
+        <br><br>Moviely es un lugar donde puedes compartir tus opiniones sobre películas, encontrar nuevos títulos que ver y consultar reviews con otros cinéfilos de todo el mundo!
+        <br>Para empezar, te recomendamos que explores la plataforma y descubras todas las funciones que tenemos para ofrecer. 
+        <br>Puedes leer reseñas de otros usuarios, guardar en tu lista tus películas favoritas, dejar tu calificación y opinión cinematografica.
+        <br><br>Estamos seguros de que te divertirás mucho en Moviely. ¡Gracias por formar parte de nuestra comunidad!
+        <br><br> - El equipo de Moviely.
+        <br><br> P.D.: Te dejamos el Manual del Crítico para ayudarte a explorar Moviely!';
+        // $file_path = 'path/to/your/attachment/file.pdf'; // path al manual de usuario
+        // $mail->addAttachment($file_path, 'attachment.pdf'); //cambiar nombre
+
+        $mail->send();
+        $_GET['id_usuario'] = ""; 
+        
+        session_destroy();
+
+        header('Location: LogInUsuario.php');   
+    } catch (Exception $e) {
+        echo "Email could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
 }
 ?>

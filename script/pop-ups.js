@@ -87,8 +87,6 @@ $(document).ready(function(){
     const quiero_edit = document.getElementById('click-edit');
     const repe_repe = document.getElementById('boton-mail-repe');
     const pop_edit = document.getElementById('overlay-edit-perfil');
-    const cancelX_edit = document.getElementById('pop-edit-perfil');
-    const cancelBoton_edit = document.getElementById('boton-cancelo-edit-perfil');
 
     quiero_edit.addEventListener("click", function( ){
         pop_edit.classList.add('show');
@@ -97,10 +95,18 @@ $(document).ready(function(){
     repe_repe.addEventListener("click", function( ){
         pop_edit.classList.add('show');
     });
+});
+
+
+$(document).ready(function(){
+    //edit de perfil
+    const pop_edit = document.getElementById('overlay-edit-perfil');
+    const cancelX_edit = document.getElementById('pop-cerrar-edit');
+    const cancelBoton_edit = document.getElementById('boton-cancelo-edit-perfil');
 
     cancelX_edit.addEventListener("click", function( ){
         pop_edit.classList.remove('show');
-    });
+    }); 
 
     cancelBoton_edit.addEventListener("click", function( ){
         pop_edit.classList.remove('show');
