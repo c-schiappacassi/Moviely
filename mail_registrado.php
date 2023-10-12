@@ -1,10 +1,36 @@
 <?php session_start();?>
+<?php session_start();?>
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
+    <title>Admin</title>
+</head>
+
+<body>
 <?php
 include("conexion.php");
+include("opciones.php");
+
+
+echo $opciones_sin_links;
+echo '
+    <main>
+    <svg id="loader" viewBox="25 25 50 50">
+        <circle r="20" cy="50" cx="50"></circle>
+    </svg>
+    </main>
+    <footer>
+        <p>&copy; 2023 Your Movie Reviews</p>
+    </footer>
+';
 include("vendor\config.php");
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-
 
 if (isset($_GET['id_usuario']) || isset($_SESSION['id_usuario'])){
 
@@ -56,3 +82,5 @@ if (isset($_GET['id_usuario']) || isset($_SESSION['id_usuario'])){
     }
 }
 ?>
+</body>
+</html>

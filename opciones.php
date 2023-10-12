@@ -67,5 +67,13 @@ ob_start();
         if(isset($_GET['boton-buscar'])){
             header('Location: resultado_busqueda.php?buscar='.$_GET['buscar'].'');
         }  
+
+    $opciones_sin_links='
+        <header>
+            <a id="link-logo" href="">
+                <img id="logo" src="moviely logo.png" alt="">
+            </a>
+        </header>
+        ';
 ?>
 

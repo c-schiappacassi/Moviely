@@ -41,7 +41,7 @@
                         </button>  
 
                         <div id="div_logout">
-                        <a href="LogOut.php">Cerrar Sesion</a>
+                            <a href="LogOut.php">Cerrar Sesion</a>
                         </div>  
 
                         <div class="overlay" id="overlay-edit-perfil">

@@ -21,8 +21,11 @@
             
             $q = "SELECT * from usuario where id_usuario = '$id_usuario' and administrador =1";
             $resultado=mysqli_num_rows(mysqli_query($conexion,$q));
-            if($resultado!=0) echo $opciones_admin;
-            else echo $opciones;
+            if($resultado!=0){echo $opciones_admin; $_SESSION['administrador'] = 1;}
+            else{
+                echo $opciones;
+                $_SESSION['administrador'] = 0;
+            } 
 
             if(isset($_POST['limpiar'])) //Limpiar filtro
             {
@@ -197,9 +200,68 @@
             //EMPIEZAN LAS RESEÑAS
             echo '
             <div id="reviews">
-                    
+                <div class="reseña">
+                    <form id="form-review" action="publicacionReview.php" method="post">
+                        <input type="hidden" name="id_peli" value="'.$id_peli.'">
+                        <p>Calificación en estrellas: </p>
+                        <div class="rating">
+                            <input value="5" name="rating-critico" id="starCrit5" type="radio">
+                            <label for="starCrit5"></label>
+                            <input value="4" name="rating-critico" id="starCrit4" type="radio">
+                            <label for="starCrit4"></label>
+                            <input value="3" name="rating-critico" id="starCrit3" type="radio">
+                            <label for="starCrit3"></label>
+                            <input value="2" name="rating-critico" id="starCrit2" type="radio">
+                            <label for="starCrit2"></label>
+                            <input value="1" name="rating-critico" id="starCrit1" type="radio">
+                            <label for="starCrit1"></label>
+                        </div>
+                        <textarea name="coment-critico" rows="4" placeholder="Escriba aquí su review!..." ></textarea>
+                        ';
+                        if(isset($_SESSION['id_usuario']) &&  $_SESSION['administrador'] == 0)
+                        {
+                            echo'<input class="publicar" type="submit" value="Publicar">';
+                        }
+                        else{   echo '<button class="publicar" id="no-hay-sesion" >Publicar</button>';  };
+                        echo '
+                    </form>
+                </div>
+                '; 
+                
+                $q_reseñas = mysqli_query($conexion, "SELECT * FROM moviely.review WHERE id_peli = ('$id_peli') AND estado_review = 0 AND estado_usuario = 0 ");
+                
+                if ($q_reseñas->num_rows > 0) {
+                    while ($row = $q_reseñas->fetch_assoc()) {
+                        $estrellas = $row['calificacion'];
+                        $usuario = $row['id_usuario'];
+
+                        $reseña_usuario = mysqli_query($conexion, "SELECT nombre_usuario FROM moviely.usuario WHERE id_usuario = ('$usuario')");
+                        $usuario = $reseña_usuario->fetch_assoc();
+                        echo /*aca va un while que pase por todas las reviews*/'
+                        <div class="reseña">
+                            <strong>'; $usuario['nombre_usuario']; echo'</strong> 
+                            <div id="estre-review" class="rating">
+                                <input value="5" '; if ($estrellas >=4.51){echo 'checked="checked"';}else{echo 'onclick="return false;"';}  echo'name="rating-reviews" id="starRev5" type="radio">
+                                <label for="starRev5"></label>
+                                <input value="4" '; if ($estrellas >=3.51  && $estrellas <4.51){echo 'checked="checked"';}else{echo 'onclick="return false;"';} echo' name="rating-reviews" id="starRev4" type="radio">
+                                <label for="starRev4"></label>
+                                <input value="3" '; if ($estrellas >=2.51  && $estrellas < 3.51){echo 'checked="checked"';}else{echo 'onclick="return false;"';} echo' name="rating-reviews" id="starRev3" type="radio">
+                                <label for="starRev3"></label>
+                                <input value="2" '; if ($estrellas >= 1.51  && $estrellas < 2.51){echo 'checked="checked"';}else{echo 'onclick="return false;"';} echo' name="rating-reviews" id="starRev2" type="radio">
+                                <label for="starRev2"></label>
+                                <input value="1" '; if ($estrellas >=1  && $estrellas < 1.51){echo 'checked="checked"';}else{echo 'onclick="return false;"';} echo' name="rating-reviews" id="starRev1" type="radio">
+                                <label for="starRev1"></label>
+                            </div> 
+                            <p>'; $row['comentario']; echo'</p>              
+                        </div>';
+                    }
+                } else {
+                    echo '<p>Que vacio... Se el primero en comentar!</p>';
+                }
+            echo'    
             </div>
             ';
+            
         }
 
         echo '
