@@ -17,25 +17,13 @@
 
         if(isset($_SESSION['id_usuario']))
         {
-            $id_usuario = $_SESSION['id_usuario'];
-            
-            $q = "SELECT * from usuario where id_usuario = '$id_usuario' and administrador = 1";
-            $resultado=mysqli_num_rows(mysqli_query($conexion,$q));
-            if($resultado!=0) echo $opciones_admin;
-            else echo $opciones;
-
-            if(isset($_POST['limpiar'])) //Limpiar filtro
-            {
-                $_POST['usuario'] = '';
-                $_POST['tipo'] = '';
-            }  
+            header('Location: Index.php');                                    
         }
         else echo $opciones_sin_sesion;
 
         echo '
                 <main>
                     <div class="cont-espaciado"></div>
-                    
                     <div class="div_form">
                         <h1>Inicia Sesión</h1>
                         <p>Por medio del nombre de Usuario registrado</p>
@@ -50,15 +38,16 @@
                             </div>
                             <input type="submit" name="logueame" value="Iniciar Sesion">
                         </form>
+                        <p style="font-size:1rem;">No tienes cuenta? <a href="RegistrarUsuario.php">Regístrate</a></p>
                         <p style="font-size:1rem;">Tambien puedes <a href="LogInMail.php">iniciar sesion por Mail registrado</a></p>
                     </div>
                     ';
         if(isset($_POST['logueame'])){
-            $mail = $_POST['nombre_usuario'];
+            $usuario = $_POST['nombre_usuario'];
             $contra= md5($_POST['contra_usuario']);
+
             $usuario_regis = mysqli_query($conexion,"SELECT id_usuario from usuario where nombre_usuario = '$usuario'");
-            $pregunta = mysqli_query($conexion,"SELECT id_usuario from usuario where nombre_usuario = '$usuario' and contraseña = '$contra'");
-//aca nos quedamos, seguir modificando parael usuario en lugar del mail
+            $pregunta = mysqli_query($conexion,"SELECT id_usuario , nombre_usuario, mail from usuario where nombre_usuario = '$usuario' and contraseña = '$contra'");
             if($usuario_regis->num_rows == 0 ){
                 echo'                                                                   
                 <div class="overlay show" id="overlay-mail-nuevo">
@@ -95,6 +84,8 @@
             else if ( $pregunta->num_rows == 1){
                 $row = $pregunta->fetch_assoc();
                 $_SESSION['id_usuario'] = $row['id_usuario'];
+                $_SESSION['nombre_usuario'] = $row['nombre_usuario'];
+                $_SESSION['mail_usuario'] = $row['mail'];
                 header('Location: Index.php');
             }
         }

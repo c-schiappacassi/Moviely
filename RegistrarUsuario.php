@@ -41,7 +41,7 @@
                         <form class="form_usuario" method="post" action="RegistrarUsuario.php">
                             <div>
                                 <label for="nombre_usuario">Usuario:</label>
-                                <input type="text" name="nombre_usuario" required>
+                                <input type="text" name="nombre_usuario" maxlength="15" required>
                             </div>
                             <div>
                                 <label for="mail_usuario">Email:</label>
@@ -80,7 +80,7 @@
                     ';
                     
                 }
-                else{
+                else if ($mail == $row['mail']){
                     echo'
                     <div class="overlay show" id="overlay-mail-repe">
                         <div class="popup">
@@ -102,7 +102,10 @@
             }
             else{
                 $registro_usuario = mysqli_query($conexion,"INSERT INTO moviely.usuario (nombre_usuario, mail, contraseña) values ('$usuario', '$mail', '$contra')");
-                header('Location: LogInUsuario.php');
+                $registrado = mysqli_query($conexion,"SELECT id_usuario FROM moviely.usuario WHERE nombre_usuario = '$usuario' AND mail='$mail';"); 
+                $row_registrado = $registrado->fetch_assoc();
+
+                header('Location: mail_registrado.php?id_usuario='.$row_registrado['id_usuario'].'');
             }    
         }
         echo '

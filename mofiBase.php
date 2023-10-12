@@ -51,18 +51,45 @@
                     $estreno = $_POST['fecha'];
                     $duracion = 0;
                     $temporada = 0;
-                
-                    $uncheckedDirectors = isset($_POST['uncheckeddirectors']) ? $_POST['uncheckeddirectors'] : [];
-                    $uncheckedActors = isset($_POST['uncheckedactors']) ? $_POST['uncheckedactors'] : [];
-                    $uncheckedGenres = isset($_POST['uncheckedgenres']) ? $_POST['uncheckedgenres'] : [];
                     
                     //variables asistentes
                     $direcCont = $_POST['directorCont'];
                     $actCont = $_POST['actorCont'];
-                    $genCont =  $_POST['generoCont'] ;
+                    $genCont =  $_POST['generoCont'];
+                    $direcContChau = 0;
+                    $actorContChau = 0;
+                    $generoContChau = 0;
                     $NuevoDireCont = 0;
                     $NuevoActCont = 0;
                     $NuevoGenCont = 0;
+
+                    //contamos cuantos directores, generos, y actores quieren desvincular
+                    if (isset($_POST['unchecked_directors'])) {
+                        $uncheckedDirectorIDs = $_POST['unchecked_directors'];
+                        $directorIDsArray = explode(',', $uncheckedDirectorIDs);
+
+                        foreach ($directorIDsArray as $directorID) {
+                            if($directorID > 0){    $direcContChau ++;  }
+                        }
+                    }
+
+                    if (isset($_POST['unchecked_actors'])) {
+                        $uncheckedActorsIDs = $_POST['unchecked_actors'];
+                        $actorsIDsArray = explode(',', $uncheckedActorsIDs);
+
+                        foreach ($actorsIDsArray as $actorID) {
+                            if($actorID > 0){    $actorContChau ++;  }
+                        }
+                    }
+
+                    if (isset($_POST['unchecked_genres'])) {
+                        $uncheckedGenresIDs = $_POST['unchecked_genres'];
+                        $genresIDsArray = explode(',', $uncheckedGenresIDs);
+
+                        foreach ($genresIDsArray as $genreID) {
+                            if($genreID > 0){    $generoContChau ++;  }
+                        }
+                    }
                     
                     //verificacion duracion o temporadas
                     if ($_POST['dur_min'] > 0 ){
@@ -137,7 +164,7 @@
                             }                       
                         }
                     }
-                    if (count($uncheckedDirectors) == $direcCont && $NuevoDireCont == 0 && $flagD == 1 ) { $flag_update=1; }
+                    if ( $direcContChau == $direcCont && $NuevoDireCont == 0 && $flagD == 1 ) { $flag_update=1; }
                 
                     
                     if( isset( $_POST['nombresA'] ) ){
@@ -147,7 +174,7 @@
                             }   
                         }
                     }
-                    if (count($uncheckedActors) == $actCont && $NuevoActCont == 0 && $flagA == 1 ) {$flag_update=1;}
+                    if ( $actorContChau == $actCont && $NuevoActCont == 0 && $flagA == 1 ) {$flag_update=1;}
                     
                     
                     if( isset( $_POST['nombresG'] ) ){
@@ -157,11 +184,11 @@
                             }   
                         }
                     }
-                    if (count($uncheckedGenres) == $genCont && $NuevoGenCont == 0 && $flagG == 1) {$flag_update=1;}
+                    if ($generoContChau == $genCont && $NuevoGenCont == 0 && $flagG == 1) {$flag_update=1;}
 
                     
 
-                    if($flag_update != 1){
+                    if($flag_update < 1){
                         //nuevos directores
                         if( isset( $_POST['nombres'] ) ){
                             foreach( $_POST['nombres'] as $indice => $nombre ){
@@ -186,9 +213,8 @@
                                 }                       
                             }
                         }
-                        
                         //eliminamos los directores unchecked
-                        foreach ($uncheckedDirectors as $id){
+                        foreach ($directorIDsArray as $id){
                             $eliminoDire = mysqli_query($conexion,"DELETE FROM  moviely.peli_director WHERE id_peli=('$id_peli') AND id_director=('$id')");
                         }
                         
@@ -218,8 +244,8 @@
                             }
                         }
                         //eliminamos los actores unchecked
-                        foreach ($uncheckedActors as $id){
-                            $eliminoActor = mysqli_query($conexion,"DELETE FROM  moviely.peli_actor WHERE id_peli=('$id_peli') AND id_actor=('$id')");
+                        foreach ($actorsIDsArray as $id){
+                            $eliminoActor = mysqli_query($conexion,"DELETE FROM moviely.peli_actor WHERE id_peli=('$id_peli') AND id_actor=('$id')");
                         }
                         
         
@@ -247,7 +273,7 @@
                             }
                         }
                         //eliminamos los generos unchecked
-                        foreach ($uncheckedGenres as $id){
+                        foreach ($genresIDsArray as $id){
                             $eliminoGen = mysqli_query($conexion,"DELETE FROM  moviely.peli_genero WHERE id_peli=('$id_peli') AND id_genero=('$id')");
                         }    
         
@@ -268,7 +294,7 @@
         <footer>
             <p>&copy; 2023 Your Movie Reviews</p>
         </footer>'; 
-	?>  
+	?> 
 </body>
 </html>
 

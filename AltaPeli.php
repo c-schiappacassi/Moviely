@@ -60,7 +60,7 @@
                     $registro = "INSERT INTO peli (titulo, path_poster, estreno, descripcion, duracion, calificacion, cant_review,cant_estrellas) values ('$titulo', '$target_file', '$fecha', '$descrip', '$duracion_peli', 0,0,0);" ;
                     $result = mysqli_query($conexion,$registro);
                 }
-                else if($temporadas_serie > 0){
+                else if($temporadas_serie > 0 && $duracion_peli <= 0 ){
                     $registro = "INSERT INTO peli (titulo, path_poster, estreno, descripcion, temporada) values ('$titulo', '$target_file', '$fecha', '$descrip', '$temporadas_serie'); " ;
                     $result = mysqli_query($conexion,$registro);
                 }

@@ -45,7 +45,7 @@
                 
     
                     echo '
-                    <form class="form_alta_peli" method="POST" action="mofiBase.php" enctype="multipart/form-data"> 
+                    <form id="form_alta_peli" class="form_alta_peli" method="POST" action="mofiBase.php" enctype="multipart/form-data"> 
                         <div class="divisor">
                             <div class="cont-info">
                                 <div class="cont-espaciado">
@@ -116,28 +116,32 @@
                         
                         <div class="cont-cargados checkbox-group" id="director-cargado">
                         <p class="importante">Directores Cargados</p>';
-                            $RelacionCargados = mysqli_query($conexion, "SELECT id_director FROM moviely.peli_director WHERE id_peli = ('$id_busca')");
-                            $directorCont = $RelacionCargados->num_rows;
-                            echo '<input type="hidden" name="directorCont" value="'.$directorCont.'">';
+                        $RelacionCargados = mysqli_query($conexion, "SELECT id_director FROM moviely.peli_director WHERE id_peli = ('$id_busca')");
+                        $directorCont = $RelacionCargados->num_rows;
+                        echo '<input type="hidden" name="directorCont" value="' . $directorCont . '">';
+                       
 
-                            if ($RelacionCargados->num_rows > 0) {
-                                while ($rowID = $RelacionCargados->fetch_assoc()) {
-                                    $directorId = $rowID['id_director'];
-                                    $direcInfo = mysqli_query($conexion, "SELECT * FROM moviely.director WHERE id_director = '$directorId'");
-                                
-                                    
-                                    $direcInfoRow = $direcInfo->fetch_assoc();
-                                    echo '
-                                    <label class="label-cargado">
-                                        <input type="checkbox" name="directors[]" id="'.$direcInfoRow['id_director'].'" checked="checked" value="'.$direcInfoRow['id_director'].'" />
-                                        '.$direcInfoRow['nombre'].' '.$direcInfoRow['apellido'].'
-                                        <input type="hidden" name="uncheckedDirectors" id="uncheckedDirectors" value="">
-                                    </label>  
-                                    ';
-                                }
-                            } else {
-                                echo '<p>No directors found.</p>';
+                        if ($RelacionCargados->num_rows > 0) {
+                            while ($rowID = $RelacionCargados->fetch_assoc()) {
+                                $directorId = $rowID['id_director'];
+                                $direcInfo = mysqli_query($conexion, "SELECT * FROM moviely.director WHERE id_director = '$directorId'");
+                        
+                                $direcInfoRow = $direcInfo->fetch_assoc();
+                                $checkboxId = 'director_' . $direcInfoRow['id_director']; // Unique ID for each checkbox
+                                $checkboxName = 'directors[]'; // Name for all checkboxes
+                        
+                                echo '
+                                <label class="label-cargado">
+                                    <input type="checkbox" id="'.$direcInfoRow['id_director'].'" class="unchecked-Dire" name="directors_unchecked[]" checked="checked">
+                                    '.$direcInfoRow['nombre'].' '.$direcInfoRow['apellido'].'
+                                </label>
+                                ';
                             }
+
+                        } else {
+                            echo '<p>No directors found.</p>';
+                        }
+                        
                         echo'    
                         </div>
 
@@ -149,21 +153,24 @@
 
                         if ($RelacionCargados->num_rows > 0) {
                             while ($rowID = $RelacionCargados->fetch_assoc()) {
-                                $actorId = $rowID['id_actor'];
-                                $actorInfo = mysqli_query($conexion, "SELECT * FROM moviely.actor WHERE id_actor = '$actorId'");
-
-                                $actorInfoRow = $actorInfo->fetch_assoc();
+                                $actorId = $rowID['id_actor']; // Update variable names
+                                $actorInfo = mysqli_query($conexion, "SELECT * FROM moviely.actor WHERE id_actor = '$actorId'"); // Update table name
+                        
+                                $actorInfoRow = $actorInfo->fetch_assoc(); // Update variable names
+                                $checkboxId = 'actor_' . $actorInfoRow['id_actor']; // Unique ID for each checkbox
+                                $checkboxName = 'actors[]'; // Name for all checkboxes
+                        
                                 echo '
                                 <label class="label-cargado">
-                                    <input type="checkbox" name="actors[]" id="'.$actorInfoRow['id_actor'].'" value="'.$actorInfoRow['id_actor'].'" checked="checked"/>
-                                    '.$actorInfoRow['nombre'].' '.$actorInfoRow['apellido'].'
-                                    <input type="hidden" name="uncheckedActors" id="uncheckedActors" value="">                                    
-                                </label>  
+                                    <input type="checkbox" id="'.$actorInfoRow['id_actor'].'" class="unchecked-Actors" name="actors_unchecked[]" checked="checked"> <!-- Update class and name -->
+                                    '.$actorInfoRow['nombre'].' '.$actorInfoRow['apellido'].' <!-- Update field names -->
+                                </label>
                                 ';
                             }
                         } else {
                             echo '<p>No actors found.</p>';
                         }
+                        
                         echo'    
                         </div>
 
@@ -177,22 +184,24 @@
 
                         if ($RelacionCargados->num_rows > 0) {
                             while ($rowID = $RelacionCargados->fetch_assoc()) {
-                                $generoId = $rowID['id_genero'];
-                                $generoInfo = mysqli_query($conexion, "SELECT * FROM moviely.genero WHERE id_genero = '$generoId'");
-                                
-                                
-                                $generoInfoRow = $generoInfo->fetch_assoc();
+                                $genreId = $rowID['id_genero']; // Update variable names
+                                $genreInfo = mysqli_query($conexion, "SELECT * FROM moviely.genero WHERE id_genero = '$genreId'"); // Update table name
+                        
+                                $genreInfoRow = $genreInfo->fetch_assoc(); // Update variable names
+                                $checkboxId = 'genre_' . $genreInfoRow['id_genero']; // Unique ID for each checkbox
+                                $checkboxName = 'genres[]'; // Name for all checkboxes
+                        
                                 echo '
-                                <label class="label-cargado"> 
-                                    <input type="checkbox" name="genres[]" id="'.$generoInfoRow['id_genero'].'" checked="checked" value="'.$generoInfoRow['id_genero'].'" />
-                                    '.$generoInfoRow['nombre_genero'].' 
-                                    <input type="hidden" name="uncheckedGenres" id="uncheckedGenres" value="">
-                                    </label>  
+                                <label class="label-cargado">
+                                    <input type="checkbox" id="'.$genreInfoRow['id_genero'].'" class="unchecked-Genres" name="genres_unchecked[]" checked="checked"> 
+                                    '.$genreInfoRow['nombre_genero'].' 
+                                </label>
                                 ';
                             }
                         } else {
-                            echo '<p>No actors found.</p>';
+                            echo '<p>No genres found.</p>';
                         }
+                        
                         echo'    
                         </div>
 
@@ -306,6 +315,60 @@
         </footer>'; 
 
 	?>  
+        <script>
+            document.getElementById('form_alta_peli').addEventListener('submit', function(event) {
+                // Collect unchecked checkbox IDs
+                const uncheckedIDsDirec = [];
+                const checkboxes = document.querySelectorAll('.unchecked-Dire');
+                checkboxes.forEach(function(checkbox) {
+                    if (!checkbox.checked) {
+                        // Collect the IDs of unchecked checkboxes
+                        uncheckedIDsDirec.push(checkbox.id);
+                    }
+                });
+
+                // Create a hidden input field to store unchecked IDs
+                const uncheckedInput = document.createElement('input');
+                uncheckedInput.type = 'hidden';
+                uncheckedInput.name = 'unchecked_directors';
+                uncheckedInput.value = uncheckedIDsDirec.join(',');
+
+                // Append the hidden input to the form
+                this.appendChild(uncheckedInput);
+
+                //actores
+                const uncheckedIDsActors = [];
+                const actorCheckboxes = document.querySelectorAll('.unchecked-Actors');
+                actorCheckboxes.forEach(function(checkbox) {
+                    if (!checkbox.checked) {
+                        uncheckedIDsActors.push(checkbox.id);
+                    }
+                });
+
+                const uncheckedActorsInput = document.createElement('input');
+                uncheckedActorsInput.type = 'hidden';
+                uncheckedActorsInput.name = 'unchecked_actors';
+                uncheckedActorsInput.value = uncheckedIDsActors.join(',');
+
+                this.appendChild(uncheckedActorsInput);
+
+                //generos
+                const uncheckedIDsGenres = [];
+                const genreCheckboxes = document.querySelectorAll('.unchecked-Genres');
+                genreCheckboxes.forEach(function(checkbox) {
+                    if (!checkbox.checked) {
+                        uncheckedIDsGenres.push(checkbox.id);
+                    }
+                });
+
+                const uncheckedGenresInput = document.createElement('input');
+                uncheckedGenresInput.type = 'hidden';
+                uncheckedGenresInput.name = 'unchecked_genres';
+                uncheckedGenresInput.value = uncheckedIDsGenres.join(',');
+
+                this.appendChild(uncheckedGenresInput);
+            });
+        </script>
         <script src="script/jquery.js"></script>   
         <script>
             const checkboxT = document.getElementById("modiTit");
@@ -335,7 +398,7 @@
                 }
             });
         </script>
-        <script src="script/unchecked.js"></script>
+        
         <script src="script/checked.js"></script>
         <script src="script/etiquetas-dinamicas.js"></script>    
 </body>

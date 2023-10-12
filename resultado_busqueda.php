@@ -33,8 +33,7 @@
         else echo $opciones_sin_sesion;
         echo '<main>';
 
-        $buscar = $_POST['buscar'];
-            echo "Su consulta: <em>".$buscar."</em><br>";
+        $buscar = $_GET['buscar'];
 
         $consulta = mysqli_query($conexion, "SELECT * FROM peli INNER JOIN peli_director ON peli.id_peli = peli_director.id_peli
                                                                 INNER JOIN director ON peli_director.id_director = director.id_director
