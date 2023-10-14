@@ -39,27 +39,17 @@
 
                 echo '
                 <main>
-
-                <svg id="loader" viewBox="25 25 50 50">
-                <circle r="20" cy="50" cx="50"></circle>
-                </svg>';
-
-                echo '
-                </main>
-                <footer>
-                    <p>&copy; 2023 Your Movie Reviews</p>
-                </footer>
-                '; 
+                ';
 
                 $id_peli = $_POST['id_peli'];
                 $id_usuario = $_SESSION['id_usuario'];
-                $calif = $_POST['rating-critico'];
+                $calif = $_POST['rating-crit'];
                 $comentario = $_POST['coment-critico'];
 
                 $existe_review =  mysqli_query($conexion,"SELECT * FROM moviely.review WHERE id_usuario = '$id_usuario' AND id_peli = '$id_peli';"); 
                 
                 if($existe_review->num_rows > 0){
-                    echo '<h1>Acción Negada, Solo puedes dejar 1 review por Contenido y ya tienes una!</a></h1>';
+                    echo '<h1>Acción Negada, Solo puedes dejar 1 review por Contenido y ya tienes una!</h1>';
                 }
                 else{
                     $info_peli =  mysqli_query($conexion,"SELECT * FROM moviely.peli WHERE id_peli = '$id_peli';"); 
@@ -69,9 +59,16 @@
                     $nueva_cant_estrellas =  ($row['cant_estrellas']) + $calif;
                     $nueva_calif= ($nueva_cant_estrellas / $nueva_cant_reviews) ;
 
-                    //$nueva_review =  mysqli_query($conexion,"INSERT INTO review (id_usuario , id_peli , comentario , calificacion) values ('$id_usuario', '$id_peli', '$comentario', '$calif');" );        
-                    //$update_calif_peli =  mysqli_query($conexion,"UPDATE peli SET calificacion='$nueva_calif', cant_review ='$nueva_cant_reviews', cant_estrellas='$nueva_cant_estrellas' WHERE id_peli='$id_peli';" );        
+                    $nueva_review =  mysqli_query($conexion,"INSERT INTO review (id_usuario , id_peli , comentario , calificacion) values ('$id_usuario', '$id_peli', '$comentario', '$calif');" );        
+                    $update_calif_peli =  mysqli_query($conexion,"UPDATE peli SET calificacion='$nueva_calif', cant_review ='$nueva_cant_reviews', cant_estrellas='$nueva_cant_estrellas' WHERE id_peli='$id_peli';" );        
+                    header('Location:info.php?id_peli='.$id_peli.'');
                 }
+                echo '
+                </main>
+                <footer>
+                    <p>&copy; 2023 Your Movie Reviews</p>
+                </footer>
+                '; 
             }
         }
         else{

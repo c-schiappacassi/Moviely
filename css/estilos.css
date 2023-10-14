@@ -1,5 +1,5 @@
 :root{
-    --blanco: aliceblue;
+    --blanco: #f0f8ff;
     --blanco-gris: rgb(190, 190, 190);
     --rojo: #FA3902;
     --amarillo: #FEB403;
@@ -756,6 +756,15 @@ transition: color 0.3s;
     width: 22.5%;
 }
 
+#botones{
+    margin-left: 5%;
+    width: 22.5%;
+}
+
+#botones form, #botones form button {
+    width: 100%;
+}
+
 .Btn {
     position: relative;
     display: flex;
@@ -1021,6 +1030,7 @@ button:active,  input[type="submit"]:active {
     margin-top: 1%;
     width: 80%;
     margin: auto;
+    padding-bottom: 4%;
     display: flex;
     flex-direction: column;
 }
@@ -1033,19 +1043,96 @@ button:active,  input[type="submit"]:active {
     border-bottom: 4px solid var(--header);
 }
 
-.reseña form {
+.reseña form, .reseña #cont {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
 
-.reseña form textarea {
+.reseña form textarea{
     display: flex;
     flex-direction: column;
     width: 100%;
     margin-bottom: 1%;
 }
 
+.reseña p{
+    color: var(--blanco);
+    margin-right: 2%;
+}
+
+
 .reseña form button, .reseña form input[type="submit"] {
     align-self: center;
+}
+
+#alineador_estrelllas{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+}
+
+.imp_review{
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--blanco);
+}
+
+.reseña form #boton-eliminar-reseña{
+    position: absolute;
+    right: 5%;
+    width: 50px;
+    background-color: var(--rojo);
+}
+
+/*estrellas de info*/
+/* Base setup */
+.rate , .rateDisplay{
+    display: inline-block;
+    border: 0;
+    padding: 0%;
+}
+/* Hide radio */
+.rate > input, .rateDisplay > input {
+    display: none;
+}
+/* Order correctly by floating highest to the right */
+.rate > label ,.rateDisplay > label {
+    float: right;
+    color: var(--header);
+}
+/* The star of the show */
+.rate > label:before ,.rateDisplay > label:before {
+    display: inline-block;
+    font-size: 3rem;
+    padding: 0 .2rem;
+    margin: 0;
+    cursor: pointer;
+    font-family: FontAwesome;
+    content: "\f005 "; /* full star */
+}
+
+.rate > label:before, .rateChico > label:before{
+    font-size: 2rem;
+}
+
+/* Half star trick */
+.rate .half:before, .rateDisplay .half:before {
+    content: "\f089 "; /* half star no outline */
+    position: absolute;
+    padding-right: 0;
+}
+/* Click + hover color */
+.rate input:checked ~ label, 
+.rate label:hover, .rate label:hover ~ label ,
+.rateDisplay input:checked ~ label { color: var(--amarillo);  } /* color previous stars on hover */
+
+/* Hover highlights */
+.rate input:checked + label:hover, .rate input:checked ~ label:hover, /* highlight current and previous stars */
+.rate input:checked ~ .rate label:hover ~ label, /* highlight previous selected stars for new rating */
+.rate label:hover ~ .rate input:checked ~ label /* highlight previous selected stars */ { color: var(--amarillo);  } 
+
+#add{
+    width: 25px;
 }

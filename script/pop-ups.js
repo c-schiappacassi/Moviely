@@ -18,6 +18,9 @@ $(document).ready(function(){
     });   
 });
 
+
+
+
 $(document).ready(function(){
     //nombre de usuario ocupado
     const pop_usuario = document.getElementById('overlay-usuario-repe');
@@ -112,3 +115,4 @@ $(document).ready(function(){
         pop_edit.classList.remove('show');
     });   
 });
+
