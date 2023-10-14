@@ -116,3 +116,23 @@ $(document).ready(function(){
     });   
 });
 
+$(document).ready(function(){
+    const bot_milista = document.getElementById('lista-sin-sesion');
+    const bot_review = document.getElementById('review-sin-sesion');
+    const pop = document.getElementById('overlay-sin-sesion');
+    const cancelX = document.getElementById('pop-sin-sesion');
+    const cancelBoton = document.getElementById('boton-sin-sesion');
+
+    bot_milista.addEventListener("click", function( ){
+        pop.classList.add('show');
+    }); 
+    bot_review.addEventListener("click", function( ){
+        pop.classList.add('show');
+    }); 
+    cancelX.addEventListener("click", function( ){
+        pop.classList.remove('show');
+    });
+    cancelBoton.addEventListener("click", function( ){
+        pop.classList.remove('show');
+    });   
+});

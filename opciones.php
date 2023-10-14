@@ -12,7 +12,7 @@ ob_start();
             <nav>
                 <ul>
                     <li><a href="index.php">Top Charts</a></li>
-                    <li><a href="#">Mi Lista</a></li>
+                    <li><a href="MiLista.php">Mi Lista</a></li>
                     <li><a href="MiPerfil.php">Mi Perfil</a></li>
                 </ul>
             </nav>

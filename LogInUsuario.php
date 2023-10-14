@@ -42,6 +42,7 @@
                         <p style="font-size:1rem;">Tambien puedes <a href="LogInMail.php">iniciar sesion por Mail registrado</a></p>
                     </div>
                     ';
+                    
         if(isset($_POST['logueame'])){
             $usuario = $_POST['nombre_usuario'];
             $contra= md5($_POST['contra_usuario']);

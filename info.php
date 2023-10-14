@@ -28,7 +28,10 @@
                 $_SESSION['administrador'] = 0;
             } 
         }
-        else echo $opciones_sin_sesion;
+        else {
+            echo $opciones_sin_sesion;
+            $_SESSION['administrador'] = 0;
+        } 
 
         echo '
                 <main>';// EMPIEZA EL MAIN
@@ -157,7 +160,7 @@
             //TERMINO LA INFO DE LA PELI
 
             //botones admin
-            if( $_SESSION['administrador']){
+            if( $_SESSION['administrador'] == 1){
                 echo '
                 <div id="botones-admin">
                     <form method="GET" action="ModificaPeli.php">
@@ -194,22 +197,38 @@
             }
             else{
                 echo '<div id="botones">';
-
                 if(isset($_SESSION['id_usuario']))
                 {
-                    echo'
-                    <form id="MiLista-form" method="POST" action="info.php">
-                        <input type="hidden" name="review_elim_peli" value="'.$id_peli.'">
-                        <button type="submit" name="boton-Agregar-lista" class="Btn">Agregar a Mi Lista
-                            <svg id="add" class="svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g id="Complete"><g><line fill="none" stroke="#f0f8ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="12" x2="12" y1="19" y2="5"/><line fill="none" stroke="#f0f8ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="5" x2="19" y1="12" y2="12"/></g>
-                        </button>
-                    </form>
-                    ';
+                    $id_usuario = $_SESSION['id_usuario'];
+                    $existe_lista = mysqli_query($conexion, "SELECT * FROM moviely.mi_lista WHERE id_peli = ('$id_peli') AND id_usuario = ('$id_usuario');");
+
+                    if($existe_lista->num_rows > 0){
+                        echo'
+                        <form id="MiLista-form" method="GET" action="administracionMiLista.php">
+                            <input type="hidden" name="id_peli" value="'.$id_peli.'">
+                            <button type="submit" name="boton-quitar-lista" class="Btn rojo-elim">Quitar de Mi Lista
+                                <svg class="svg" fill="#f0f8ff" viewBox="-3.5 0 19 19" xmlns="http://www.w3.org/2000/svg" class="cf-icon-svg"><path d="M11.383 13.644A1.03 1.03 0 0 1 9.928 15.1L6 11.172 2.072 15.1a1.03 1.03 0 1 1-1.455-1.456l3.928-3.928L.617 5.79a1.03 1.03 0 1 1 1.455-1.456L6 8.261l3.928-3.928a1.03 1.03 0 0 1 1.455 1.456L7.455 9.716z"/></svg>
+                            </button>
+                        </form>
+                        ';
+                        
+                    }
+                    else{
+                        echo'
+                        <form id="MiLista-form" method="GET" action="administracionMiLista.php">
+                            <input type="hidden" name="id_peli" value="'.$id_peli.'">
+                            <button type="submit" name="boton-Agregar-lista" class="Btn">Agregar a Mi Lista
+                                <svg id="add" class="svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g id="Complete"><g><line fill="none" stroke="#f0f8ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="12" x2="12" y1="19" y2="5"/><line fill="none" stroke="#f0f8ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="5" x2="19" y1="12" y2="12"/></g>
+                            </button>
+                        </form>
+                        ';
+                         
+                    }
                 }
                 else{   echo '
-                    <button name="boton-Agregar-lista-sin-sesiom" class="Btn">Agregar a Mi Lista
+                    <button name="lista-sin-sesion" id="lista-sin-sesion" class="Btn">Agregar a Mi Lista
                         <svg id="add" class="svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g id="Complete"><g><line fill="none" stroke="#f0f8ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="12" x2="12" y1="19" y2="5"/><line fill="none" stroke="#f0f8ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="5" x2="19" y1="12" y2="12"/></g>
-                    </button>';  
+                    </button>';
                 }
                 echo '</div>';
             }
@@ -217,8 +236,9 @@
 
             //EMPIEZAN LAS RESEÑAS
             echo '
-            <div id="reviews">
-
+            <div id="reviews">';
+            if ($_SESSION['administrador'] == 0){
+                echo'
                 <div class="reseña">
                 <p class="imp_review"><strong>Deja tu review!</strong></p>
                     <form id="form-review" action="publicacionReview.php" method="post">
@@ -241,13 +261,33 @@
                         
                         <textarea name="coment-critico" rows="4" placeholder="Escriba aquí su review!..." ></textarea>
                         ';
-                        if(isset($_SESSION['id_usuario']) &&  $_SESSION['administrador'] == 0)
+                        if(isset($_SESSION['id_usuario']))
                         {
-                            echo'<input class="publicar" type="submit" value="Publicar">';
+                            echo'<input class="publicar" type="submit" value="Publicar">
+                            </form>';
                         }
-                        else{   echo '<button class="publicar" id="no-hay-sesion" >Publicar</button>';  };
+                        else{   echo' </form> <button class="publicar" id="review-sin-sesion" >Publicar</button>';  };
                         echo '
-                    </form>
+                </div>';
+            }
+            
+            echo '
+                <div class="overlay" id="overlay-sin-sesion">
+                    <div class="popup">
+                        <span class="popup-close" id="pop-sin-sesion">&times;</span>
+                        <div class="popup-content">
+                            <p class="importante">Accion Negada</p>
+                            <div class="descripcion_accion"><p>Parece que no a iniciado sesion!     :o <br><br>Solo los usuarios Criticos con sesión iniciada<br>pueden realizar esta acción</p></div>
+                        </div>
+                        <div class="popup-buttons">
+                            <form method="POST" action="LogInUsuario.php">
+                                <button >Iniciar Sesión</button>
+                            </form>
+                            <form method="POST" action="RegistrarUsuario.php">
+                                <button >Crear Cuenta</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
                 '; 
                 
@@ -284,8 +324,11 @@
                         </div>';
                         $contName++;
                     }
-                } else {
+                } else if ($q_reseñas->num_rows == 0 && $_SESSION['administrador'] == 0) {
                     echo '<div class="reseña"><p>Que vacio... Se el primero en comentar!</p></div>';
+                }
+                else{
+                    echo '<div class="reseña"><p>No hay reseñas</p></div>';
                 }
             echo'    
             </div>
@@ -306,5 +349,6 @@
     ?>
         <script src="script/jquery.js"></script>
         <script src="script/pop-ups.js"></script>
+
 </body>
 </html>

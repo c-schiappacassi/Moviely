@@ -761,9 +761,18 @@ transition: color 0.3s;
     width: 22.5%;
 }
 
-#botones form, #botones form button {
+#botones form, #botones form button, #botones button {
     width: 100%;
 }
+
+#botones form button svg, #botones button svg{
+    width: 25px;
+}
+
+.popup .importante{
+    color: var(--negro);
+}
+
 
 .Btn {
     position: relative;
@@ -926,7 +935,7 @@ button:active,  input[type="submit"]:active {
     padding-bottom: 3%;
 }
 
-#perfil .popup{
+#perfil  .popup, #reviews .popup{
     background-color: var(--blanco-gris);
 }
 
@@ -1079,6 +1088,11 @@ button:active,  input[type="submit"]:active {
     color: var(--blanco);
 }
 
+#review-sin-sesion{
+    position: relative;
+    margin-left: 44%;
+}
+
 .reseña form #boton-eliminar-reseña{
     position: absolute;
     right: 5%;
@@ -1133,6 +1147,58 @@ button:active,  input[type="submit"]:active {
 .rate input:checked ~ .rate label:hover ~ label, /* highlight previous selected stars for new rating */
 .rate label:hover ~ .rate input:checked ~ label /* highlight previous selected stars */ { color: var(--amarillo);  } 
 
-#add{
-    width: 25px;
-}
+.uiverse {
+    position: absolute;
+    background: transparent;
+    background: linear-gradient(0deg, var(--header) 2%, transparent 100%);
+    width: 334px;
+    bottom: 5px;
+    height: 50px;
+    font-size: 17px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0 10px 10px var(--header);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+  
+  .tooltip {
+    position: absolute;
+    top: 0;
+    font-size: 14px;
+    background: #ffffff;
+    color: #ffffff;
+    padding: 5px 8px;
+    border-radius: 5px;
+    box-shadow: 0 10px 10px var(--header);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+  
+  .tooltip::before {
+    position: absolute;
+    content: "";
+    height: 8px;
+    width: 8px;
+    background: #ffffff;
+    bottom: -3px;
+    left: 50%;
+    transform: translate(-50%) rotate(45deg);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+  
+  .uiverse:hover .tooltip {
+    top: -45px;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+  
+  .uiverse:hover,
+  .uiverse:hover .tooltip,
+  .uiverse:hover .tooltip::before {
+    background: var(--rojo);
+  }

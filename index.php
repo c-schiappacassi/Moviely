@@ -40,7 +40,6 @@
         <button class="carousel-prev">&#60</button>
         <div class="carousel-slide">';
     
-            // Assuming you have a database connection established earlier
             $sql = "SELECT path_poster as poster, id_peli as id FROM peli ORDER BY calificacion DESC LIMIT 10";
             $result = mysqli_query($conexion,$sql);
 
