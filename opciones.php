@@ -18,9 +18,7 @@ ob_start();
             </nav>
         </header>
         ';
-        if(isset($_GET['boton-buscar'])){
-            header('Location: resultado_busqueda.php?buscar='.$_GET['buscar'].'');
-        }
+
      
 
     $opciones_admin='
@@ -42,9 +40,7 @@ ob_start();
             </nav>
         </header>
         ';
-        if(isset($_GET['boton-buscar'])){
-            header('Location: resultado_busqueda.php?buscar='.$_GET['buscar'].'');
-        }
+
         
         
     $opciones_sin_sesion='
@@ -64,9 +60,6 @@ ob_start();
             </nav>
         </header>
         ';
-        if(isset($_GET['boton-buscar'])){
-            header('Location: resultado_busqueda.php?buscar='.$_GET['buscar'].'');
-        }  
 
     $opciones_sin_links='
         <header>
@@ -75,5 +68,9 @@ ob_start();
             </a>
         </header>
         ';
+
+        if(isset($_GET['boton-buscar'])){
+            header('Location: resultado_busqueda.php?buscar='.$_GET['buscar'].'');
+        }  
 ?>
 

@@ -291,7 +291,7 @@
                 </div>
                 '; 
                 
-                $q_reseñas = mysqli_query($conexion, "SELECT * FROM moviely.review WHERE id_peli = ('$id_peli') AND estado_review is NULL AND estado_usuario is NULL ");
+                $q_reseñas = mysqli_query($conexion, "SELECT * FROM moviely.review WHERE id_peli = ('$id_peli') AND estado_review is NULL");
                 $contName = 1;
                 if ($q_reseñas->num_rows > 0) {
                     while ($row = $q_reseñas->fetch_assoc()) {

@@ -23,8 +23,11 @@
             
             $q = "SELECT * from usuario where id_usuario = '$id_usuario' and administrador = 1";
             $resultado=mysqli_num_rows(mysqli_query($conexion,$q));
-            if($resultado!=0) echo $opciones_admin;
-            else echo $opciones;
+            if($resultado!=0){echo $opciones_admin; $_SESSION['administrador'] = 1;}
+            else{
+                echo $opciones;
+                $_SESSION['administrador'] = 0;
+            } 
 
             echo '
             <main>
