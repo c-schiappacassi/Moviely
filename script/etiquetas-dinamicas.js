@@ -21,7 +21,6 @@ const DOM1 = function( ){
             hijos.map(hijo => padre.appendChild(hijo)) :
             padre.appendChild(hijos);
     }
-
     this.remove = e => e.remove();
 }
 

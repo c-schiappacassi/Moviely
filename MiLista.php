@@ -35,14 +35,14 @@
             if( $_SESSION['administrador'] == 0){
                 $usuario = $_SESSION['id_usuario'];
                 echo'
-                <h1 style="padding-left: 5%; font-size:3.5rem;">Mi Lista</h1>
-                <div class="carousel-container">
-                <button class="carousel-prev">&#60</button>
-                <div class="carousel-slide">';
+                <h1 style="padding-left: 5%; font-size:3.5rem;">Mi Lista</h1>';                
             
                 $pelis = mysqli_query($conexion, "SELECT id_peli FROM mi_lista WHERE id_usuario = '$usuario' ");
 
                 if ($pelis->num_rows > 0) {
+                    echo '<div class="carousel-container">
+                    <button class="carousel-prev">&#60</button>
+                    <div class="carousel-slide">';
                     while ($row = $pelis->fetch_assoc()) {
                         $id = $row["id_peli"];
 
@@ -70,14 +70,18 @@
                             
                         }
                     }
+                    echo '</div>
+                <button class="carousel-next">&#62</button>
+                </div>';
                 } else {
-                    echo '<p>No tienes nada guardado en tu lista  :( </p>';
+                    echo '
+                    <div style="width:80%; margin: auto; padding-top:3%;">
+                        <p>No tienes nada guardado en tu lista  :( </p>
+                    </div>';
                 }
                 
                     
-                echo '</div>
-                <button class="carousel-next">&#62</button>
-                </div>';
+                
             }
              
             echo '
@@ -93,6 +97,43 @@
     ?>
     <script src="script/jquery.js"></script>
     <script src="slick/slick.min.js"></script>
-    <script src="script/script.js"></script>
+    <script>
+        $(document).ready(function(){
+            var movieCount = $('.carousel-slide .cont').length;
+
+            var slickOptions = {
+                infinite: false,
+                arrows: false,
+                centerMode: false,
+                variableWidth: true,
+                pauseOnHover: false,
+                pauseOnFocus: false,
+                pauseOnDotsHover: false,
+            };
+
+            if (movieCount > 4) {
+                slickOptions.slidesToShow = 1;
+                slickOptions.slidesToScroll = 1;
+                slickOptions.autoplay = true;
+                slickOptions.autoplaySpeed = 3000;
+                slickOptions.centerMode = true;
+                slickOptions.infinite = true;
+            } else {
+                // If there are 5 or fewer movies, show them all without sliding
+                slickOptions.slidesToShow = movieCount;
+                slickOptions.slidesToScroll = movieCount;
+            }
+
+            $('.carousel-slide').slick(slickOptions);
+
+            $('.carousel-prev').on('click', function(){
+                $('.carousel-slide').slick('slickPrev');
+            });
+
+            $('.carousel-next').on('click', function(){
+                $('.carousel-slide').slick('slickNext');
+            });
+        });
+    </script>
 </body>
 </html>

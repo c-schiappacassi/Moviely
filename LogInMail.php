@@ -86,7 +86,7 @@
             else if ( $pregunta->num_rows == 1){
                 $row = $pregunta->fetch_assoc();
                 if($row['estado']> 0){
-                    header('Location: Banneado?id_banneado='.$row['id_usuario'].'.php');
+                    header('Location: Banneado.php?id_banneado='.$row['id_usuario'].'.php');
                 }
                 else{
                     $_SESSION['id_usuario'] = $row['id_usuario'];

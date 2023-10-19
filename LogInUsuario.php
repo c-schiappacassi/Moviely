@@ -48,7 +48,7 @@
             $contra= md5($_POST['contra_usuario']);
 
             $usuario_regis = mysqli_query($conexion,"SELECT id_usuario from usuario where nombre_usuario = '$usuario'");
-            $pregunta = mysqli_query($conexion,"SELECT id_usuario , nombre_usuario, mail from usuario where nombre_usuario = '$usuario' and contraseña = '$contra'");
+            $pregunta = mysqli_query($conexion,"SELECT id_usuario , nombre_usuario, mail , estado from usuario where nombre_usuario = '$usuario' and contraseña = '$contra'");
             if($usuario_regis->num_rows == 0 ){
                 echo'                                                                   
                 <div class="overlay show" id="overlay-mail-nuevo">
@@ -84,10 +84,16 @@
             }
             else if ( $pregunta->num_rows == 1){
                 $row = $pregunta->fetch_assoc();
-                $_SESSION['id_usuario'] = $row['id_usuario'];
-                $_SESSION['nombre_usuario'] = $row['nombre_usuario'];
-                $_SESSION['mail_usuario'] = $row['mail'];
-                header('Location: Index.php');
+                if($row['estado']> 0){
+                    header('Location: Banneado.php?id_banneado='.$row['id_usuario'].'.php');
+                }
+                else{
+                    $_SESSION['id_usuario'] = $row['id_usuario'];
+                    $_SESSION['nombre_usuario'] = $row['nombre_usuario'];
+                    $_SESSION['mail_usuario'] = $row['mail'];
+                    $_SESSION['estado'] = $row['estado'];
+                    header('Location: Index.php');
+                }
             }
         }
                     

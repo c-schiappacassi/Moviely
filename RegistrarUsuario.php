@@ -12,6 +12,7 @@
 
 <body>
     <?php
+        ob_start();
         include("conexion.php");
         include("opciones.php");
 

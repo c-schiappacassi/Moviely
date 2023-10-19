@@ -183,9 +183,9 @@
                             <div class="descripcion_accion"><p>Esta acción BORRARIA PERMANENTEMENTE toda la informacion de "'.$row_datos['titulo'].'" y TODAS sus reviews</p></div>
                         </div>
                         <div class="popup-buttons">
-                            <form method="POST" action="ElimPeli.php">
+                            <form method="GET" action="ElimPeli.php">
                                 <input type="hidden" name="id_peli" value="'.$id_peli.'">
-                                <button name="boton-eliminar" id="boton-eliminar" class="Btn">SI, ELIMINAR
+                                <button type="submit" name="boton-eliminar" id="boton-eliminar" class="Btn">SI, ELIMINAR
                                     <svg class="svg" fill="#ffffff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M5.755,20.283,4,8H20L18.245,20.283A2,2,0,0,1,16.265,22H7.735A2,2,0,0,1,5.755,20.283ZM21,4H16V3a1,1,0,0,0-1-1H9A1,1,0,0,0,8,3V4H3A1,1,0,0,0,3,6H21a1,1,0,0,0,0-2Z"></path></g></svg>
                                 </button>
                             </form>
@@ -200,7 +200,7 @@
                 if(isset($_SESSION['id_usuario']))
                 {
                     $id_usuario = $_SESSION['id_usuario'];
-                    $existe_lista = mysqli_query($conexion, "SELECT * FROM moviely.mi_lista WHERE id_peli = ('$id_peli') AND id_usuario = ('$id_usuario');");
+                    $existe_lista = mysqli_query($conexion, "SELECT * FROM moviely.mi_lista WHERE id_peli = ('$id_peli') AND id_usuario = ('$id_usuario')");
 
                     if($existe_lista->num_rows > 0){
                         echo'
@@ -302,7 +302,24 @@
                         $usuario = $reseña_usuario->fetch_assoc();
                         
                         echo /*aca va un while que pase por todas las reviews*/'
-                        <div class="reseña">
+                        <div class="reseña">';
+
+                        if($_SESSION['administrador'] > 0){
+                            echo '
+                            <form method="POST" action="BanReview.php">
+                                <input type="hidden" name="id_review_ban" value="'.$row['id_review'].'">
+                                <input type="hidden" name="id_peli" value="'.$row['id_peli'].'">
+                                <button name="boton-bannear-reseña" id="boton-bannear-reseña" class="Btn">Bannear Review</button>
+                            </form>
+                            <form method="POST" action="BanReview.php">
+                                <input type="hidden" name="id_review_ban" value="'.$row['id_review'].'">
+                                <input type="hidden" name="id_peli" value="'.$row['id_peli'].'">
+                                <input type="hidden" name="id_critico-ban" value="'.$row['id_usuario'].'">
+                                <button name="boton-bannear-critico" id="boton-bannear-critico" class="Btn">Bannear Crítico</button>
+                            </form>
+                            ';
+                        }
+                            echo '
                             <div id="cont">
                                 <p class="imp_review"><strong>'.$usuario['nombre_usuario'].'</strong></p> 
                                 <div id="estre-review" >

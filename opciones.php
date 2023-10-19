@@ -33,8 +33,8 @@ ob_start();
             <nav>
                 <ul>
                     <li><a href="AltaPeli.php">Alta Contenido</a></li>
-                    <li><a href="">Criticos Banneados</a></li>
-                    <li><a href="">Reviews Banneadas</a></li>
+                    <li><a href="listaBanCrit.php">Criticos Banneados</a></li>
+                    <li><a href="listaBanReview.php">Reviews Banneadas</a></li>
                     <li><a href="MiPerfil.php">Mi perfil</a></li>
                 </ul>
             </nav>
@@ -63,7 +63,7 @@ ob_start();
 
     $opciones_sin_links='
         <header>
-            <a id="link-logo" href="">
+            <a id="link-logo" href="index.php">
                 <img id="logo" src="moviely logo.png" alt="">
             </a>
         </header>
