@@ -69,7 +69,7 @@
                         echo'
                         <div style="width:80%; margin: auto; padding-top:3%;">
                             <h1>Review Banneada correctamente</h1>
-                            <a href="info.php?id_peli='.$id_peli.'">Volver al contenido</a> o <a>Ver la lista de Reviews Banneadas</a>
+                            <a href="info.php?id_peli='.$id_peli.'">Volver al contenido</a> o <a href="listaBanReview.php">Ver la lista de Reviews Banneadas</a>
                         </div>';
                     }
                 }
@@ -116,7 +116,7 @@
                     echo'
                     <div style="width:80%; margin: auto; padding-top:3%;">
                         <h1>Crítico Banneado correctamente</h1>
-                        <a href="info.php?id_peli='.$id_peli.'">Volver al contenido</a> o <a>Ver la lista de Críticos Banneados</a>
+                        <a href="info.php?id_peli='.$id_peli.'">Volver al contenido</a> o <a href="listaBanCrit.php">Ver la lista de Críticos Banneados</a>
                     </div>';
                 }
             }   

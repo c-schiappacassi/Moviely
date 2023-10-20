@@ -39,28 +39,35 @@
         if (isset($_POST['desbannear-crit-2'])) {
             if (isset($_POST['checkedIds']) && is_array($_POST['checkedIds'])) {
                 $checkedIds = $_POST['checkedIds'];
-        
+                echo '<div style="width:80%; margin: auto; padding-top:3%;">';
                 foreach ($checkedIds as $checkedId) {
-                    echo $checkedId . "<br>";
-                    
+
                     $BanReviews = mysqli_query($conexion, "UPDATE moviely.review SET estado_review = NULL WHERE id_usuario = '$checkedId'");
-                    
+                    $BanCrit = mysqli_query($conexion, "UPDATE moviely.usuario SET estado = NULL WHERE id_usuario = '$checkedId'");
+
                     $calificaciones = mysqli_query($conexion, "SELECT * FROM moviely.review WHERE id_usuario = '$checkedId'");
                     
                     if($calificaciones->num_rows > 0){
-                        $row = $calificaciones->fetch_assoc();
-                        $peli = $row['id_peli'];
-                        $buscar_peli=  mysqli_query($conexion, "SELECT * FROM moviely.peli WHERE id_peli = '$peli'");
-                        $peli = $buscar_peli->fetch_assoc();
-
-                        $nueva_cant_reviews =  ($peli['cant_review']) + 1;
-                        $nueva_cant_estrellas =  ($peli['cant_estrellas']) + $row['calificacion'];
-                        
-                        $nueva_calif= ($nueva_cant_estrellas / $nueva_cant_reviews) ;
-                        $idpeli = $peli['id_peli'];
-                        $update_calif_peli =  mysqli_query($conexion,"UPDATE peli SET calificacion='$nueva_calif', cant_review ='$nueva_cant_reviews', cant_estrellas='$nueva_cant_estrellas' WHERE id_peli='$idpeli'" );        
+                        while($row = $calificaciones->fetch_assoc()){
+                            $peli = $row['id_peli'];
+                            $buscar_peli=  mysqli_query($conexion, "SELECT * FROM moviely.peli WHERE id_peli = '$peli'");
+                            $peli = $buscar_peli->fetch_assoc();
+    
+                            $nueva_cant_reviews =  ($peli['cant_review']) + 1;
+                            $nueva_cant_estrellas =  ($peli['cant_estrellas']) + $row['calificacion'];
+                            
+                            $nueva_calif= ($nueva_cant_estrellas / $nueva_cant_reviews) ;
+                            $idpeli = $peli['id_peli'];
+                            $update_calif_peli =  mysqli_query($conexion,"UPDATE peli SET calificacion='$nueva_calif', cant_review ='$nueva_cant_reviews', cant_estrellas='$nueva_cant_estrellas' WHERE id_peli='$idpeli'" );        
+                        }
+                    }
+                    $critico =  mysqli_query($conexion, "SELECT nombre_usuario FROM moviely.usuario WHERE id_usuario = '$checkedId'");
+                    if($critico ->num_rows > 0){
+                        $critico = $critico->fetch_assoc();
+                        echo ' <p class="importante">Se desbanneo al Critico <strong>'.$critico['nombre_usuario'].'</strong></p> '; 
                     }
                 }
+                echo '</div>';
             } else {
                 echo "No checked review IDs found.";
             }

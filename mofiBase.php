@@ -19,21 +19,21 @@
             
             $q = "SELECT * from usuario where id_usuario = '$id_usuario' and administrador =1";
             $resultado=mysqli_num_rows(mysqli_query($conexion,$q));
-            if($resultado!=0) echo $opciones_admin;
-            else echo $opciones;
-
-            if(isset($_POST['limpiar'])) //Limpiar filtro
-            {
-                $_POST['usuario'] = '';
-                $_POST['tipo'] = '';
-            }  
+            if($resultado!=0){echo $opciones_admin; $_SESSION['administrador'] = 1;}
+            else{
+                echo $opciones;
+                $_SESSION['administrador'] = 0;
+            } 
         }
-        else echo $opciones_sin_sesion;
+        else {
+            echo $opciones_sin_sesion;
+            $_SESSION['administrador'] = 0;
+        } 
 
-        echo '
-            <main> 
-            
-            <div class="completador">
+        echo ' <main> '; 
+
+        if($_SESSION['administrador'] > 0){
+            echo '<div class="completador">
                 <h1>';
                 // EMPIEZA EL MAIN
 
@@ -286,11 +286,19 @@
                     }
                 }
                 
-        echo '  </h1>
-                <a href="info.php?id_peli='.$id_peli.'">Volver a la visualizacion del contenido</a><br>
-                <a href="index.php">Volver a la home</a>
-            </div>
-        </main>
+            echo '  </h1>
+                    <a href="info.php?id_peli='.$id_peli.'">Volver a la visualizacion del contenido</a><br>
+                    <a href="index.php">Volver a la home</a>
+                </div>';
+        }
+        else {
+
+            echo '
+            <div style="width:80%; margin: auto; padding-top:3%;">
+                <h1>Acceso Negado</h1>
+            </div>';      
+        }
+        echo '</main>
         <footer>
             <p>&copy; 2023 Your Movie Reviews</p>
         </footer>'; 

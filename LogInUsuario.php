@@ -19,7 +19,9 @@
         {
             header('Location: Index.php');                                    
         }
-        else echo $opciones_sin_sesion;
+        else {echo $opciones_sin_sesion;
+            $_SESSION['administrador'] = 0;
+        } 
 
         echo '
                 <main>
@@ -84,7 +86,7 @@
             }
             else if ( $pregunta->num_rows == 1){
                 $row = $pregunta->fetch_assoc();
-                if($row['estado']> 0){
+                if($row['estado'] > 0){
                     header('Location: Banneado.php?id_banneado='.$row['id_usuario'].'.php');
                 }
                 else{

@@ -35,36 +35,42 @@
 
         echo '<main>';// EMPIEZA EL MAIN
 
-        if($_GET['id_peli'] != 0){
-            $id_peli = $_GET['id_peli'];
-            
-            if(isset($_SESSION['id_usuario']) && $_SESSION['administrador'] == 0 )
-            {
-                $id_usuario = $_SESSION['id_usuario'];
-                if(isset($_GET['boton-quitar-lista']) || isset($_GET['quitar'])){
-                    $quitar_lista = mysqli_query($conexion, "DELETE FROM moviely.mi_lista WHERE id_usuario = '$id_usuario' AND id_peli = '$id_peli' ;");
-                    if(isset($_GET['quitar'])){
-                        header('Location: MiLista.php');
-                    }else{
-                        header('Location: info.php?id_peli='.$id_peli.'');
+        if (isset($_SESSION['id_usuario']) && $_SESSION['administrador'] == 0 ){
+            if($_GET['id_peli'] != 0){
+                $id_peli = $_GET['id_peli'];
+                
+                if(isset($_SESSION['id_usuario']) && $_SESSION['administrador'] == 0 )
+                {
+                    $id_usuario = $_SESSION['id_usuario'];
+                    if(isset($_GET['boton-quitar-lista']) || isset($_GET['quitar'])){
+                        $quitar_lista = mysqli_query($conexion, "DELETE FROM moviely.mi_lista WHERE id_usuario = '$id_usuario' AND id_peli = '$id_peli' ;");
+                        if(isset($_GET['quitar'])){
+                            header('Location: MiLista.php');
+                        }else{
+                            header('Location: info.php?id_peli='.$id_peli.'');
+                        }
                     }
+                    if(isset($_GET['boton-Agregar-lista'])){
+                        $agregar_lista = mysqli_query($conexion, "INSERT INTO moviely.mi_lista ( id_usuario , id_peli ) VALUES (  '$id_usuario' , '$id_peli');");
+                        header('Location: info.php?id_peli='.$id_peli.'');
+                    }   
                 }
-                if(isset($_GET['boton-Agregar-lista'])){
-                    $agregar_lista = mysqli_query($conexion, "INSERT INTO moviely.mi_lista ( id_usuario , id_peli ) VALUES (  '$id_usuario' , '$id_peli');");
-                    header('Location: info.php?id_peli='.$id_peli.'');
-                }   
             }
         }
+        else if(isset($_SESSION['id_usuario']) && $_SESSION['administrador'] > 0 ){
+            echo '
+            <div style="width:80%; margin: auto; padding-top:3%;">
+            <h1>Acceso Negado</h1>
+            </div>';
+        }
+        else{ header("Location:login.php");  }
+
         echo '
         </main>
         <footer>
             <p>&copy; 2023 Your Movie Reviews</p>
         </footer>
         '; 
-/*    
-     }
-    else header("Location:login.php");   */
-
     ?>
         <script src="script/jquery.js"></script>
         <script src="script/pop-ups.js"></script>

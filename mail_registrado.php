@@ -56,5 +56,47 @@ if (isset($_GET['id_usuario']) || isset($_SESSION['id_usuario'])){
     } catch (Exception $e) {
         echo "Email could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
+} 
+else{
+        if(isset($_SESSION['id_usuario']))
+        {
+            $id_usuario = $_SESSION['id_usuario'];
+            
+            $q = "SELECT * from usuario where id_usuario = '$id_usuario' and administrador =1";
+            $resultado=mysqli_num_rows(mysqli_query($conexion,$q));
+            if($resultado!=0){echo $opciones_admin; $_SESSION['administrador'] = 1;}
+            else{
+                echo $opciones;
+                $_SESSION['administrador'] = 0;
+            } 
+        }
+        else {
+            echo $opciones_sin_sesion;
+            $_SESSION['administrador'] = 0;
+        } 
+
+        echo '
+        <!doctype html>
+        <html>
+        <head>
+            <meta charset="utf-8">
+            <link rel="stylesheet" href="css/normalize.css">
+            <link rel="stylesheet" href="css/estilos.css">
+            <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+            <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
+            <title>Admin</title>
+        </head>
+
+        <body>
+        <main>
+            <div style="width:80%; margin: auto; padding-top:3%;">
+                <h1>Acceso Negado</h1>
+            </div>
+        </main>
+        <footer>
+            <p>&copy; 2023 Your Movie Reviews</p>
+        </footer>
+        </body>
+        </html>';
 }
 ?>

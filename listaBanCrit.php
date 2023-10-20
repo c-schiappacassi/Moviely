@@ -33,7 +33,7 @@
         $_SESSION['administrador'] = 0;
     } 
 
-    echo '<main>';// EMPIEZA EL MAIN
+    echo '<main style="padding-top:2%;">';// EMPIEZA EL MAIN
 
     if($_SESSION['administrador'] > 0){
         echo' <form id="form_criticos" method="POST" action="DesbannearCritico.php"><div id="reviews">';
@@ -56,33 +56,27 @@
 
                 echo'
                 <div class="reseña" style="border-top: 4px solid #FA3902; border-bottom: 4px solid #FA3902;">
+                    <input type="checkbox" name="checkedIds[]" id="'.$row['id_usuario'].'" value="'.$row['id_usuario'].'" class="checkboxRev checkbox-input ">
+                    <input type="hidden" id="checkedIdsInput1" name="checkedIds1" value=""> 
                     <div id="cont">
-                        <p class="imp_review"><strong>'.$row['nombre_usuario'].'</strong></p>
-                        <input type="checkbox" name="checkedIds[]" id="'.$row['id_usuario'].'" value="'.$row['id_usuario'].'" class="checkboxRev">
-                        <input type="hidden" id="checkedIdsInput1" name="checkedIds1" value="">
-                        <a href="info.php?id_peli='.$id_peli.'" class="imp_review">'.$reseña_peli['titulo'].'</a> 
-                        <div id="estre-review" >
-                            <fieldset class="rateDisplay rateChico">
-                                <input type="radio" id="rating10" name="rating'.$contName.'" value="10" '; if ($estrellas ==10  ){echo 'checked';}else{echo 'onclick="return false;"';} echo'/><label for="rating10" title="10/10"></label>
-                                <input type="radio" id="rating9" name="rating'.$contName.'" value="9" '; if ($estrellas >=9  && $estrellas < 10){echo 'checked';}else{echo 'onclick="return false;"';} echo'/><label class="half" for="rating9" title="9/10"></label>
-                                <input type="radio" id="rating8" name="rating'.$contName.'" value="8" '; if ($estrellas >=8 && $estrellas < 9){echo 'checked';}else{echo 'onclick="return false;"';} echo'/><label for="rating8" title="8/10"></label>
-                                <input type="radio" id="rating7" name="rating'.$contName.'" value="7" '; if ($estrellas >=7 && $estrellas < 8){echo 'checked';}else{echo 'onclick="return false;"';} echo'/><label class="half" for="rating7" title="7/10"></label>
-                                <input type="radio" id="rating6" name="rating'.$contName.'" value="6" '; if ($estrellas >=6  && $estrellas < 7){echo 'checked';}else{echo 'onclick="return false;"';} echo'/><label for="rating6" title="6/10"></label>
-                                <input type="radio" id="rating5" name="rating'.$contName.'" value="5" '; if ($estrellas >=5  && $estrellas < 6){echo 'checked';}else{echo 'onclick="return false;"';} echo'/><label class="half" for="rating5" title="5/10"></label>
-                                <input type="radio" id="rating4" name="rating'.$contName.'" value="4" '; if ($estrellas >=4 && $estrellas < 5){echo 'checked';}else{echo 'onclick="return false;"';} echo'/><label for="rating4" title="4/10"></label>
-                                <input type="radio" id="rating3" name="rating'.$contName.'" value="3" '; if ($estrellas >=3 && $estrellas < 4){echo 'checked';}else{echo 'onclick="return false;"';} echo'/><label class="half" for="rating3" title="3/10"></label>
-                                <input type="radio" id="rating2" name="rating'.$contName.'" value="2" '; if ($estrellas >=2 && $estrellas < 3){echo 'checked';}else{echo 'onclick="return false;"';} echo'/><label for="rating2" title="2/10"></label>
-                                <input type="radio" id="rating1" name="rating'.$contName.'" value="1" '; if ($estrellas >=1 && $estrellas < 2){echo 'checked';}else{echo 'onclick="return false;"';} echo'/><label class="half" for="rating1" title="1/10"></label>
-                            </fieldset>
+                        <p class="imp_review"><strong>'.$row['nombre_usuario'].'</strong> <span class="mini">dejo en <span><a href="info.php?id_peli='.$id_peli.'" class="imp_review">'.$reseña_peli['titulo'].'</a></p> 
+                        <div style="display:flex; align-items: center; flex-direction: row;">
+                            <p>'.$estrellas.'/10<p>
+                            <div id="estre-review">
+                                <fieldset class="rateDisplay rateChico">
+                                    <input type="radio" id="rating2" name="rating'.$contName.'" value="2"  checked onclick="return false;"/><label for="rating2" title="2/10"></label>
+                                </fieldset>
+                            </div>
                         </div>
-                        <p>'.$crit_reseña['comentario'].'</p>     
+                        <p class="razon-ban">" '.$crit_reseña['comentario'].' "</p> 
                     </div>      
                 </div>';
                 $contName++;
+                }
             }
-            }
-        }
-        echo '</div><button name="desbannear-crit-2" type="submit">Desbannear las seleccionadas</button></form></div>';
+            echo '</div><button name="desbannear-crit-2" type="submit">Desbannear los Críticos seleccionados</button></form></div>';
+        }else{echo '<h1>No hay Críticos Banneados</h1></div></form></div>';}
+        
 
 
     }

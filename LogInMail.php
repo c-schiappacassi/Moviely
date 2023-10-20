@@ -19,7 +19,7 @@
         {
             header('Location: Index.php');
         }
-        else echo $opciones_sin_sesion;
+        else{ echo $opciones_sin_sesion; $_SESSION['administrador'] = 0;}
 
         echo '
                 <main>

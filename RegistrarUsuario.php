@@ -22,16 +22,16 @@
             
             $q = "SELECT * from usuario where id_usuario = '$id_usuario' and administrador =1";
             $resultado=mysqli_num_rows(mysqli_query($conexion,$q));
-            if($resultado!=0) echo $opciones_admin;
-            else echo $opciones;
-
-            if(isset($_POST['limpiar'])) //Limpiar filtro
-            {
-                $_POST['usuario'] = '';
-                $_POST['tipo'] = '';
-            }  
+            if($resultado!=0){echo $opciones_admin; $_SESSION['administrador'] = 1;}
+            else{
+                echo $opciones;
+                $_SESSION['administrador'] = 0;
+            } 
         }
-        else echo $opciones_sin_sesion;
+        else {
+            echo $opciones_sin_sesion;
+            $_SESSION['administrador'] = 0;
+        } 
 
         echo '
                 <main>

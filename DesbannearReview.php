@@ -39,7 +39,7 @@
         if (isset($_POST['desbannear-review'])) {
             if (isset($_POST['checkedIds']) && is_array($_POST['checkedIds'])) {
                 $checkedIds = $_POST['checkedIds'];
-
+                $contRev = 0;
                 foreach ($checkedIds as $checkedId) {
                     $BanReviews = mysqli_query($conexion, "UPDATE moviely.review SET estado_review = NULL WHERE id_review = '$checkedId'");
                     
@@ -58,7 +58,12 @@
                         $idpeli = $peli['id_peli'];
                         $update_calif_peli =  mysqli_query($conexion,"UPDATE peli SET calificacion='$nueva_calif', cant_review ='$nueva_cant_reviews', cant_estrellas='$nueva_cant_estrellas' WHERE id_peli='$idpeli'" );        
                     }
+                    $contRev++;
                 }
+                echo '
+                <div style="width:80%; margin: auto; padding-top:3%;">
+                    <h1 class="importante">Se desbannearon <strong>'.$contRev.'</strong> reviews</h1>
+                </div>';
             }
             else {
                 echo "No checked review IDs found.";

@@ -33,7 +33,7 @@
         $_SESSION['administrador'] = 0;
     } 
 
-    echo '<main>';// EMPIEZA EL MAIN
+    echo '<main style="padding-top:2%;">';// EMPIEZA EL MAIN
 
     if($_SESSION['administrador'] > 0){
         echo' <form id="form_reviews_ban" method="POST" action="DesbannearReview.php"><div id="reviews">';
@@ -54,11 +54,10 @@
 
                 echo'
                 <div class="reseña" style="border-top: 4px solid #FA3902; border-bottom: 4px solid #FA3902;">
+                    <input type="checkbox" name="checkedIds[]" id="'.$row['id_review'].'" value="'.$row['id_review'].'" class="checkboxRev checkbox-input">
+                    <input type="hidden" id="checkedIdsInput2" name="checlistaBanReview2" value="">    
                     <div id="cont">
-                        <p class="imp_review"><strong>'.$usuario['nombre_usuario'].'</strong></p>
-                        <input type="checkbox" name="checkedIds[]" id="'.$row['id_review'].'" value="'.$row['id_review'].'" class="checkboxRev">
-                        <input type="hidden" id="checkedIdsInput2" name="checlistaBanReview2" value="">
-                        <a href="info.php?id_peli='.$id_peli.'" class="imp_review">'.$reseña_peli['titulo'].'</a> 
+                        <p class="imp_review"><strong>'.$usuario['nombre_usuario'].'</strong> <span class="mini">dejo en <span><a href="info.php?id_peli='.$id_peli.'" class="imp_review">'.$reseña_peli['titulo'].'</a></p> 
                         <div id="estre-review" >
                             <fieldset class="rateDisplay rateChico">
                                 <input type="radio" id="rating10" name="rating'.$contName.'" value="10" '; if ($estrellas ==10  ){echo 'checked';}else{echo 'onclick="return false;"';} echo'/><label for="rating10" title="10/10"></label>
@@ -73,13 +72,13 @@
                                 <input type="radio" id="rating1" name="rating'.$contName.'" value="1" '; if ($estrellas >=1 && $estrellas < 2){echo 'checked';}else{echo 'onclick="return false;"';} echo'/><label class="half" for="rating1" title="1/10"></label>
                             </fieldset>
                         </div>
-                        <p>'.$row['comentario'].'</p>     
+                        <p class="razon-ban">" '.$row['comentario'].' "</p>     
                     </div>      
                 </div>';
                 $contName++;
             }
-        }
-        echo '</div><button name="desbannear-review" type="submit">Desbannear las seleccionadas</button></form></div>';
+            echo '</div><button name="desbannear-review" type="submit">Desbannear las Reviews seleccionadas</button></form></div>';
+        }else{echo '<h1>No hay Reviews Banneadas</h1></div></form></div>';}
 
 
     }

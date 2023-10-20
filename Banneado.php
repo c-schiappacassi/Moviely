@@ -23,7 +23,7 @@
         if(isset($_GET['id_banneado']))
         {
             $id=$_GET['id_banneado'];
-            $pregunta = mysqli_query($conexion,"SELECT * from review where id_usuario = '$id' and estado_review = 2");
+            $pregunta = mysqli_query($conexion,"SELECT * from review where id_usuario = '$id' and estado_review = 3");
 
             if($pregunta->num_rows > 0){
                 $review_toxica = $pregunta->fetch_assoc();

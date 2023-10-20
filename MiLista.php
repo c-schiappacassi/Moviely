@@ -79,9 +79,11 @@
                         <p>No tienes nada guardado en tu lista  :( </p>
                     </div>';
                 }
-                
-                    
-                
+            }else{
+                echo'
+                <div style="width:80%; margin: auto; padding-top:3%;">
+                    <h1>Acceso Negado</h1>
+                </div>';
             }
              
             echo '

@@ -352,7 +352,6 @@
             ';
             
         }
-
         echo '
         </main>
         <footer>
