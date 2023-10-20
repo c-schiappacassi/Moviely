@@ -36,7 +36,7 @@
     echo '<main style="padding-top:2%;">';// EMPIEZA EL MAIN
 
     if($_SESSION['administrador'] > 0){
-        echo' <form id="form_reviews_ban" method="POST" action="DesbannearReview.php"><div id="reviews">';
+        echo' <form id="form_reviews_ban" method="POST" action="DesbannearReview.php"><div id="reviews" class="custom-scroll" >';
 
         $contName = 1;
         $crit_reseña_ban= mysqli_query($conexion, "SELECT * FROM moviely.review WHERE estado_review = 1 ");
@@ -90,6 +90,7 @@
     }
     echo '
     </main>
+    <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
     <footer>
         <p>&copy; 2023 Your Movie Reviews</p>
     </footer>
@@ -97,6 +98,7 @@
 ?>
 <script src="script/jquery.js"></script>
 <script src="script/pop-ups.js"></script>
+<script src="script/botonTop.js"></script>
 <script>
 document.getElementById('form_reviews_ban').addEventListener('submit', function(event) {
     // Collect checked checkbox values

@@ -87,6 +87,7 @@
             }
              
             echo '
+            <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
             </main>
             <footer>
                 <p>&copy; 2023 Your Movie Reviews</p>
@@ -99,6 +100,7 @@
     ?>
     <script src="script/jquery.js"></script>
     <script src="slick/slick.min.js"></script>
+    <script src="script/botonTop.js"></script>
     <script>
         $(document).ready(function(){
             var movieCount = $('.carousel-slide .cont').length;

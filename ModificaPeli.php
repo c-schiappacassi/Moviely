@@ -314,6 +314,7 @@
             </div>';
         }
         echo '
+        <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
         </main>
         <footer>
             <p>&copy; 2023 Your Movie Reviews</p>
@@ -407,5 +408,6 @@
         
         <script src="script/checked.js"></script>
         <script src="script/etiquetas-dinamicas.js"></script>    
+        <script src="script/botonTop.js"></script>
 </body>
 </html>

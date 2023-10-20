@@ -87,5 +87,6 @@
     ?>
         <script src="script/jquery.js"></script>
         <script src="script/pop-ups.js"></script>
+        <script src="script/botonTop.js"></script>
 </body>
 </html>

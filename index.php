@@ -34,7 +34,6 @@
 
         echo '
         <main>
-
         <h1 id="top10">TOP 10</h1>
         <div class="carousel-container">
         <button class="carousel-prev">&#60</button>
@@ -53,11 +52,12 @@
                 LIMIT 10;";
             }
             $result = mysqli_query($conexion,$sql);
-
+            $puesto = 1;
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     $imagePath = $row["poster"];
-                    echo '<div class="cont"><a href="info.php?id_peli=' . $row["id"] . '" ><img src="' . $imagePath . '" alt="Movie Posters"></a></div>';
+                    echo '<div class="cont"><a href="info.php?id_peli=' . $row["id"] . '" ><img src="' . $imagePath . '" alt="Movie Posters"></a><div class="puesto"><p>'.$puesto.'°</p></div></div>';
+                    $puesto++;
                 }
             } else {
                 echo '<p>No movies found.</p>';
@@ -267,12 +267,14 @@
         }
         else{
             //PELICULAS PARA KIDS
-            $consulta = "SELECT DISTINCT peli.path_poster, peli.id_peli FROM peli 
+            $consulta = "SELECT DISTINCT peli.path_poster, peli.id_peli 
+            FROM peli 
             INNER JOIN peli_genero ON peli.id_peli = peli_genero.id_peli 
             INNER JOIN genero ON peli_genero.id_genero = genero.id_genero
             WHERE genero.nombre_genero IN ('Kids','Infantil', 'Familiar')
             GROUP BY peli.titulo
-            ORDER BY peli.calificacion DESC;";
+            ORDER BY peli.calificacion DESC
+            LIMIT 18446744073709551615 OFFSET 10 ; ";
 
             $consulta = mysqli_query($conexion,$consulta);  
             
@@ -302,17 +304,17 @@
         </div>
         ';
         echo '
+        <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
         </main>
         <footer>
             <p>&copy; 2023 Your Movie Reviews</p>
         </footer>
         ';   
-    
-
     ?>
         <script src="script/jquery.js"></script>
         <script src="slick/slick.min.js"></script>
         <script src="script/script.js"></script>
+        <script src="script/botonTop.js"></script>
         <script>
             $(document).ready(function() {
                 $("#cb3-8").on("change", function() {

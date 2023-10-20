@@ -39,8 +39,8 @@
             if (isset($_POST['submit']))
             {
     
-                $titulo = $_POST['titulo'];
-                $descrip = $_POST['descrip'];
+                $titulo = str_replace("'", "''", $_POST['titulo']);
+                $descrip = str_replace("'", "''", $_POST['descrip']);                
                 $fecha = $_POST['fecha'];
                 $duracion_peli = $_POST['dur_min'];
                 $temporadas_serie = $_POST['temporada'];
@@ -59,7 +59,7 @@
                 } else 
                 {
                     if($duracion_peli > 0 && $temporadas_serie <= 0){  
-                        $registro = "INSERT INTO peli (titulo, path_poster, estreno, descripcion, duracion, calificacion, cant_review,cant_estrellas) values ('$titulo', '$target_file', '$fecha', '$descrip', '$duracion_peli', 0,0,0);" ;
+                        $registro = "INSERT INTO peli (titulo, path_poster, estreno, descripcion, duracion) values ('$titulo', '$target_file', '$fecha', '$descrip', '$duracion_peli', 0,0,0);" ;
                         $result = mysqli_query($conexion,$registro);
                     }
                     else if($temporadas_serie > 0 && $duracion_peli <= 0 ){
@@ -122,12 +122,14 @@
                         } else {$flagD = 1;};
                         if( isset( $_POST['nombres'] ) ){
                             foreach( $_POST['nombres'] as $indice => $nombre ){
-                                $apellido = $_POST['apellidos'][$indice];
+                                $nombre = str_replace("'", "''", $_POST['nombres'][$indice]);
+                                $apellido = str_replace("'", "''", $_POST['apellidos'][$indice]);
                                 if ($flagD == 1 && $NuevoDireCont == 0){
                                     echo 'ERROR: Al menos un director tiene que ser asignado/ingresado';
                                     $hay_error = mysqli_query($conexion, $destruc_peli);
                                 }
-                                else if ($nombre != ""){
+                                else if ($nombre > ""){
+                                    $flagD = 0;
                                     $buscadire = "SELECT id_director FROM moviely.director WHERE nombre=('$nombre') AND apellido=('$apellido')";
                                 
                                     $existedire = mysqli_query($conexion,$buscadire);
@@ -160,13 +162,16 @@
                         } else { $flagA = 1;  }
                         if( isset( $_POST['nombresA'] ) ){
                             foreach( $_POST['nombresA'] as $indice => $nombre ){
-                                $apellido = $_POST['apellidosA'][$indice];
+                                $nombre = str_replace("'", "''", $_POST['nombresA'][$indice]);
+                                $apellido = str_replace("'", "''", $_POST['apellidosA'][$indice]);
+
                                 if ($flagA == 1 && $NuevoActCont == 0 ){
                                     echo 'ERROR: Al menos un actor tiene que ser asignado/ingresado)';
                                     $hay_error = mysqli_query($conexion, $destruc_peli_direc);
                                     $hay_error = mysqli_query($conexion, $destruc_peli);
                                 }
-                                else if ($nombre != "" && $apellido != ""){
+                                else if ($nombre > ""){
+                                    $flagA = 0;
                                     $buscaactor = "SELECT id_actor FROM moviely.actor WHERE nombre=('$nombre') AND apellido=('$apellido')";
                                 
                                     $existeactor = mysqli_query($conexion,$buscaactor);
@@ -199,13 +204,15 @@
                         } else {  $flagG = 1;   }
                         if( isset( $_POST['nombresG'] ) ){
                             foreach( $_POST['nombresG'] as $indice => $nombre ){
+                                $nombre = str_replace("'", "''", $_POST['nombresG'][$indice]);
                                 if ($flagG == 1 && $NuevoGenCont == 0){
                                     echo 'ERROR: Al menos un genero tiene que ser asignado/ingresado)';
                                     $hay_error = mysqli_query($conexion, $destruc_peli_direc);
                                     $hay_error = mysqli_query($conexion, $destruc_peli_actor);
                                     $hay_error = mysqli_query($conexion, $destruc_peli);
                                 }
-                                else if($nombre != ""){
+                                else if($nombre > ""){
+                                    $flagG = 0;
                                     $buscagenero = "SELECT id_genero FROM moviely.genero WHERE nombre_genero=('$nombre')";
                                     $existegenero = mysqli_query($conexion,$buscagenero);
     
@@ -297,7 +304,7 @@
                         <div id="div-director" class="div-repetidor">
                             <p class="importante">Directores</p>
                             <input type="text" id="checkboxSearchDire" placeholder="Buscar en el Sistema">
-                            <div id="checkboxContainerDire">
+                            <div class="custom-scroll" id="checkboxContainerDire">
                                 ';
                                 $todos_direc = mysqli_query($conexion,"SELECT * FROM moviely.director");
                                 while ($row_direc = $todos_direc->fetch_assoc()) {
@@ -327,7 +334,7 @@
                         <div id="div-actor" class="div-repetidor">
                             <p class="importante">Actores</p>
                             <input type="text" id="checkboxSearchActor" placeholder="Buscar en el Sistema">
-                            <div id="checkboxContainerActor">
+                            <div class="custom-scroll" id="checkboxContainerActor">
                                 ';
                                 $todos_Actorc = mysqli_query($conexion,"SELECT * FROM moviely.actor");
                                 while ($row_Actor = $todos_Actorc->fetch_assoc()) {
@@ -359,7 +366,7 @@
                     <div id="div-genero" class="div-repetidor">
                         <p class="importante">Generos</p>
                         <input type="text" id="checkboxSearchGenero" placeholder="Buscar en el Sistema">
-                        <div id="checkboxContainerGenero">
+                        <div class="custom-scroll" id="checkboxContainerGenero">
                             ';
                             $todos_Genero = mysqli_query($conexion,"SELECT * FROM moviely.genero");
                             while ($row_Genero = $todos_Genero->fetch_assoc()) {
@@ -393,7 +400,9 @@
             <h1>Acceso Negado</h1>
             </div>';
         }
-        echo '</main>
+        echo '
+        <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+        </main>
         <footer>
             <p>&copy; 2023 Your Movie Reviews</p>
         </footer>';  
@@ -402,7 +411,6 @@
         <script src="script/jquery.js"></script>
         <script src="script/checked.js"></script>
         <script src="script/etiquetas-dinamicas.js"></script>
-
-        
+        <script src="script/botonTop.js"></script>
 </body>
 </html>

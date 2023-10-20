@@ -32,7 +32,6 @@
             $_SESSION['administrador'] = 0;
         } 
         echo '<main>';
-
         $buscar = $_GET['buscar'];
 
         if(isset($_SESSION['kids']) == false || ($_SESSION['kids'] == 0 || $_SESSION['kids'] == false )){
@@ -86,14 +85,55 @@
         echo '</div>';
         mysqli_free_result($consulta);
         mysqli_close($conexion);
+        
+        $quebusco = $_GET['buscar'];
+        echo '<script>var phpValue = ' . json_encode($quebusco) . ';</script>';
+       
+        echo'
+        <div id="kids-cont">
+            <p>Modo Kids</p>
+            <div class="checkbox-wrapper-8">
+                <input type="checkbox" id="cb3-8" class="tgl tgl-skewed" ';
+                if(isset($_SESSION['kids']) && $_SESSION["kids"] == 1){echo'checked'; }
+                echo'>
+                <label for="cb3-8" data-tg-on="ON" data-tg-off="OFF" class="tgl-btn"></label>
+            </div>  
+        </div>
+         ';
 
-
-        echo '</main>
+        echo '
+        <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+        </main>
         <footer>
             <p>&copy; 2023 Your Movie Reviews</p>
         </footer>';
     ?>
     <script src="script/jquery.js"></script>
     <script src="script/pop-ups.js"></script>
+    <script src="script/botonTop.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#cb3-8").on("change", function() {
+                var isChecked = $(this).prop("checked");
+                
+                // Use the phpValue variable from PHP
+                var busca = phpValue;
+
+                // Send an AJAX request to update the session variable
+                $.ajax({
+                    url: "updateKids.php",
+                    method: "POST",
+                    data: { isChecked: isChecked, quebusca: busca },
+                    success: function(response) {
+                        // Reload the page after the session variable is updated
+                        location.reload();
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle errors here
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

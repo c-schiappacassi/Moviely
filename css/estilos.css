@@ -23,17 +23,17 @@ body a:hover {
 color: var(--azul);
 }
 
-html::-webkit-scrollbar{
-width: 6px;
+html::-webkit-scrollbar , .custom-scroll::-webkit-scrollbar{
+width: 10px;
 background-color: var(--negro);
 }
 
-html::-webkit-scrollbar-track {
+html::-webkit-scrollbar-track,  .custom-scroll::-webkit-scrollbar-track {
 -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
 border-radius: 10px;
 }
 
-html::-webkit-scrollbar-thumb {
+html::-webkit-scrollbar-thumb, .custom-scroll::-webkit-scrollbar-thumb {
 border-radius: 3px;
 height: 30px;
 background-color: var(--blanco);
@@ -203,12 +203,12 @@ padding-left: 2%;
 }
 
 #contenido-kids{
-    font-size: 3rem;
-    width: 100%;
-    text-align: center;
-    padding-top: 2%;
-    margin-top: 2%;
-    border-top: 4px solid var(--blanco);
+font-size: 3rem;
+width: 100%;
+text-align: center;
+padding-top: 2%;
+margin-top: 2%;
+border-top: 4px solid var(--blanco);
 }
 
 #cont-busca{
@@ -255,7 +255,16 @@ transition: transform 0.3s; /* Add a smooth transition effect */
 
 /* Apply the scale transformation to the focused .cont element */
 .carousel-slide .cont.slick-center {
-transform: scale(1.15);
+transform: scale(1.05);
+}
+
+.carousel-slide .cont.slick-center .puesto{
+    width: 100px;
+    bottom: 20px;
+    height: 120px;
+    border-radius:  0 50% 0 0;
+    font-weight: bold;
+    font-size: 3rem;
 }
 
 .carousel-slide .cont , .carousel-slide-mi-lista .cont{
@@ -302,8 +311,9 @@ transition: transform 0.3s;
 }
 
 .small-carousel-item.slick-center {
-transform: scale(1.15);
+transform: scale(1.05);
 }
+
 
 
 .small-carousel-item img {
@@ -354,8 +364,6 @@ right: 0;
 .carousel-next-mi-lista {
 background-color: var(--amarillo);
 }
-
-
 
 /* Formularios ABM */
 .form_alta_peli, #form-modi-elec, .form_cancelar{
@@ -1235,6 +1243,22 @@ box-shadow: 0 10px 10px var(--header);
 cursor: pointer;
 transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
+.puesto{
+    position: absolute;
+    background-color: var(--rojo);
+    width: 80px;
+    bottom: 20px;
+    height: 80px;
+    border-radius:  0 50% 0 0;
+    font-size: 2rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    transition:  transform 0.3s ease-in-out;
+    align-items: center;
+    flex-direction: row;
+}
 
 .tooltip {
 position: absolute;
@@ -1290,7 +1314,6 @@ font-size: 1rem;
 font-weight: lighter;
 }
 
-/* Style the checkbox label (text) */
 
 #form_criticos #reviews .reseña, #form_reviews_ban #reviews .reseña{
 display: flex;
@@ -1315,25 +1338,9 @@ flex-direction: column;
 
 #form_criticos #reviews, #form_reviews_ban  #reviews{
 padding: 3% 5%;
-max-height: 50vh;
+max-height: 60vh;
 border: 2px var(--blanco) solid;
 overflow-y: scroll;
-}
-
-#form_criticos #reviews::-webkit-scrollbar, #form_reviews_ban #reviews::-webkit-scrollbar{
-width: 6px;
-background-color: var(--negro);
-}
-
-#form_criticos #reviews::-webkit-scrollbar-track, #form_reviews_ban #reviews::-webkit-scrollbar-track {
--webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-border-radius: 10px;
-}
-
-#form_criticos #reviews::-webkit-scrollbar-thumb, #form_reviews_ban #reviews::-webkit-scrollbar-thumb {
-border-radius: 3px;
-height: 30px;
-background-color: var(--blanco);
 }
 
 #cont {
@@ -1496,4 +1503,24 @@ left: 0;
 
 .checkbox-wrapper-8 .tgl-skewed:checked + .tgl-btn:active:after {
 left: 10%;
+}
+
+#myBtn {
+display: none;
+position: fixed;
+bottom: 20px;
+right: 30px;
+z-index: 99;
+font-size: 18px;
+border: none;
+outline: none;
+background-color: red;
+color: white;
+cursor: pointer;
+padding: 15px;
+border-radius: 4px;
+}
+
+#myBtn:hover {
+background-color: #555;
 }

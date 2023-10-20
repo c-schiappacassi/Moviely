@@ -106,10 +106,11 @@
                 $registrado = mysqli_query($conexion,"SELECT id_usuario FROM moviely.usuario WHERE nombre_usuario = '$usuario' AND mail='$mail';"); 
                 $row_registrado = $registrado->fetch_assoc();
 
-                header('Location: mail_registrado.php?id_usuario='.$row_registrado['id_usuario'].'');
+                //header('Location: mail_registrado.php?id_usuario='.$row_registrado['id_usuario'].'');
             }    
         }
         echo '
+        <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
         </main>
         <footer>
             <p>&copy; 2023 Your Movie Reviews</p>
@@ -118,5 +119,6 @@
     ?>
     <script src="script/jquery.js"></script>
     <script src="script/pop-ups.js"></script>
+    <script src="script/botonTop.js"></script>
 </body>
 </html>

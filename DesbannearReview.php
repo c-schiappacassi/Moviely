@@ -77,6 +77,7 @@
         </div>';
     }
     echo '
+    <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
     </main>
     <footer>
         <p>&copy; 2023 Your Movie Reviews</p>
@@ -85,5 +86,6 @@
 ?>
 <script src="script/jquery.js"></script>
 <script src="script/pop-ups.js"></script>
+<script src="script/botonTop.js"></script>
 </body>
 </html>
