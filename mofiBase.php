@@ -36,8 +36,7 @@
             echo '<div class="completador">
                 <h1>';
                 // EMPIEZA EL MAIN
-
-                if(isset($_POST['submit'])){
+                if(isset($_POST['submit-modificacion'])){
                     $id_peli = $_POST['id_peli'];
                     $flag_update = 0;
 
@@ -284,15 +283,19 @@
                     else{
                         echo 'No se a modificado el contenido por error de carga, Asegurese de que deje registrado al menos un director, un actor y un genero para el Contenido ';
                     }
+                    echo '  </h1>
+                        f="info.php?id_peli='.$id_peli.'">Volver a la visualizacion del contenido</a><br>
+                        <a href="index.php">Volver a la home</a>
+                    </div>';
                 }
-                
-            echo '  </h1>
-                    <a href="info.php?id_peli='.$id_peli.'">Volver a la visualizacion del contenido</a><br>
-                    <a href="index.php">Volver a la home</a>
-                </div>';
+                else{
+                    echo '
+                    <div style="width:80%; margin: auto; padding-top:3%;">
+                        <h1>Acceso Negado</h1>
+                    </div>';    
+                }
         }
         else {
-
             echo '
             <div style="width:80%; margin: auto; padding-top:3%;">
                 <h1>Acceso Negado</h1>

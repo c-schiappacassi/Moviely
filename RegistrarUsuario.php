@@ -34,29 +34,31 @@
         } 
 
         echo '
-                <main>
-                    <div class="cont-espaciado"></div>
-                    <div class="div_form">
-                        <h1>¡ Únete a la Comunidad !</h1>
-                        <p>Crea un usuario y conviértete en Crítico</p>
-                        <form class="form_usuario" method="post" action="RegistrarUsuario.php">
-                            <div>
-                                <label for="nombre_usuario">Usuario:</label>
-                                <input type="text" name="nombre_usuario" maxlength="15" required>
-                            </div>
-                            <div>
-                                <label for="mail_usuario">Email:</label>
-                                <input type="email" name="mail_usuario" required ';if(isset($_POST['mail_usuario'])){echo'value='.$_POST['mail_usuario'].'';}echo '>
-                            </div>
-                            <div>
-                                <label for="contra_usuario">Contraseña:</label>
-                                <input type="password" name="contra_usuario" required>
-                            </div>
-                            <input type="submit" name="nuevo_critico" value="Registrame!">
-                        </form>
-                        <p style="font-size:1rem;">Ya tienes usuario? <a href="LogInUsuario.php">inicia sesion</a></p>
+        <main>';
+
+        echo '
+            <div class="cont-espaciado"></div>
+            <div class="div_form">
+                <h1>¡ Únete a la Comunidad !</h1>
+                <p>Crea un usuario y conviértete en Crítico</p>
+                <form class="form_usuario" method="post" action="RegistrarUsuario.php">
+                    <div>
+                        <label for="nombre_usuario">Usuario:</label>
+                        <input type="text" name="nombre_usuario" maxlength="15" required>
                     </div>
-                    ';
+                    <div>
+                        <label for="mail_usuario">Email:</label>
+                        <input type="email" name="mail_usuario" required ';if(isset($_POST['mail_usuario'])){echo'value='.$_POST['mail_usuario'].'';}echo '>
+                    </div>
+                    <div>
+                        <label for="contra_usuario">Contraseña:</label>
+                        <input type="password" name="contra_usuario" required>
+                    </div>
+                    <input type="submit" name="nuevo_critico" value="Registrame!">
+                </form>
+                <p style="font-size:1rem;">Ya tienes usuario? <a href="LogInUsuario.php">inicia sesion</a></p>
+            </div>
+            ';
         if(isset($_POST['nuevo_critico'])){
             $usuario = $_POST['nombre_usuario'];
             $mail = $_POST['mail_usuario'];

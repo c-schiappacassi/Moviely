@@ -57,6 +57,11 @@
                         <a href="index.php">Volver a la home</a>
                     </div>';
                 }  
+            }else{
+                echo '
+                <div style="width:80%; margin: auto; padding-top:3%;">
+                    <h1>Acceso Negado</h1>
+                </div>';
             }
         }
         else{

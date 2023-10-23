@@ -36,7 +36,7 @@
         echo '
                 <main>';// EMPIEZA EL MAIN
 
-        if($_GET['id_peli'] != 0){
+        if(isset($_GET['id_peli']) && $_GET['id_peli'] > 0){
             $id_peli = $_GET['id_peli'];
             $q_datos = mysqli_query($conexion, "SELECT * FROM moviely.peli WHERE id_peli = ('$id_peli')");
             $row_datos = mysqli_fetch_assoc($q_datos); 
@@ -263,7 +263,7 @@
                         ';
                         if(isset($_SESSION['id_usuario']))
                         {
-                            echo'<input class="publicar" type="submit" value="Publicar">
+                            echo'<input name="public-review" class="publicar" type="submit" value="Publicar">
                             </form>';
                         }
                         else{   echo' </form> <button class="publicar" id="review-sin-sesion" >Publicar</button>';  };
@@ -350,7 +350,11 @@
             echo'    
             </div>
             ';
-            
+        }else{
+            echo '
+            <div style="width:80%; margin: auto; padding-top:3%;">
+                <h1>Acceso Negado</h1>
+            </div>';
         }
         echo '
         <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>

@@ -26,7 +26,9 @@
                 $_SESSION['administrador'] = 1;
                 echo '
                 <main>
-                    <h1>Acción Negada, Los usuarios administradores no pueden dejar reviews</h1>
+                    <div style="width:80%; margin: auto; padding-top:3%;">
+                        <h1>Acción Negada, Los usuarios administradores no pueden dejar reviews</h1>
+                    </div>
                 </main>
                 <footer>
                     <p>&copy; 2023 Your Movie Reviews</p>
@@ -40,29 +42,36 @@
                 echo '
                 <main>
                 ';
-
-                $id_peli = $_POST['id_peli'];
-                $id_usuario = $_SESSION['id_usuario'];
-                $calif = $_POST['rating-crit'];
-                $comentario = $_POST['coment-critico'];
-
-                $existe_review =  mysqli_query($conexion,"SELECT * FROM moviely.review WHERE id_usuario = '$id_usuario' AND id_peli = '$id_peli';"); 
+                if(isset($_POST['public-review'])){
+                    $id_peli = $_POST['id_peli'];
+                    $id_usuario = $_SESSION['id_usuario'];
+                    $calif = $_POST['rating-crit'];
+                    $comentario = $_POST['coment-critico'];
+    
+                    $existe_review =  mysqli_query($conexion,"SELECT * FROM moviely.review WHERE id_usuario = '$id_usuario' AND id_peli = '$id_peli';"); 
+                    
+                    if($existe_review->num_rows > 0){
+                        echo '<h1>Acción Negada, Solo puedes dejar 1 review por Contenido y ya tienes una!</h1>';
+                    }
+                    else{
+                        $info_peli =  mysqli_query($conexion,"SELECT * FROM moviely.peli WHERE id_peli = '$id_peli';"); 
+                        $row = $info_peli->fetch_assoc();
+    
+                        $nueva_cant_reviews =  ($row['cant_review']) + 1;
+                        $nueva_cant_estrellas =  ($row['cant_estrellas']) + $calif;
+                        $nueva_calif= ($nueva_cant_estrellas / $nueva_cant_reviews) ;
+    
+                        $nueva_review =  mysqli_query($conexion,"INSERT INTO review (id_usuario , id_peli , comentario , calificacion) values ('$id_usuario', '$id_peli', '$comentario', '$calif');" );        
+                        $update_calif_peli =  mysqli_query($conexion,"UPDATE peli SET calificacion='$nueva_calif', cant_review ='$nueva_cant_reviews', cant_estrellas='$nueva_cant_estrellas' WHERE id_peli='$id_peli';" );        
+                        header('Location:info.php?id_peli='.$id_peli.'');
+                    }
+                }else{
+                    echo '
+                    <div style="width:80%; margin: auto; padding-top:3%;">
+                    <h1>Acceso Negado</h1>
+                    </div>';
+                }
                 
-                if($existe_review->num_rows > 0){
-                    echo '<h1>Acción Negada, Solo puedes dejar 1 review por Contenido y ya tienes una!</h1>';
-                }
-                else{
-                    $info_peli =  mysqli_query($conexion,"SELECT * FROM moviely.peli WHERE id_peli = '$id_peli';"); 
-                    $row = $info_peli->fetch_assoc();
-
-                    $nueva_cant_reviews =  ($row['cant_review']) + 1;
-                    $nueva_cant_estrellas =  ($row['cant_estrellas']) + $calif;
-                    $nueva_calif= ($nueva_cant_estrellas / $nueva_cant_reviews) ;
-
-                    $nueva_review =  mysqli_query($conexion,"INSERT INTO review (id_usuario , id_peli , comentario , calificacion) values ('$id_usuario', '$id_peli', '$comentario', '$calif');" );        
-                    $update_calif_peli =  mysqli_query($conexion,"UPDATE peli SET calificacion='$nueva_calif', cant_review ='$nueva_cant_reviews', cant_estrellas='$nueva_cant_estrellas' WHERE id_peli='$id_peli';" );        
-                    header('Location:info.php?id_peli='.$id_peli.'');
-                }
                 echo '
                 </main>
                 <footer>
@@ -75,7 +84,9 @@
             echo $opciones_sin_sesion;
             echo '
             <main>
+            <div style="width:80%; margin: auto; padding-top:3%;">
                 <h1>Acción Negada, <a href="LogInUsuario.php" >Inicie Sesion</a></h1>
+            </div>
             </main>
             <footer>
                 <p>&copy; 2023 Your Movie Reviews</p>

@@ -36,7 +36,7 @@
         echo '<main>';// EMPIEZA EL MAIN
 
         if (isset($_SESSION['id_usuario']) && $_SESSION['administrador'] == 0 ){
-            if($_GET['id_peli'] != 0){
+            if(isset($_GET['id_peli']) && $_GET['id_peli'] > 0){
                 $id_peli = $_GET['id_peli'];
                 
                 if(isset($_SESSION['id_usuario']) && $_SESSION['administrador'] == 0 )
@@ -55,6 +55,11 @@
                         header('Location: info.php?id_peli='.$id_peli.'');
                     }   
                 }
+            }else{
+                echo '
+                <div style="width:80%; margin: auto; padding-top:3%;">
+                <h1>Acceso Negado</h1>
+                </div>';
             }
         }
         else if(isset($_SESSION['id_usuario']) && $_SESSION['administrador'] > 0 ){
@@ -63,7 +68,7 @@
             <h1>Acceso Negado</h1>
             </div>';
         }
-        else{ header("Location:login.php");  }
+        else{ header("Location:LogInUsuario.php");  }
 
         echo '
         </main>

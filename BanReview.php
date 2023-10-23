@@ -74,8 +74,7 @@
                     }
                 }
             }
-            
-            if (isset($_POST['boton-bannear-critico'])){
+            else if (isset($_POST['boton-bannear-critico'])){
                 $id_critico_ban= $_POST['id_critico-ban'];
                 $id_review_ban= $_POST['id_review_ban'];
                 $id_peli= $_POST['id_peli'];
@@ -119,6 +118,12 @@
                         <a href="info.php?id_peli='.$id_peli.'">Volver al contenido</a> o <a href="listaBanCrit.php">Ver la lista de Críticos Banneados</a>
                     </div>';
                 }
+            }
+            else{
+                echo '
+                <div style="width:80%; margin: auto; padding-top:3%;">
+                    <h1>Acceso Negado</h1>
+                </div>';
             }   
         }
         else{

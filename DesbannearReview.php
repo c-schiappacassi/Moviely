@@ -68,6 +68,11 @@
             else {
                 echo "No checked review IDs found.";
             }      
+        }else{
+            echo '
+            <div style="width:80%; margin: auto; padding-top:3%;">
+                <h1>Acceso Negado</h1>
+            </div>';
         }
     }
     else{
