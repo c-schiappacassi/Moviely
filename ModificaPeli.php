@@ -79,9 +79,16 @@
                                 </label>
                             </div>
                             <input name="path_poster" type="hidden" value="'.$row_encontrado['path_poster'].'">
-                            <div class="cont-viejo" id="viejo-imagen">
+                            <div class="cont-viejo">
                                 <p>Poster actual</p>
-                                <img style="width: 100px;" src="'.$row_encontrado['path_poster'].'." alt="Movie Posters">
+                                <img src="'.$row_encontrado['path_poster'].'." alt="Movie Posters">
+                            </div>
+
+                            <div class="cont-viejo" id="viejo-texto">
+                                <p>Categorización actual: </p>';
+                                if($row_encontrado['duracion'] > 0){ echo '<p>Pelicula de '.$row_encontrado['duracion'].' minutos</p>'; }
+                                else {echo '<p>Serie de '.$row_encontrado['temporada'].' temporadas</p>';}
+                                echo '
                             </div>
             
                             <div class="cont-espaciado" id="mas-espacio">
@@ -92,12 +99,7 @@
                                     <option value="temporadas">Serie</option>
                                 </select>
 
-                                <div class="cont-viejo" id="viejo-texto">
-                                <p>Categorización actual: </p>';
-                                if($row_encontrado['duracion'] > 0){ echo '<p>Pelicula de '.$row_encontrado['duracion'].' minutos</p>'; }
-                                else {echo '<p>Serie de '.$row_encontrado['temporada'].' temporadas</p>';}
-                                echo '
-                                </div>
+                                
                             
                                 <div class="cont-espaciado">
                                     <label class="op" id="tipo_duracion" >Duracion en minutos
@@ -297,7 +299,7 @@
                             </div>
                             <input class="boton_agregar" type="button" value="+ Agregar" id="agregarG" />
                         </div>
-                        <input type="submit" name="submit-modificacion" value="Registrar Modificación">
+                        <input type="submit" name="viejo" value="Registrar Modificación">
                     </form>
                     <form class="form_cancelar" method="GET" action="info.php">
                             <input type="hidden" name="id_peli" value="'.$row_encontrado['id_peli'].'">
