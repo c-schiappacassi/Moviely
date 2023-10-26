@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="css/estilos.css">
     <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
-    <title>Admin</title>
+    <link rel="icon" href="moviely favicon.png" type="image/ico">
+    <title>Publicación Review</title>
 </head>
 
 <body>

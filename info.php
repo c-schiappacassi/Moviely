@@ -3,12 +3,13 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <link rel="icon" href="moviely favicon.png" type="image/ico">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/estilos.css">
     <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
     <link rel="stylesheet" href="css\font-awesome-4.7.0/css/font-awesome.min.css">
-    <title>Admin</title>
+    <title>Moviely</title>
 </head>
 
 <body>
@@ -306,12 +307,12 @@
 
                         if($_SESSION['administrador'] > 0){
                             echo '
-                            <form method="POST" action="BanReview.php">
+                            <form method="POST" action="Banneo.php">
                                 <input type="hidden" name="id_review_ban" value="'.$row['id_review'].'">
                                 <input type="hidden" name="id_peli" value="'.$row['id_peli'].'">
                                 <button name="boton-bannear-reseña" id="boton-bannear-reseña" class="Btn">Bannear Review</button>
                             </form>
-                            <form method="POST" action="BanReview.php">
+                            <form method="POST" action="Banneo.php">
                                 <input type="hidden" name="id_review_ban" value="'.$row['id_review'].'">
                                 <input type="hidden" name="id_peli" value="'.$row['id_peli'].'">
                                 <input type="hidden" name="id_critico-ban" value="'.$row['id_usuario'].'">

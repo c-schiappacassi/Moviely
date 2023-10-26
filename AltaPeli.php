@@ -4,8 +4,9 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/normalize.css">
+    <link rel="icon" href="moviely favicon.png" type="image/ico">
     <link rel="stylesheet" href="css/estilos.css">
-    <title>Admin</title>
+    <title>Alta</title>
 </head>
 
 <body>
@@ -125,7 +126,6 @@
                                 $nombre = str_replace("'", "''", $_POST['nombres'][$indice]);
                                 $apellido = str_replace("'", "''", $_POST['apellidos'][$indice]);
                                 if ($flagD == 1 && $NuevoDireCont == 0){
-                                    echo 'ERROR: Al menos un director tiene que ser asignado/ingresado';
                                     $hay_error = mysqli_query($conexion, $destruc_peli);
                                 }
                                 else if ($nombre > ""){
@@ -166,7 +166,6 @@
                                 $apellido = str_replace("'", "''", $_POST['apellidosA'][$indice]);
 
                                 if ($flagA == 1 && $NuevoActCont == 0 ){
-                                    echo 'ERROR: Al menos un actor tiene que ser asignado/ingresado)';
                                     $hay_error = mysqli_query($conexion, $destruc_peli_direc);
                                     $hay_error = mysqli_query($conexion, $destruc_peli);
                                 }
@@ -206,7 +205,6 @@
                             foreach( $_POST['nombresG'] as $indice => $nombre ){
                                 $nombre = str_replace("'", "''", $_POST['nombresG'][$indice]);
                                 if ($flagG == 1 && $NuevoGenCont == 0){
-                                    echo 'ERROR: Al menos un genero tiene que ser asignado/ingresado)';
                                     $hay_error = mysqli_query($conexion, $destruc_peli_direc);
                                     $hay_error = mysqli_query($conexion, $destruc_peli_actor);
                                     $hay_error = mysqli_query($conexion, $destruc_peli);

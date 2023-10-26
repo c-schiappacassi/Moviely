@@ -79,11 +79,12 @@ else{
         <html>
         <head>
             <meta charset="utf-8">
+            <link rel="icon" href="moviely favicon.png" type="image/ico">
             <link rel="stylesheet" href="css/normalize.css">
             <link rel="stylesheet" href="css/estilos.css">
             <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
             <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
-            <title>Admin</title>
+            <title>mail</title>
         </head>
 
         <body>

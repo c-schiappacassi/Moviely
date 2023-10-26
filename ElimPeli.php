@@ -3,11 +3,12 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <link rel="icon" href="moviely favicon.png" type="image/ico">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/estilos.css">
     <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
-    <title>Admin</title>
+    <title>Eliminación</title>
 </head>
 
 <body>
@@ -53,7 +54,7 @@
                 else{
                     echo'
                     <div style="width:80%; margin: auto; padding-top:3%;">
-                        <h1>Contenido ELIMINADO permanentementa</h1>
+                        <h1>Contenido ELIMINADO permanentemente</h1>
                         <a href="index.php">Volver a la home</a>
                     </div>';
                 }  

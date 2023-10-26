@@ -3,9 +3,10 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <link rel="icon" href="moviely favicon.png" type="image/ico">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/estilos.css">
-    <title>Admin</title>
+    <title>Modificación</title>
 </head>
 
 <body>
@@ -17,9 +18,9 @@
         {
             $id_usuario = $_SESSION['id_usuario'];
             
-            $q = "SELECT * from usuario where id_usuario = '$id_usuario' and administrador =1";
+            $q = "SELECT administrador from usuario where id_usuario = '$id_usuario' and administrador = 1";
             $resultado=mysqli_num_rows(mysqli_query($conexion,$q));
-            if($resultado!=0){echo $opciones_admin; $_SESSION['administrador'] = 1;}
+            if($resultado > 0){echo $opciones_admin; $_SESSION['administrador'] = 1;}
             else{
                 echo $opciones;
                 $_SESSION['administrador'] = 0;
@@ -29,9 +30,7 @@
             echo $opciones_sin_sesion;
             $_SESSION['administrador'] = 0;
         } 
-
-        echo ' <main> '; 
-
+        echo ' <main> ';
         if($_SESSION['administrador'] > 0){
             echo '<div class="completador">
                 <h1>';
@@ -284,7 +283,7 @@
                         echo 'No se a modificado el contenido por error de carga, Asegurese de que deje registrado al menos un director, un actor y un genero para el Contenido ';
                     }
                     echo '  </h1>
-                        f="info.php?id_peli='.$id_peli.'">Volver a la visualizacion del contenido</a><br>
+                        <a href="info.php?id_peli='.$id_peli.'">Volver a la visualizacion del contenido</a><br>
                         <a href="index.php">Volver a la home</a>
                     </div>';
                 }

@@ -3,9 +3,10 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <link rel="icon" href="moviely favicon.png" type="image/ico">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/estilos.css">
-    <title>Admin</title>
+    <title>Modificación</title>
 </head>
 
 <body>
@@ -299,7 +300,7 @@
                             </div>
                             <input class="boton_agregar" type="button" value="+ Agregar" id="agregarG" />
                         </div>
-                        <input type="submit" name="viejo" value="Registrar Modificación">
+                        <input type="submit" name="submit-modificacion" value="Registrar Modificación">
                     </form>
                     <form class="form_cancelar" method="GET" action="info.php">
                             <input type="hidden" name="id_peli" value="'.$row_encontrado['id_peli'].'">
