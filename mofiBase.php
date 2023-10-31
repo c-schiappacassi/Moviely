@@ -122,38 +122,11 @@
 
                     //verifico de no quedarme sin director, actor o genero
                     $flagD = 0;$flagA = 0;$flagG = 0;
-                    if (isset($_POST['checkboxDire'])) {
-                        $checkedCheckboxValues = $_POST['checkboxDire'];
-
-                        foreach ($checkedCheckboxValues as $checkedCheckboxValue) { 
-                            $existe_relacion= mysqli_query($conexion, "SELECT * FROM moviely.peli_director WHERE id_peli=($id_peli) AND id_director=($checkedCheckboxValue)");
-                            if ($existe_relacion->num_rows==0){
-                                $relacion = mysqli_query($conexion,"INSERT INTO peli_director ( id_peli, id_director) values ( '$id_peli' , '$checkedCheckboxValue' );");
-                            }
-                        }
-                    } else {$flagD = 1;}
-
-                    if (isset($_POST['checkboxActor'])) {
-                        $checkedCheckboxValues = $_POST['checkboxActor'];
-                
-                        foreach ($checkedCheckboxValues as $checkedCheckboxValue) {
-                            $existe_relacion= mysqli_query($conexion, "SELECT * FROM moviely.peli_actor WHERE id_peli=($id_peli) AND id_actor=($checkedCheckboxValue)");
-                            if ($existe_relacion->num_rows==0){
-                                $relacion = mysqli_query($conexion,"INSERT INTO peli_actor ( id_peli, id_actor) values ( $id_peli , $checkedCheckboxValue);");
-                            }
-                        }
-                    } else { $flagA = 1;  }
-
-                    if (isset($_POST['checkboxGenero'])) {
-                        $checkedCheckboxValues = $_POST['checkboxGenero'];
-        
-                        foreach ($checkedCheckboxValues as $checkedCheckboxValue) {
-                            $existe_relacion= mysqli_query($conexion, "SELECT * FROM moviely.peli_genero WHERE id_peli=($id_peli) AND id_genero=($checkedCheckboxValue)");
-                            if ($existe_relacion->num_rows==0){
-                                $relacion = mysqli_query($conexion,"INSERT INTO moviely.peli_genero ( id_peli, id_genero) values ( $id_peli, $checkedCheckboxValue);");
-                            }
-                        }
-                    } else {  $flagG = 1; }
+                    if (isset($_POST['checkboxDire'])) {} else {$flagD = 1;}
+                    //vincular actor seleccionados
+                    if (isset($_POST['checkboxActor'])) {} else { $flagA = 1;  }
+                    //vincular generos seleccionados
+                    if (isset($_POST['checkboxGenero'])) {} else {  $flagG = 1; }
 
                     if( isset( $_POST['nombres'] ) ){
                         foreach( $_POST['nombres'] as $indice => $nombre ){        
@@ -174,17 +147,7 @@
                     }
                     if ( $actorContChau == $actCont && $NuevoActCont == 0 && $flagA == 1 ) {$flag_update=1;}
                     
-                    
-                    if( isset( $_POST['nombresG'] ) ){
-                        foreach( $_POST['nombresG'] as $indice => $nombre ){
-                            if($nombre != ""){
-                                $NuevoGenCont++;
-                            }   
-                        }
-                    }
-                    if ($generoContChau == $genCont && $NuevoGenCont == 0 && $flagG == 1) {$flag_update=1;}
-
-                    
+                    if ($generoContChau == $genCont && $flagG == 1) {$flag_update=1;}
 
                     if($flag_update < 1){
                         //nuevos directores
@@ -246,34 +209,44 @@
                             $eliminoActor = mysqli_query($conexion,"DELETE FROM moviely.peli_actor WHERE id_peli=('$id_peli') AND id_actor=('$id')");
                         }
                         
-        
-                        //nuevos generos
-                        if( isset( $_POST['nombresG'] ) ){
-                            foreach( $_POST['nombresG'] as $indice => $nombre ){
-                                
-                                if($nombre != ""){
-                                    $buscagenero = "SELECT id_genero FROM moviely.genero WHERE nombre_genero=('$nombre')";
-                                    
-                                    $existegenero = mysqli_query($conexion,$buscagenero);
-        
-                                    if ($existegenero->num_rows == 0){
-                                        $consulta_sql = mysqli_query($conexion,"INSERT INTO moviely.genero SET nombre_genero='$nombre'");
-                                        $existegenero = mysqli_query($conexion,$buscagenero);
-                                    }
-                                    $row_genero = mysqli_fetch_assoc($existegenero); 
-                                    $idgenero = $row_genero['id_genero'];
-        
-                                    $existe_relacion= mysqli_query($conexion, "SELECT * FROM moviely.peli_genero WHERE id_peli=($id_peli) AND id_genero=($idgenero)");
-                                    if ($existe_relacion->num_rows==0){
-                                        $relacion = mysqli_query($conexion,"INSERT INTO moviely.peli_genero ( id_peli, id_genero) values ( $id_peli , $idgenero);");
-                                    }
-                                }   
-                            }
-                        }
                         //eliminamos los generos unchecked
                         foreach ($genresIDsArray as $id){
                             $eliminoGen = mysqli_query($conexion,"DELETE FROM  moviely.peli_genero WHERE id_peli=('$id_peli') AND id_genero=('$id')");
                         }    
+
+                        // vinculamos directores selecionados
+                        if (isset($_POST['checkboxDire'])) {
+                            $checkedCheckboxValues = $_POST['checkboxDire'];
+    
+                            foreach ($checkedCheckboxValues as $checkedCheckboxValue) { 
+                                $existe_relacion= mysqli_query($conexion, "SELECT * FROM moviely.peli_director WHERE id_peli=($id_peli) AND id_director=($checkedCheckboxValue)");
+                                if ($existe_relacion->num_rows==0){
+                                    $relacion = mysqli_query($conexion,"INSERT INTO peli_director ( id_peli, id_director) values ( '$id_peli' , '$checkedCheckboxValue' );");
+                                }
+                            }
+                        }
+                        //vincular actor seleccionados
+                        if (isset($_POST['checkboxActor'])) {
+                            $checkedCheckboxValues = $_POST['checkboxActor'];
+                    
+                            foreach ($checkedCheckboxValues as $checkedCheckboxValue) {
+                                $existe_relacion= mysqli_query($conexion, "SELECT * FROM moviely.peli_actor WHERE id_peli=($id_peli) AND id_actor=($checkedCheckboxValue)");
+                                if ($existe_relacion->num_rows==0){
+                                    $relacion = mysqli_query($conexion,"INSERT INTO peli_actor ( id_peli, id_actor) values ( $id_peli , $checkedCheckboxValue);");
+                                }
+                            }
+                        }
+                        //vincular generos seleccionados
+                        if (isset($_POST['checkboxGenero'])) {
+                            $checkedCheckboxValues = $_POST['checkboxGenero'];
+            
+                            foreach ($checkedCheckboxValues as $checkedCheckboxValue) {
+                                $existe_relacion= mysqli_query($conexion, "SELECT * FROM moviely.peli_genero WHERE id_peli=($id_peli) AND id_genero=($checkedCheckboxValue)");
+                                if ($existe_relacion->num_rows==0){
+                                    $relacion = mysqli_query($conexion,"INSERT INTO moviely.peli_genero ( id_peli, id_genero) values ( $id_peli, $checkedCheckboxValue);");
+                                }
+                            }
+                        }
         
                         $update= "UPDATE moviely.peli SET titulo=('$titulo'),path_poster=('$poster'),estreno=('$estreno'),descripcion=('$descrip'),temporada=('$temporada'),duracion=('$duracion') WHERE id_peli=('$id_peli')";
                         $resultado_update = mysqli_query($conexion,$update);

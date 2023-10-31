@@ -79,7 +79,7 @@
                 $sql = "SELECT DISTINCT peli.path_poster as poster, peli.id_peli as id FROM peli
                     INNER JOIN peli_genero ON peli.id_peli = peli_genero.id_peli
                     INNER JOIN genero ON peli_genero.id_genero = genero.id_genero
-                    WHERE genero.nombre_genero IN ('Acción', 'Aventura', 'Wéstern')
+                    WHERE genero.nombre_genero IN ('Acción', 'Aventura', 'Wéstern' , 'Bélicas', 'Catástrofe')
                     GROUP BY peli.titulo
                     ORDER BY peli.calificacion DESC
                     LIMIT 15;";
@@ -136,7 +136,7 @@
                 $sql = "SELECT DISTINCT peli.path_poster as poster, peli.id_peli as id FROM peli
                     INNER JOIN peli_genero ON peli.id_peli = peli_genero.id_peli 
                     INNER JOIN genero ON peli_genero.id_genero = genero.id_genero
-                    WHERE genero.nombre_genero IN ('Dramático','Historia Real')
+                    WHERE genero.nombre_genero IN ('Dramático','Historia Real', 'Juveniles', 'Musical','Documental', 'Religioso', 'Históricas', 'Deportivas')
                     GROUP BY peli.titulo
                     ORDER BY peli.calificacion DESC LIMIT 15;";
                 $result = mysqli_query($conexion,$sql);
@@ -164,7 +164,7 @@
                 $sql = "SELECT DISTINCT peli.path_poster as poster, peli.id_peli as id FROM peli 
                     INNER JOIN peli_genero ON peli.id_peli = peli_genero.id_peli 
                     INNER JOIN genero ON peli_genero.id_genero = genero.id_genero
-                    WHERE genero.nombre_genero IN ('Fantasía')
+                    WHERE genero.nombre_genero IN ('Fantasía', 'Ciencia Ficción', 'Épicas', 'Futuristas')
                     GROUP BY peli.titulo
                     ORDER BY peli.calificacion DESC LIMIT 15;";
                 $result = mysqli_query($conexion,$sql);
@@ -220,7 +220,7 @@
                 $sql = "SELECT DISTINCT peli.path_poster as poster, peli.id_peli as id FROM peli 
                     INNER JOIN peli_genero ON peli.id_peli = peli_genero.id_peli 
                     INNER JOIN genero ON peli_genero.id_genero = genero.id_genero
-                    WHERE genero.nombre_genero IN ('Suspenso','Misterio')
+                    WHERE genero.nombre_genero IN ('Suspenso','Misterio', 'Policial', 'Crimen','Gangsters')
                     GROUP BY peli.titulo
                     ORDER BY peli.calificacion DESC LIMIT 15;";
                 $result = mysqli_query($conexion,$sql);

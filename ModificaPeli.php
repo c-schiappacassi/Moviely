@@ -214,7 +214,7 @@
                                 <div id="div-director" class="div-repetidor">
                                     <p class="importante">Agregar directores</p>
                                     <input type="text" id="checkboxSearchDire" placeholder="Buscar en el Sistema">
-                                    <div id="checkboxContainerDire">
+                                    <div  class="custom-scroll" id="checkboxContainerDire">
                                         ';
                                         $todos_direc = mysqli_query($conexion,"SELECT * FROM moviely.director");
                                         while ($row_direc = $todos_direc->fetch_assoc()) {
@@ -245,7 +245,7 @@
                                 <div id="div-actor" class="div-repetidor">
                                     <p class="importante">Agregar actores</p>
                                     <input type="text" id="checkboxSearchActor" placeholder="Buscar en el Sistema">
-                                    <div id="checkboxContainerActor">
+                                    <div  class="custom-scroll" id="checkboxContainerActor">
                                         ';
                                         $todos_Actorc = mysqli_query($conexion,"SELECT * FROM moviely.actor");
                                         while ($row_Actor = $todos_Actorc->fetch_assoc()) {
@@ -276,8 +276,7 @@
                         <div class="cont-dinamicas cont-genero">
                             <div id="div-genero" class="div-repetidor">
                                 <p class="importante">Agregar generos</p>
-                                <input type="text" id="checkboxSearchGenero" placeholder="Buscar en el Sistema">
-                                <div id="checkboxContainerGenero">
+                                <div  id="checkboxContainerGenero">
                                     ';
                                     $todos_Genero = mysqli_query($conexion,"SELECT * FROM moviely.genero");
                                     while ($row_Genero = $todos_Genero->fetch_assoc()) {
@@ -290,15 +289,7 @@
                                     }
                                     echo '
                                 </div>
-                                <p style="font-size:1.5rem;">Si no existe en el Sistema, <span style="font-weight:bold; ">Creelo</span>:</p>
-                                <p>(Preste atención a la ortografía, Comience con Mayúscula)</p>
-                                <div>
-                                    <div>
-                                        <span>Nombre del Genero</span><input type="text" name="nombresG[]" autocomplete="off" />
-                                    </div>
-                                </div>
                             </div>
-                            <input class="boton_agregar" type="button" value="+ Agregar" id="agregarG" />
                         </div>
                         <input type="submit" name="submit-modificacion" value="Registrar Modificación">
                     </form>

@@ -470,11 +470,15 @@ background: transparent;
 color: var(--blanco);
 }
 
+.cont-genero{
+    width: 100%;
+    padding-bottom: 0;
+}
+
 .div-repetidor{
 margin-top: 2%;
 width: 100%;
 }
-
 
 .div-repetidor >  div{
 display: flex;
@@ -482,6 +486,27 @@ flex-direction: row;
 width: fit-content;
 position: static;
 max-width: 350px;
+}
+
+#div-genero > div{
+    max-width: 100%;
+}
+#div-genero{
+    padding-left: 1%;
+}
+
+.checkbox-container-Genero{
+    display: flex;
+    flex-direction: row;
+    width: 15%;
+    font-size: large;
+    padding: 1%;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px var(--blanco) solid;
+    border-radius: 5px;
+    margin-left: 1%;
+    margin-bottom: 1%;
 }
 
 .div-repetidor > div > div span{
@@ -555,7 +580,7 @@ padding-top: 2.5%;
 }
 
 .mas{
-margin-top: 10%;
+margin-top: 5%;
 }
 
 .importante{
@@ -591,8 +616,8 @@ width: fit-content;
 font-size: 0.8em;
 color: var(--blanco);
 font-weight: 600;
-margin-top: 350px;
-margin-right: 20px;
+margin-top: 360px;
+margin-right: 25px;
 }
 
 .boton_agregar:hover{
@@ -981,7 +1006,7 @@ width: 20px;
 background-color: var(--rojo);
 }
 
-#checkboxContainerDire, #checkboxContainerActor, #checkboxContainerGenero{
+#checkboxContainerDire, #checkboxContainerActor{
 display: flex;
 flex-direction: column;
 width: 100%;
@@ -997,7 +1022,21 @@ color: var(--blanco);
 margin-bottom: 5%;
 }
 
-#checkboxSearchDire, #checkboxSearchActor, #checkboxSearchGenero{
+#checkboxContainerGenero{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+    margin-top: 2%;
+    padding: 11px 10px;
+    font-size: 1.1rem;
+    background: transparent;
+    color: var(--blanco);
+    margin-bottom: 5%;
+}
+
+
+#checkboxSearchDire, #checkboxSearchActor{
 width: 80%;
 }
 

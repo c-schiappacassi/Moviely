@@ -101,14 +101,6 @@
                                 }   
                             }
                         }                   
-                        
-                        if( isset( $_POST['nombresG'] ) ){
-                            foreach( $_POST['nombresG'] as $indice => $nombre ){
-                                if($nombre != ""){
-                                    $NuevoGenCont++;
-                                }   
-                            }
-                        }
     
                         //DIRECTORES
                         if (isset($_POST['checkboxDire'])) {
@@ -201,33 +193,7 @@
                                 }
                             }
                         } else {  $flagG = 1;   }
-                        if( isset( $_POST['nombresG'] ) ){
-                            foreach( $_POST['nombresG'] as $indice => $nombre ){
-                                $nombre = str_replace("'", "''", $_POST['nombresG'][$indice]);
-                                if ($flagG == 1 && $NuevoGenCont == 0){
-                                    $hay_error = mysqli_query($conexion, $destruc_peli_direc);
-                                    $hay_error = mysqli_query($conexion, $destruc_peli_actor);
-                                    $hay_error = mysqli_query($conexion, $destruc_peli);
-                                }
-                                else if($nombre > ""){
-                                    $flagG = 0;
-                                    $buscagenero = "SELECT id_genero FROM moviely.genero WHERE nombre_genero=('$nombre')";
-                                    $existegenero = mysqli_query($conexion,$buscagenero);
-    
-                                    if ($existegenero->num_rows == 0){
-                                        $consulta_sql = mysqli_query($conexion,"INSERT INTO moviely.genero (nombre_genero) VALUES ('$nombre')");
-                                        $existegenero = mysqli_query($conexion,$buscagenero);
-                                    }
-                                    $row_genero = mysqli_fetch_assoc($existegenero); 
-                                    $idgenero = $row_genero['id_genero'];
-    
-                                    $existe_relacion= mysqli_query($conexion, "SELECT * FROM moviely.peli_genero WHERE id_peli = ($idpeli) AND id_genero=($idgenero)");
-                                    if ($existe_relacion->num_rows==0){
-                                        $relacion = mysqli_query($conexion,"INSERT INTO moviely.peli_genero ( id_peli, id_genero ) values ( $idpeli , $idgenero);");
-                                    }
-                                }
-                            }
-                        }
+
     
                         if($flagA > 0 || $flagD > 0 || $flagG > 0){
                             
@@ -271,8 +237,8 @@
                             </label>
                         </div>
     
-                        <div class="cont-espaciado">
-                            <label class="importante">Seleccione  foto:
+                        <div class="cont-espaciado mas">
+                            <label class="importante">Poster:
                                 <input type="file" name="foto_cargar" id="foto_cargar" required>
                             </label>
                         </div>
@@ -363,8 +329,7 @@
                 <div class="cont-dinamicas cont-genero">
                     <div id="div-genero" class="div-repetidor">
                         <p class="importante">Generos</p>
-                        <input type="text" id="checkboxSearchGenero" placeholder="Buscar en el Sistema">
-                        <div class="custom-scroll" id="checkboxContainerGenero">
+                        <div id="checkboxContainerGenero">
                             ';
                             $todos_Genero = mysqli_query($conexion,"SELECT * FROM moviely.genero");
                             while ($row_Genero = $todos_Genero->fetch_assoc()) {
@@ -377,15 +342,7 @@
                             }
                             echo '
                         </div>
-                        <p style="font-size:1.5rem;">Si no existe en el Sistema, <span style="font-weight:bold; ">Creelo</span>:</p>
-                        <p>(Preste atención a la ortografía, Comience con Mayúscula)</p>
-                        <div>
-                            <div>
-                                <span>Nombre del Genero</span><input type="text" name="nombresG[]" autocomplete="off" />
-                            </div>
-                        </div>
                     </div>
-                    <input class="boton_agregar" type="button" value="+ Agregar" id="agregarG" />
                 </div>
     
                 <input type="submit" name="submit" value="Registrar Contenido">
