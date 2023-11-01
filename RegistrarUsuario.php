@@ -109,7 +109,7 @@
                 $registrado = mysqli_query($conexion,"SELECT id_usuario FROM moviely.usuario WHERE nombre_usuario = '$usuario' AND mail='$mail';"); 
                 $row_registrado = $registrado->fetch_assoc();
 
-                //header('Location: mail_registrado.php?id_usuario='.$row_registrado['id_usuario'].'');
+                header('Location: mail_registrado.php?id_usuario='.$row_registrado['id_usuario'].'');
             }    
         }
         echo '

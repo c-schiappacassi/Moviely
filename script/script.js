@@ -26,13 +26,13 @@ $(document).ready(function(){
 
     // Small carousel with manual navigation using arrow controls
     $('.small-carousel-slide').slick({
-        infinite: false,
+        infinite: true,
         slidesToShow: 1, // Set to 6 to scroll 6 images at a time
         slidesToScroll: 1, // Set to 6 to scroll 6 images at a time
         arrows: false,
         autoplay: true,
         autoplaySpeed: 3000,
-        centerMode: true,
+        centerMode: false,
         variableWidth: true,
         pauseOnHover: false,
         pauseOnFocus: false,

@@ -60,7 +60,7 @@
                 } else 
                 {
                     if($duracion_peli > 0 && $temporadas_serie <= 0){  
-                        $registro = "INSERT INTO peli (titulo, path_poster, estreno, descripcion, duracion) values ('$titulo', '$target_file', '$fecha', '$descrip', '$duracion_peli', 0,0,0);" ;
+                        $registro = "INSERT INTO peli (titulo, path_poster, estreno, descripcion, duracion) values ('$titulo', '$target_file', '$fecha', '$descrip', '$duracion_peli');" ;
                         $result = mysqli_query($conexion,$registro);
                     }
                     else if($temporadas_serie > 0 && $duracion_peli <= 0 ){
