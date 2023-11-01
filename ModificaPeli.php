@@ -74,10 +74,9 @@
                                 </label>
                             </div>
 
-                            <div class="cont-espaciado mas">
-                                <label class="importante">Poster:
-                                    <input type="file" name="foto_cargar" id="foto_cargar" >
-                                </label>
+                            <div  style="display:flex; aling-items:center;" class="cont-espaciado mas">
+                                <label class="importante">Poster:</label>
+                                <input type="file" name="foto_cargar" id="foto_cargar" >
                             </div>
                             <input name="path_poster" type="hidden" value="'.$row_encontrado['path_poster'].'">
                             <div class="cont-viejo">
@@ -278,7 +277,7 @@
                                 <p class="importante">Agregar generos</p>
                                 <div  id="checkboxContainerGenero">
                                     ';
-                                    $todos_Genero = mysqli_query($conexion,"SELECT * FROM moviely.genero");
+                                    $todos_Genero = mysqli_query($conexion,"SELECT * FROM moviely.genero ORDER BY nombre_genero ASC");
                                     while ($row_Genero = $todos_Genero->fetch_assoc()) {
                                         echo'
                                         <div class="checkbox-container-Genero">

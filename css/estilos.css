@@ -215,7 +215,7 @@ border-top: 4px solid var(--blanco);
 display: flex;
 flex-direction: row;
 flex-wrap: wrap;
-width: 95%;
+width: 85%;
 align-items: center;
 margin: 0 auto;
 padding-top: 20px;
@@ -473,6 +473,7 @@ color: var(--blanco);
 .cont-genero{
     width: 100%;
     padding-bottom: 0;
+    margin-bottom: 0;
 }
 
 .div-repetidor{
@@ -660,7 +661,9 @@ outline: none;
 border-radius: 5px;
 }
 
-
+#res-cont{
+    margin-top: 2%;
+}
 
 input[name=submit-busca]{
 margin-top: 8%;
@@ -774,7 +777,7 @@ width: 25%;
 
 #contDatosTags{
 width: 100%;
-padding-top: 4rem;
+padding-top: 5%;
 display: flex;
 flex-direction: row;
 justify-content: space-evenly;
@@ -829,7 +832,6 @@ padding-right: 5%;
 
 #contDesTags{
 display: flex;
-min-height:45vh;
 flex-direction: column;
 justify-content: space-between;
 }

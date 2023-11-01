@@ -79,7 +79,7 @@
                 $sql = "SELECT DISTINCT peli.path_poster as poster, peli.id_peli as id FROM peli
                     INNER JOIN peli_genero ON peli.id_peli = peli_genero.id_peli
                     INNER JOIN genero ON peli_genero.id_genero = genero.id_genero
-                    WHERE genero.nombre_genero IN ('Acción', 'Aventura', 'Wéstern' , 'Bélicas', 'Catástrofe')
+                    WHERE genero.nombre_genero IN ('Acción', 'Épicas', 'Wéstern' , 'Bélicas', 'Catástrofe')
                     GROUP BY peli.titulo
                     ORDER BY peli.calificacion DESC
                     LIMIT 15;";

@@ -44,12 +44,12 @@
                     $destruc_peli_actor = "DELETE FROM moviely.peli_actor WHERE id_peli = ($id_peli);";
 
                     //variables con modificaciones a cargar
-                    $titulo = ($_POST['tituloMod'] == "") ? $_POST['tituloRead'] : $_POST['tituloMod']; //verifica modificacion titulo
-                    $descrip = ($_POST['descripMod'] == "") ? $_POST['descripRead'] : $_POST['descripMod']; //verifica modificacion descripcion
+                    $titulo = ($_POST['tituloMod'] == "") ?  str_replace("'", "''",$_POST['tituloRead']) : str_replace("'", "''",$_POST['tituloMod']) ; //verifica modificacion titulo
+                    $descrip = ($_POST['descripMod'] == "") ? str_replace("'", "''",$_POST['descripRead'] ) : str_replace("'", "''",$_POST['descripMod'] ); //verifica modificacion descripcion
                     $estreno = $_POST['fecha'];
                     $duracion = 0;
                     $temporada = 0;
-                    
+    
                     //variables asistentes
                     $direcCont = $_POST['directorCont'];
                     $actCont = $_POST['actorCont'];
@@ -153,7 +153,8 @@
                         //nuevos directores
                         if( isset( $_POST['nombres'] ) ){
                             foreach( $_POST['nombres'] as $indice => $nombre ){
-                                $apellido = $_POST['apellidos'][$indice];
+                                $nombre = str_replace("'", "''", $_POST['nombres'][$indice]);
+                                $apellido = str_replace("'", "''", $_POST['apellidos'][$indice]);
 
                                 if ($nombre != "" && $apellido != ""){
                                     $buscadire = "SELECT id_director FROM moviely.director WHERE nombre=('$nombre') AND apellido=('$apellido')";
@@ -183,7 +184,8 @@
                         //nuevos actores
                         if( isset( $_POST['nombresA'] ) ){
                             foreach( $_POST['nombresA'] as $indice => $nombre ){
-                                $apellido = $_POST['apellidosA'][$indice];
+                                $nombre = str_replace("'", "''", $_POST['nombresA'][$indice]);
+                                $apellido = str_replace("'", "''", $_POST['apellidosA'][$indice]);
                                 
                                 if ($nombre != "" && $apellido != ""){
                                     $buscaactor = "SELECT id_actor FROM moviely.actor WHERE nombre=('$nombre') AND apellido=('$apellido')";
@@ -248,7 +250,7 @@
                             }
                         }
         
-                        $update= "UPDATE moviely.peli SET titulo=('$titulo'),path_poster=('$poster'),estreno=('$estreno'),descripcion=('$descrip'),temporada=('$temporada'),duracion=('$duracion') WHERE id_peli=('$id_peli')";
+                        $update= "UPDATE moviely.peli SET titulo=('$titulo'), path_poster=('$poster'),estreno=('$estreno'), descripcion=('$descrip'),temporada=('$temporada'),duracion=('$duracion') WHERE id_peli=('$id_peli')";
                         $resultado_update = mysqli_query($conexion,$update);
                         if ($resultado_update){echo 'Se a modificado con exito el contenido!';} else {echo '<h1>No se ha podido modificar el contenido, inetente nuevamente. Si el error persiste, comuniquese con el administrador</h1>';}
                     }

@@ -90,7 +90,7 @@
                                 </div>
                                 <div id="contDesTags">
                                     <div style="width: 90%;">
-                                        <p id="descripcionInfo">'.$row_datos['descripcion'].'</p>
+                                        <p  id="descripcionInfo">'.$row_datos['descripcion'].'</p>
                                     </div> 
                             
                                     <div id="contDatosTags">

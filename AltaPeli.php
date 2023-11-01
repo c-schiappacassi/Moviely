@@ -237,10 +237,9 @@
                             </label>
                         </div>
     
-                        <div class="cont-espaciado mas">
-                            <label class="importante">Poster:
-                                <input type="file" name="foto_cargar" id="foto_cargar" required>
-                            </label>
+                        <div style="display:flex; align-items: center;" class="cont-espaciado mas">
+                            <label  class="importante">Poster:</label>
+                            <input type="file" name="foto_cargar" id="foto_cargar" required>
                         </div>
         
                         <div class="cont-espaciado" id="mas-espacio">
@@ -331,7 +330,7 @@
                         <p class="importante">Generos</p>
                         <div id="checkboxContainerGenero">
                             ';
-                            $todos_Genero = mysqli_query($conexion,"SELECT * FROM moviely.genero");
+                            $todos_Genero = mysqli_query($conexion,"SELECT * FROM moviely.genero ORDER BY nombre_genero ASC");
                             while ($row_Genero = $todos_Genero->fetch_assoc()) {
                                 echo'
                                 <div class="checkbox-container-Genero">
@@ -344,8 +343,7 @@
                         </div>
                     </div>
                 </div>
-    
-                <input type="submit" name="submit" value="Registrar Contenido">
+                <input id="res-cont" type="submit" name="submit" value="Registrar Contenido">
             </form>
                     ';
             }
