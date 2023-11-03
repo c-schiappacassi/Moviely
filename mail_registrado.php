@@ -7,6 +7,15 @@ include("opciones.php");
 include("vendor\config.php");
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+echo '
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="moviely favicon.png" type="image/ico">
+    <title>mail</title>
+</head>
+</html>';
 
 if (isset($_GET['id_usuario'])){
 
@@ -41,10 +50,11 @@ if (isset($_GET['id_usuario'])){
             <br>Puedes leer reseñas de otros usuarios, guardar en tu lista tus películas favoritas, dejar tu calificación y opinión cinematografica.
             <br><br>Estamos seguros de que te divertirás mucho en Moviely. ¡Gracias por formar parte de nuestra comunidad!
             <br><br> - El equipo de Moviely.
+            <br><br> - El equipo de Moviely.
             <br><br> P.D.: Te dejamos el Manual del Crítico para ayudarte a explorar Moviely!';
-            // $file_path = 'path/to/your/attachment/file.pdf'; // path al manual de usuario
-            // $mail->addAttachment($file_path, 'attachment.pdf'); //cambiar nombre
-    
+            $file_path = 'Manual del Crítico - Moviely.pdf'; 
+            $mail->addAttachment($file_path, 'Manual del Critico - Moviely.pdf');
+            
             $mail->send();
             $_GET['id_usuario'] = ""; 
             
@@ -73,30 +83,5 @@ else{
         echo $opciones_sin_sesion;
         $_SESSION['administrador'] = 0;
     } 
-
-        echo '
-        <!doctype html>
-        <html>
-        <head>
-            <meta charset="utf-8">
-            <link rel="icon" href="moviely favicon.png" type="image/ico">
-            <link rel="stylesheet" href="css/normalize.css">
-            <link rel="stylesheet" href="css/estilos.css">
-            <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
-            <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
-            <title>mail</title>
-        </head>
-
-        <body>
-        <main>
-            <div style="width:80%; margin: auto; padding-top:3%;">
-                <h1>Acceso Negado</h1>
-            </div>
-        </main>
-        <footer>
-            <p>&copy; 2023 Your Movie Reviews</p>
-        </footer>
-        </body>
-        </html>';
 }
 ?>
