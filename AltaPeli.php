@@ -59,16 +59,17 @@
                     echo '<p>Una pelicula con este titulo ya existe en la base de datos</p>';
                 } else 
                 {
-                    if($duracion_peli > 0 && $temporadas_serie <= 0){  
+                    if($duracion_peli > 0 && $temporadas_serie == 0){  
                         $registro = "INSERT INTO peli (titulo, path_poster, estreno, descripcion, duracion) values ('$titulo', '$target_file', '$fecha', '$descrip', '$duracion_peli');" ;
                         $result = mysqli_query($conexion,$registro);
                     }
-                    else if($temporadas_serie > 0 && $duracion_peli <= 0 ){
+                    else if($temporadas_serie > 0 && $duracion_peli == 0 ){
                         $registro = "INSERT INTO peli (titulo, path_poster, estreno, descripcion, temporada) values ('$titulo', '$target_file', '$fecha', '$descrip', '$temporadas_serie'); " ;
                         $result = mysqli_query($conexion,$registro);
                     }
                     else{
-                        echo '<h2>Faltaron datos de la duración del contenido (minutos si es pelicula, temporadas si es serie), intente nuevamente sin obviar datos</h2>';
+                        echo '<div style="width:80%; margin: auto; padding-top:3%;"><h2>Faltaron datos de la duración del contenido (minutos si es pelicula, temporadas si es serie), intente nuevamente sin obviar datos</h2><div>';
+                        $result = 0;
                     }
     
                     if($result == 1){
@@ -209,7 +210,11 @@
                                 <a href="info.php?id_peli='.$idpeli.'">Visualizar el contenido recien cargado</a>
                             </div>';
                         }
-                    } else {  echo '<h2>La pelicula NO se dio de alta correctamente, intente nuevamente con datos validos</h2>';}
+                    } else {  echo '
+                        <div style="width:80%; margin: auto; padding-top:3%;">
+                        <h2>La pelicula NO se dio de alta correctamente, intente nuevamente con datos validos</h2>
+                        </div>';
+                    }
                 }
     
             }

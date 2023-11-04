@@ -90,23 +90,17 @@
                     }
                     
                     //verificacion duracion o temporadas
-                    if ($_POST['dur_min'] > 0 ){
+                    
+                    if($_POST['dur_min'] > 0 && $_POST['temporada'] == 0){  
                         $duracion = $_POST['dur_min'];
                         $temporada = NULL;
                     }
-                    else if($_POST['temporada'] > 0){
+                    else if($_POST['dur_min'] == 0 && $_POST['temporada'] > 0 ){
                         $temporada = $_POST['temporada'];
                         $duracion = NULL;
                     }
-                    else {
-                        if ($_POST['dur_registro'] > 0){
-                            $duracion = $_POST['dur_registro'];
-                            $temporada = NULL;
-                        }
-                        else {
-                            $temporada = $_POST['temp_registro'];
-                            $duracion = NULL;
-                        }
+                    else{
+                        $flag_update=1;
                     }
 
                     //verificacion archivo imagen
@@ -255,7 +249,7 @@
                         if ($resultado_update){echo 'Se a modificado con exito el contenido!';} else {echo '<h1>No se ha podido modificar el contenido, inetente nuevamente. Si el error persiste, comuniquese con el administrador</h1>';}
                     }
                     else{
-                        echo 'No se a modificado el contenido por error de carga, Asegurese de que deje registrado al menos un director, un actor y un genero para el Contenido ';
+                        echo 'No se a modificado el contenido por error de carga, Asegurese de que deje registrado al menos un director, un actor y un genero para el Contenido; y de completar el campo de un solo tipo de contenido (Pelicula o Serie) ';
                     }
                     echo '  </h1>
                         <a href="info.php?id_peli='.$id_peli.'">Volver a la visualizacion del contenido</a><br>
